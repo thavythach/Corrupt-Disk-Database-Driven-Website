@@ -13,5 +13,9 @@
 			<li><p>The default value is Port 80.</p></li>
 			<li><p>/var/www/html/index.html (the document root)</p></li>
 			<li><p>the config file specifies an {APACHE_LOG_DIR} that stores all the logs. The tail command is used to access the last few lines of a file.</p></li>
+			<li><p>A directory index file is one that is specified to display when a user tries to look in a specific directory, and this is useful to offer the user a default page.</p></li>
+			<li><p>A VirtualHost block needs to be added to ports.conf.</p></li>
+			<li><p>A password-protected file needs to have an htpasswd file and that must be referenced in the htaccess file which establishes requirements to access that directory.</p></li>
+			<li><p>Automatic redirection requires us to find the 404 error contingency and have it refer to a file of our choice.</p></li>
 	</BODY>
 </HTML>
