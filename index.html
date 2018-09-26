@@ -87,12 +87,16 @@
           </div>
           <div class="col-md-5">
             <ol>
-							<li><p>sudo service httpd status</p></li>
-							<li><p>A GET command will retrieve the specified data from the server, POST adds it to the server, and HEAD retrieves metadata.</p></li>
-							<li><p>ServerRoot contains the files for the server. DocumentRoot contains the files for the webpages that are sent through the server</p></li>
-							<li><p>The default value is Port 80.</p></li>
-							<li><p>/var/www/html/index.html (the document root)</p></li>
-							<li><p>the config file specifies an {APACHE_LOG_DIR} that stores all the logs. The tail command is used to access the last few lines of a file.</p></li>
+							<li>sudo service httpd status</li>
+              <li>A GET command will retrieve the specified data from the server, POST adds it to the server, and HEAD retrieves metadata.</li>
+              <li>ServerRoot contains the files for the server. DocumentRoot contains the files for the webpages that are sent through the server</li>
+              <li>The default value is Port 80.</li>
+              <li>/var/www/html/index.html (the document root)</li>
+              <li>the config file specifies an {APACHE_LOG_DIR} that stores all the logs. The tail command is used to access the last few lines of a file.</li>
+              <li>A directory index file is one that is specified to display when a user tries to look in a specific directory, and this is useful to offer the user a default page.</li>
+              <li>A VirtualHost block needs to be added to ports.conf.</li>
+              <li>A password-protected file needs to have an htpasswd file and that must be referenced in the htaccess file which establishes requirements to access that directory.</li>
+              <li>Automatic redirection requires us to find the 404 error contingency and have it refer to a file of our choice.</li>
 						</ol>
           </div>
         </div>
@@ -127,7 +131,7 @@
           <div class="col-lg-4">
             <img class="rounded-circle" src="img/jake.jpg" alt="Jake Profile Picture" width="140" height="140">
             <h2>Jake Redmond</h2>
-            <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
+            <p>Just learned how to use a list item in html and ready to go.</p>
             <p><a class="btn btn-secondary" href="https://github.com/Jakeredmond22" role="button">View GitHub &raquo;</a></p>
           </div><!-- /.col-lg-4 -->
         </div><!-- /.row -->
