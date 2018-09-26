@@ -94,7 +94,11 @@
               <li>/var/www/html/index.html (the document root)</li>
               <li>the config file specifies an {APACHE_LOG_DIR} that stores all the logs. The tail command is used to access the last few lines of a file.</li>
               <li>A directory index file is one that is specified to display when a user tries to look in a specific directory, and this is useful to offer the user a default page.</li>
-              <li>A VirtualHost block needs to be added to ports.conf.</li>
+              <li>A VirtualHost block needs to be added to ports.conf and modified in 000-default.conf. Listen 80
+Listen 8080
+<VirtualHost *:80>
+	DocumentRoot "/var/www/html/teamcorruptdisk"
+</VirtualHost>.</li>
               <li>A password-protected file needs to have an htpasswd file and that must be referenced in the htaccess file which establishes requirements to access that directory.</li>
               <li>Automatic redirection requires us to find the 404 error contingency and have it refer to a file of our choice.</li>
 						</ol>
