@@ -20,6 +20,8 @@
 		$m_name = "";
 	}
 
+	$pattern = '/^[A-Za-z]+/';
+
 	// check ssn
 	if (!preg_match('(^\d{3}-?\d{2}-?\d{4}$|^XXX-XX-XXXX$)', $ssn, $matches)){
 		$error = "Social Security Doesn't Match Pattern: (yyy-yy-yyyy).";
@@ -27,23 +29,27 @@
 		exit();
 	}
 
-	if (!preg_match('^([A-Za-z])+$', $f_name, $matches)){
+	if (!preg_match($pattern, $f_name)){
 		$error = $f_name . " is not a valid first name.";
                 header('Location: insertPass.php?error='.$error);
                 exit();
 	}
 
-	if (strlen($m_name) >0 and !preg_match('^([A-Za-z])+$', $m_name, $matches)){
-                $error = $m_name . " is not a valid middle name.";
-                header('Location: insertPass.php?error='.$error);
-                exit();
+	if (strlen($m_name) >0){
+		if(!preg_match($pattern, $m_name)){
+                	$error = $m_name . " is not a valid middle name.";
+                	header('Location: insertPass.php?error='.$error);
+                	exit();
+		}
         }
 
-	if (!preg_match('^([A-Za-z])+$', $l_name, $matches)){
+	if (!preg_match($pattern, $l_name)){
                 $error = $l_name . " is not a valid last name.";
                 header('Location: insertPass.php?error='.$error);
                 exit();
         }
+
+	// insert cool query stuff here rip
 
 	header('Location: insertPass.php?error='.$error);
 	exit();

@@ -48,7 +48,7 @@
 
 <main role="main">
 <div class="container">
-<form action="formHandler2.php", method="post">
+<form action="createPassenger.php", method="post">
 Social Security #: <input type="text" name="passenger_ssn" required/><br/>
 First Name: <input type="text" name="f_name" required/><br/>
 Middle Name: <input type="text" name="m_name"/><br/>
