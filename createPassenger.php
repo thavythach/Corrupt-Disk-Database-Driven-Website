@@ -73,7 +73,7 @@
             exit();
 	}
 
-	header('Location: insertPass.php?error='.$error);
+	header('Location: showPassengers.php?success='.$error);
 	exit();
 
 ?>
