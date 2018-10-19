@@ -58,15 +58,17 @@
         $db_file = './myDB/airport.db';
 
         try {
-            //open connection to the airport database file
-            $db = new PDO('sqlite:' . $db_file) or die("cannot open the database");
+            if(isset($_POST['SQL'])) {
+              //open connection to the airport database file
+              $db = new PDO('sqlite:' . $db_file) or die("cannot open the database");
 
-            $query =  $_POST['SQL'];
-            foreach ($db->query($query) as $row)
-            {
-                echo $row[0];
+              $query =  $_POST['SQL'];
+              foreach ($db->query($query) as $row)
+              {
+                  echo $row[0];
+              }
+              $db = null;
             }
-            $db = null;
         }
         catch(PDOException $e) {
             die('Exception : '.$e->getMessage());
