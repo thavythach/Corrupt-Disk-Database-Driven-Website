@@ -13,7 +13,7 @@ Last Name: <input type="text" name="l_name" required/><br/>
 if (isset($_GET['error'])) {
 	$result = $_GET['error'];
 
-	echo $error;
+	echo $result;
 	echo "swag";
 }
 
