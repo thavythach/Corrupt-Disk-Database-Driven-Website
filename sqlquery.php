@@ -50,7 +50,7 @@
 	</div>
 <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Submit</button>
 
-<h2 style="padding-top: 10px">Result</h2>
+<h2 style="padding-top: 10px">Result:</h2>
 <p>
     <?php
 
