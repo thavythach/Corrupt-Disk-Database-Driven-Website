@@ -21,8 +21,8 @@
 	}
 
 	// check ssn
-	if (!preg_match('#^(\d{3})-(\d{2})-(\d{4})$#', $ssn, $matches)){
-		$error = "Social Security Doesn't Match Pattern: (###-##-####).";
+	if (!preg_match('(^\d{3}-?\d{2}-?\d{4}$|^XXX-XX-XXXX$)', $ssn, $matches)){
+		$error = "Social Security Doesn't Match Pattern: (yyy-yy-yyyy).";
 		header('Location: insertPass.php?error='.$error);
 		exit();
 	}

@@ -65,7 +65,9 @@
               $query =  $_POST['SQL'];
               foreach ($db->query($query) as $row)
               {
-                  echo $row[0];
+		  echo '<pre>';
+		  print_r($row);
+		  echo "<\pre>";
               }
               $db = null;
             }
