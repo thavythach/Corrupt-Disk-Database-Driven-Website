@@ -52,7 +52,9 @@
 <h2>List of all passengers</h2>
 <p>
     <?php
-
+	if (isset($_GET['success'])) {
+        	$success = $_GET['success'];
+	}
         //path to the SQLite database file
         $db_file = './myDB/airport.db';
 
@@ -72,9 +74,15 @@
 	    $result = $query_str->fetchAll();
             //loop through each tuple in result set and print out the data
             //ssn will be shown in blue (see below)
+	    $res = "";
             foreach($result as $tuple) {
                  echo "<font color='blue'>$tuple[ssn]</font> $tuple[f_name] $tuple[m_name] $tuple[l_name]<br/>\n";
-            }
+		 if (isset($_GET['success'])) {
+                	$success = $_GET['success']; 
+			$res = "SUCCESS! Added: <font color='blue'>$tuple[ssn]</font> $tuple[f_name] $tuple[m_name] $tuple[l_name]<br/>\n";
+        	}
+	    }
+	    echo "<p> $res </p>";
 
             //disconnect from db
             $db = null;
@@ -86,6 +94,9 @@
 
 </p>
 </div>
+
+
+
 </main>
 </body>
 </html>
