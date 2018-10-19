@@ -22,10 +22,28 @@
 
 	// check ssn
 	if (!preg_match('#^(\d{3})-(\d{2})-(\d{4})$#', $ssn, $matches)){
-		$error = "Social Security Doesn't Match Pattern: 123-45-7890 (xxx-xx-xxxx).";
+		$error = "Social Security Doesn't Match Pattern: (###-##-####).";
 		header('Location: insertPass.php?error='.$error);
 		exit();
 	}
+
+	if (!preg_match('^([A-Za-z])+$', $f_name, $matches)){
+		$error = $f_name . " is not a valid first name.";
+                header('Location: insertPass.php?error='.$error);
+                exit();
+	}
+
+	if (strlen($m_name) >0 and !preg_match('^([A-Za-z])+$', $m_name, $matches)){
+                $error = $m_name . " is not a valid middle name.";
+                header('Location: insertPass.php?error='.$error);
+                exit();
+        }
+
+	if (!preg_match('^([A-Za-z])+$', $l_name, $matches)){
+                $error = $l_name . " is not a valid last name.";
+                header('Location: insertPass.php?error='.$error);
+                exit();
+        }
 
 	header('Location: insertPass.php?error='.$error);
 	exit();
