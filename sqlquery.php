@@ -59,24 +59,13 @@
 
         try {
             //open connection to the airport database file
-            $db = new PDO('sqlite:' . $db_file);
+            $db = new PDO('sqlite:' . $db_file) or die("cannot open the database");
 
-            //set errormode to use exceptions
-            $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
- 	    //return all passengers, and store the result set
-            $query_str = $db->prepare(":SQL");
-            $query_str->bindParam("SQL", $_POST['SQL']);
-	    // prepare gives back an object, calling bindParam lets it identify the target parts
-	    // of the statement to replace
-	    $query_str->execute();
-            //loop through each tuple in result set and print out the data
-            //ssn will be shown in blue (see below)
-            foreach($query_str as $tuple) {
-                 echo "<font color='blue'>$tuple[ssn]</font> $tuple[f_name] $tuple[m_name] $tuple[l_name]<br/>\n";
+            $query =  $_POST['SQL'];
+            foreach ($db->query($query) as $row)
+            {
+                echo $row[0];
             }
-
-            //disconnect from db
             $db = null;
         }
         catch(PDOException $e) {
