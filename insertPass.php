@@ -26,7 +26,7 @@
         <div class="collapse navbar-collapse" id="navbarCollapse">
           <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-              <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+              <a class="nav-link" href="~ubuntu">Home <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item active">
               <a class="nav-link" href="showPassengers.php">Show All Passengers <span class="sr-only">(current)</span></a>
@@ -54,7 +54,7 @@ First Name: <input type="text" name="f_name" required/><br/>
 Middle Name: <input type="text" name="m_name"/><br/>
 Last Name: <input type="text" name="l_name" required/><br/>
 
-<input type="submit"/>
+<input class="btn btn-lg btn-primary" type="submit"/>
 
 <?php
 

@@ -27,7 +27,7 @@
         <div class="collapse navbar-collapse" id="navbarCollapse">
           <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-              <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+              <a class="nav-link" href="~ubuntu">Home <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item active">
               <a class="nav-link" href="showPassengers.php">Show All Passengers <span class="sr-only">(current)</span></a>
@@ -54,7 +54,7 @@
 		<label for="SQL Query">SQL Query</label>
 		<textarea class="form-control" rows="5" name="SQL" id="SQL"></textarea>
 	</div>
-<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Submit</button>
+<button class="btn btn-lg btn-primary" type="submit">Submit</button>
 
 <h2 style="padding-top: 10px">Result:</h2>
 <p>
