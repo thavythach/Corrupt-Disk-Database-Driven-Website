@@ -1,0 +1,20 @@
+
+
+<?php
+        // Make sure all elements are nonempty.
+	$ssn = $_POST['passenger_ssn'];
+	echo $ssn;
+	$i = 0;
+        foreach($_POST as $tuple) {
+                if (strlen($tuple) == 0 and $i != 2) {
+                        //echo "$tuple is empty";
+			header('Location: insertPass.html');
+			exit();
+                } else {
+			// success exists
+			echo "$tuple is succeeds html validation";
+		}
+		$i++;
+	}
+?>
+
