@@ -47,7 +47,7 @@
               <div class="carousel-caption text-left">
                 <h1>Welcome to our page!</h1>
                 <p>This page was made by a trio of college seniors with a vision and a dream. Please support us by donating to help fund our use of AWS to keep this page (and our dream) alive.</p>
-                <p><a class="btn btn-lg btn-primary" href="~ubuntu/showPassengers.php" role="button">Show All Passengers</a></p>
+                <p><a class="btn btn-lg btn-primary" href="showPassengers.php" role="button">Show All Passengers</a></p>
               </div>
             </div>
           </div>
