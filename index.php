@@ -29,9 +29,6 @@
               <a class="nav-link" href="showPassengers.php">Show All Passengers <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item active">
-              <a class="nav-link" href="showPassengers.php">Show All Passengers <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item active">
               <a class="nav-link" href="insertPass.php">Create Passenger <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item active">
