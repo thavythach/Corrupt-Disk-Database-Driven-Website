@@ -46,7 +46,7 @@
 	<form action="", method="post">
 	<div class="form-group">
 		<label for="SQL Query">SQL Query</label>
-		<textarea class="form-control" rows="5" id="SQL"></textarea>
+		<textarea class="form-control" rows="5" name="SQL" id="SQL"></textarea>
 	</div>
 <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Submit</button>
 
