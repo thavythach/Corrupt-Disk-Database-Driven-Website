@@ -65,7 +65,8 @@
             $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
  	    //return all passengers, and store the result set
-            $query_str = $db->prepare($_POST['SQL']);
+            $query_str = $db->prepare(":SQL");
+            $query_str->bindParam("SQL", $_POST['SQL']);
 	    // prepare gives back an object, calling bindParam lets it identify the target parts
 	    // of the statement to replace
 	    $query_str->execute();
