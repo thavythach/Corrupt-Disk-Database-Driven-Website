@@ -52,6 +52,7 @@
 <h2>List of all passengers</h2>
 <p>
     <?php
+	error_reporting(E_ALL ^ E_NOTICE);
 	if (isset($_GET['success'])) {
         	$success = $_GET['success'];
 	}
@@ -75,13 +76,27 @@
             //loop through each tuple in result set and print out the data
             //ssn will be shown in blue (see below)
 	    $res = "";
-            foreach($result as $tuple) {
-                 echo "<font color='blue'>$tuple[ssn]</font> $tuple[f_name] $tuple[m_name] $tuple[l_name]<br/>\n";
+            echo "
+	    <table class='table'>
+	    <tr>
+	        <th>SSN</th>
+	        <th>First Name</th>
+	        <th>Middle Name</th>
+		<th>Last Name</th>
+	    </tr>";
+	    foreach($result as $tuple) {
+		echo "<tr>";
+                 	echo "<td><font color='blue'>$tuple[ssn]</font></td>";
+			echo "<td>".$tuple[f_name]."</td>";
+			echo "<td>". $tuple[m_name]."</td>";
+			echo "<td>". $tuple[l_name]."</td>";
+		echo "</tr>";
 		 if (isset($_GET['success'])) {
                 	$success = $_GET['success']; 
 			$res = "SUCCESS! Added: <font color='blue'>$tuple[ssn]</font> $tuple[f_name] $tuple[m_name] $tuple[l_name]<br/>\n";
         	}
 	    }
+	    echo "</table>";
 	    echo "<p> $res </p>";
 
             //disconnect from db
