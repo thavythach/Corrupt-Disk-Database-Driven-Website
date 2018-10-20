@@ -66,13 +66,7 @@
           <label for="l_name">Last Name</label>
           <input type="text" name="l_name" class="form-control" placeholder="Last Name" required/>
         </div>
-        <?php
-        if (isset($_POST)) {
-          echo '<button type="update" class="btn btn-primary">Update</button>';
-        } else {
-           echo '<button type="submit" class="btn btn-primary">Submit</button>';
-        }
-        ?>
+        <button type="submit" class="btn btn-primary">Submit</button>
       </form>
 
       <?php
