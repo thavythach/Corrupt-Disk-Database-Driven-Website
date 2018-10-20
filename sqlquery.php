@@ -82,7 +82,6 @@
          }
          $db = null;
        }
-     }
      catch(Exception $e) {
            // die('Exception : '.$e->getMessage());
       echo "<div class='alert alert-warning' role='alert'>There was an error processing the SQL statement.</div>";
