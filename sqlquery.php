@@ -73,9 +73,8 @@
             {
              echo '<pre>';
              print_r($row);
-             echo "<\pre>";
-           }
-         }
+             echo "<\pre>";           }
+
          $db = null;
        }
      }
