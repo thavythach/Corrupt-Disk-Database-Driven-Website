@@ -69,11 +69,15 @@
             $db = new PDO('sqlite:' . $db_file) or die("cannot open the database");
 
             $query =  $_POST['SQL'];
-            foreach ($db->query($query) as $row)
-            {
-             echo '<pre>';
-             print_r($row);
-             echo "<\pre>";
+            if(substr($query, 0, 6) != 'SELECT') {
+              echo "<div class='alert alert-warning' role='alert'>There was an error processing the SQL statement.</div>";
+            } else {
+              foreach ($db->query($query) as $row)
+              {
+               echo '<pre>';
+               print_r($row);
+               echo "<\pre>";
+             }
            }
          }
          $db = null;
