@@ -49,12 +49,25 @@
 <main role="main">
 <div class="container">
 <form action="createPassenger.php", method="post">
-Social Security #: <input type="text" name="passenger_ssn" required/><br/>
-First Name: <input type="text" name="f_name" required/><br/>
-Middle Name: <input type="text" name="m_name"/><br/>
-Last Name: <input type="text" name="l_name" required/><br/>
-
-<input class="btn btn-lg btn-primary" type="submit"/>
+  <div class="form-group">
+    <label for="passenger_ssn">Social Security Number</label>
+    <input type="text" name="passenger_ssn" class="form-control" placeholder="SSN" required/>
+    <small id="ssnHelp" class="form-text text-muted">Format: xxx-xx-xxxx</small>
+  </div>
+  <div class="form-group">
+    <label for="f_name">First Name</label>
+    <input type="text" name="f_name" class="form-control" placeholder="First Name" required/>
+  </div>
+  <div class="form-group">
+    <label for="m_name">Middle Name</label>
+    <input type="text" name="m_name" class="form-control" placeholder="Middle Name"/>
+  </div>
+  <div class="form-group">
+    <label for="l_name">Last Name</label>
+    <input type="text" name="l_name" class="form-control" placeholder="Last Name" required/>
+  </div>
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
 
 <?php
 
@@ -65,7 +78,6 @@ if (isset($_GET['error'])) {
 }
 
 ?>
-</form>
 </div>
 </main>
 </body>
