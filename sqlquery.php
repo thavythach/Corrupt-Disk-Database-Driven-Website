@@ -54,7 +54,7 @@
         <label for="SQL Query">SQL Query</label>
         <textarea class="form-control" rows="5" name="SQL" id="SQL"></textarea>
       </div>
-      <button class="btn btn-lg btn-primary" type="submit">Submit</button>
+      <button class="btn btn-primary" type="submit">Submit</button>
 
       <h2 style="padding-top: 10px">Result:</h2>
       <p>
@@ -70,14 +70,20 @@
 
             $query =  $_POST['SQL'];
             if(substr($query, 0, 6) != 'SELECT') {
-              echo "<div class='alert alert-warning' role='alert'>There was an error processing the SQL statement.</div>";
+              echo "<div class='alert alert-warning' role='alert'>Only SELECT statements are allowed.</div>";
             } else {
-              foreach ($db->query($query) as $row)
-              {
-               echo '<pre>';
-               print_r($row);
-               echo "<\pre>";
+	      $query = strip_tags($query);
+              $query = preg_replace('/[^A-Za-z0-9\* \'\"\-\_\,]/', '', $query); 
+	      echo "
+	      <table class='table'>";
+	    foreach ($db->query($query) as $row) {
+	      echo "<tr>";
+              foreach ($row as $item) {
+		echo "<td>".$item."</td>";
+	      }
+	      echo "</tr>";
              }
+	    echo "</table>";
            }
          }
          $db = null;

@@ -99,8 +99,11 @@
 	      </tr>";
               if (isset($_GET['success'])) {
                $success = $_GET['success']; 
-               $res = "SUCCESS! Added: <font color='blue'>$tuple[ssn]</font> $tuple[f_name] $tuple[m_name] $tuple[l_name]<br/>\n";
-           }
+               //$res = "SUCCESS! Added: <font color='blue'>$tuple[ssn]</font> $tuple[f_name] $tuple[m_name] $tuple[l_name]<br/>\n";
+		$res = "<div class='alert alert-success' role='alert'>Row successfully updated!</div>";
+              } else {
+		$res = "<div class='alert alert-danger' role='alert'>There was an error updating the selected row.</div>";
+	      }
        }
        echo "</table>";
        echo "<p> $res </p>";

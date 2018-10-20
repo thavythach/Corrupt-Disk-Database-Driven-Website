@@ -80,7 +80,7 @@
       if (isset($_GET['error'])) {
        $result = $_GET['error'];
 
-       echo "<br> <h1>Result:</h1>".$result;
+       echo "<br><div class='alert alert-danger' role='alert'>".$result."</div>";
      }
 
      ?>
