@@ -69,17 +69,23 @@
               $db = new PDO('sqlite:' . $db_file) or die("cannot open the database");
 
               $query =  $_POST['SQL'];
-              foreach ($db->query($query) as $row)
-              {
-		  echo '<pre>';
-		  print_r($row);
-		  echo "<\pre>";
-              }
+	      try {
+              	foreach ($db->query($query) as $row)
+              	{
+			  echo '<pre>';
+		 	 print_r($row);
+		 	 echo "<\pre>";
+              	}
+	      }
+	      catch(Exception $e) {
+	         echo "<div class='alert alert-warning' role='alert'>There was an error processing the SQL statement.</div>";
+              }	
               $db = null;
             }
         }
-        catch(PDOException $e) {
-            die('Exception : '.$e->getMessage());
+        catch(Exception $e) {
+           // die('Exception : '.$e->getMessage());
+	   echo "<div class='alert alert-warning' role='alert'>There was an error processing the SQL statement.</div>";
         }
     ?>
 
