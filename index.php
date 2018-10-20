@@ -1,59 +1,59 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="icon" href="../../../../favicon.ico">
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="icon" href="../../../../favicon.ico">
 
-    <!-- CSS -->
-    <link rel="stylesheet" href="style.css" />
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+  <!-- CSS -->
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 
-		<title>Databases Home Page</title>
-	</head>
-	<body>
+  <title>Databases Home Page</title>
+</head>
+<body>
 
-    <header>
-      <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-        <a class="navbar-brand" href="#">TeamCorruptDisk</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarCollapse">
-          <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-              <a class="nav-link" href="showPassengers.php">Show All Passengers <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item active">
-              <a class="nav-link" href="insertPass.php">Create Passenger <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item active">
-              <a class="nav-link" href="sqlquery.php">SQL Form <span class="sr-only">(current)</span></a>
-            </li>
-          </ul>
-          <form class="form-inline mt-2 mt-md-0">
-            <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-          </form>
-        </div>
-      </nav>
-    </header>
+  <header>
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+      <a class="navbar-brand" href="#">TeamCorruptDisk</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarCollapse">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="showPassengers.php">Show All Passengers <span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" href="insertPass.php">Create Passenger <span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" href="sqlquery.php">SQL Form <span class="sr-only">(current)</span></a>
+          </li>
+        </ul>
+        <form class="form-inline mt-2 mt-md-0">
+          <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
+      </div>
+    </nav>
+  </header>
 
-    <main role="main">
+  <main role="main">
 
-      <div id="myCarousel" class="carousel slide" data-ride="carousel">
-        <div class="carousel-inner">
-          <div class="carousel-item active">
-            <img class="first-slide" src="img/banner.jpg" alt="First slide">
-            <div class="container">
-              <div class="carousel-caption text-left">
-                <h1>Welcome to our page!</h1>
-                <p>This page was made by a trio of college seniors with a vision and a dream. Please support us by donating to help fund our use of AWS to keep this page (and our dream) alive.</p>
-                <p><a class="btn btn-lg btn-primary" href="showPassengers.php" role="button">Show All Passengers</a></p>
-              </div>
+    <div id="myCarousel" class="carousel slide" data-ride="carousel">
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <img class="first-slide" src="img/banner.jpg" alt="First slide">
+          <div class="container">
+            <div class="carousel-caption text-left">
+              <h1>Welcome to our page!</h1>
+              <p>This page was made by a trio of college seniors with a vision and a dream. Please support us by donating to help fund our use of AWS to keep this page (and our dream) alive.</p>
+              <p><a class="btn btn-lg btn-primary" href="showPassengers.php" role="button">Show All Passengers</a></p>
             </div>
           </div>
+        </div>
           <!-- <div class="carousel-item">
             <img class="second-slide" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Second slide">
             <div class="container">
@@ -78,41 +78,41 @@
       </div>
 
       <!-- Marketing messaging and featurettes
-      ================================================== -->
-      <!-- Wrap the rest of the page in another container to center all the content. -->
+        ================================================== -->
+        <!-- Wrap the rest of the page in another container to center all the content. -->
 
-      <div class="container marketing">
+        <div class="container marketing">
 
-        <!-- START THE FEATURETTES -->
+          <!-- START THE FEATURETTES -->
 
-        <hr class="featurette-divider">
+          <hr class="featurette-divider">
 
-        <div class="row featurette">
-          <div class="col-md-7">
-            <h2 class="featurette-heading">Questions from <span class="text-muted">Assignment 1</span></h2>
-          </div>
-          <div class="col-md-5">
-            <ol>
-							<li>sudo service httpd status</li>
-              <li>A GET command will retrieve the specified data from the server, POST adds it to the server, and HEAD retrieves metadata.</li>
-              <li>ServerRoot contains the files for the server. DocumentRoot contains the files for the webpages that are sent through the server</li>
-              <li>The default value is Port 80.</li>
-              <li>/var/www/html/index.html (the document root)</li>
-              <li>the config file specifies an {APACHE_LOG_DIR} that stores all the logs. The tail command is used to access the last few lines of a file.</li>
-              <li>A directory index file is one that is specified to display when a user tries to look in a specific directory, and this is useful to offer the user a default page.</li>
-              <li>A VirtualHost block needs to be added to ports.conf and modified in 000-default.conf:
+          <div class="row featurette">
+            <div class="col-md-7">
+              <h2 class="featurette-heading">Questions from <span class="text-muted">Assignment 1</span></h2>
+            </div>
+            <div class="col-md-5">
+              <ol>
+               <li>sudo service httpd status</li>
+               <li>A GET command will retrieve the specified data from the server, POST adds it to the server, and HEAD retrieves metadata.</li>
+               <li>ServerRoot contains the files for the server. DocumentRoot contains the files for the webpages that are sent through the server</li>
+               <li>The default value is Port 80.</li>
+               <li>/var/www/html/index.html (the document root)</li>
+               <li>the config file specifies an {APACHE_LOG_DIR} that stores all the logs. The tail command is used to access the last few lines of a file.</li>
+               <li>A directory index file is one that is specified to display when a user tries to look in a specific directory, and this is useful to offer the user a default page.</li>
+               <li>A VirtualHost block needs to be added to ports.conf and modified in 000-default.conf:
                 <code>
                   <br>
                   Listen 80 <br>
                   Listen 8080 <br>
                   &lt;VirtualHost *:80&gt;<br>
-                	&nbsp DocumentRoot "/var/www/html/teamcorruptdisk"
+                  &nbsp DocumentRoot "/var/www/html/teamcorruptdisk"
                   &lt;/VirtualHost&gt;.
-              </code>
-            </li>
+                </code>
+              </li>
               <li>A password-protected file needs to have an htpasswd file and that must be referenced in the htaccess file which establishes requirements to access that directory.</li>
               <li>Automatic redirection requires us to find the 404 error contingency and have it refer to a file of our choice.</li>
-						</ol>
+            </ol>
           </div>
         </div>
 
@@ -164,13 +164,13 @@
     </main>
 
     <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
-    <script src="../../assets/js/vendor/popper.min.js"></script>
-    <script src="../../dist/js/bootstrap.min.js"></script>
-    <!-- Just to make our placeholder images work. Don't actually copy the next line! -->
-    <script src="../../assets/js/vendor/holder.min.js"></script>
-  </body>
-</html>
+      ================================================== -->
+      <!-- Placed at the end of the document so the pages load faster -->
+      <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+      <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
+      <script src="../../assets/js/vendor/popper.min.js"></script>
+      <script src="../../dist/js/bootstrap.min.js"></script>
+      <!-- Just to make our placeholder images work. Don't actually copy the next line! -->
+      <script src="../../assets/js/vendor/holder.min.js"></script>
+    </body>
+    </html>
