@@ -45,26 +45,32 @@
       </div>
     </nav>
   </header>
+	<?php 
+		$oldSSN = $_GET['ssn'];
+		$oldf = $_GET['f_name'];
+		$oldm = $_GET['m_name'];
+		$oldl = $_GET['l_name'];
+	?>
 
   <main role="main">
     <div class="container">
-      <form action="createPassenger.php", method="post">
+      <form action="<?php echo "update.php?oldSSN=$oldSSN&of=$oldf&om=$oldm&ol=$oldl" ?>", method="post">
         <div class="form-group">
           <label for="passenger_ssn">Social Security Number</label>
-          <input type="text" name="passenger_ssn" class="form-control" placeholder="SSN" required/>
+          <input type="text" name="passenger_ssn" class="form-control" placeholder="SSN" value="<?php echo htmlspecialchars($oldSSN); ?>" required/>
           <small id="ssnHelp" class="form-text text-muted">Format: xxx-xx-xxxx</small>
         </div>
         <div class="form-group">
           <label for="f_name">First Name</label>
-          <input type="text" name="f_name" class="form-control" placeholder="First Name" required/>
+          <input type="text" name="f_name" class="form-control" placeholder="First Name" value="<?php echo htmlspecialchars($oldf); ?>" required/>
         </div>
         <div class="form-group">
           <label for="m_name">Middle Name</label>
-          <input type="text" name="m_name" class="form-control" placeholder="Middle Name"/>
+          <input type="text" name="m_name" class="form-control" placeholder="Middle Name" value="<?php echo htmlspecialchars($oldm); ?>"/>
         </div>
         <div class="form-group">
           <label for="l_name">Last Name</label>
-          <input type="text" name="l_name" class="form-control" placeholder="Last Name" required/>
+          <input type="text" name="l_name" class="form-control" placeholder="Last Name" value="<?php echo htmlspecialchars($oldl); ?>" required/>
         </div>
         <button type="update" class="btn btn-primary">Update</button>
       </form>

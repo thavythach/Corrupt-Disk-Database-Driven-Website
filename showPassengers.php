@@ -92,7 +92,7 @@
               <td>". $tuple[m_name]."</td>
               <td>". $tuple[l_name]."</td>
               <td>
-	      <form action='updatePass.php', method='post'>
+	      <form action='updatePass.php?f_name=$tuple[f_name]&m_name=$tuple[m_name]&l_name=$tuple[l_name]&ssn=$tuple[ssn]', method='post'>
               <button type='submit' class='btn btn-primary'>Update</button>
               </form>
 	      </td>
