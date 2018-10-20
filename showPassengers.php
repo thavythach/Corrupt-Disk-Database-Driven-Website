@@ -85,12 +85,15 @@
             <th>Last Name</th>
             </tr>";
             foreach($result as $tuple) {
-              echo "<tr>";
-              echo "<td><font color='blue'>$tuple[ssn]</font></td>";
-              echo "<td>".$tuple[f_name]."</td>";
-              echo "<td>". $tuple[m_name]."</td>";
-              echo "<td>". $tuple[l_name]."</td>";
-              echo "</tr>";
+              echo "<tr>
+              <td><font color='blue'>$tuple[ssn]</font></td>
+              <td>".$tuple[f_name]."</td>
+              <td>". $tuple[m_name]."</td>
+              <td>". $tuple[l_name]."</td>
+              </tr>";
+              echo"<form action='updatePass.php', method='post'>
+              <button type='submit' class='btn btn-primary'>Update</button>
+              </form>"
               if (isset($_GET['success'])) {
                $success = $_GET['success']; 
                $res = "SUCCESS! Added: <font color='blue'>$tuple[ssn]</font> $tuple[f_name] $tuple[m_name] $tuple[l_name]<br/>\n";
