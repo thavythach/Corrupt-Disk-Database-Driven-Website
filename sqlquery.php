@@ -74,16 +74,15 @@
             } else {
 	      $query = strip_tags($query);
               $query = preg_replace('/[^A-Za-z0-9\* \'\"\-\_\,]/', '', $query); 
-	      echo "
-	      <table class='table'>";
+	      echo "<table class='table'>";
 	    foreach ($db->query($query) as $row) {
 	      echo "<tr>";
               foreach ($row as $item) {
-		echo "<td>".$item."</td>";
+		echo "<td>$item</td>";
 	      }
 	      echo "</tr>";
              }
-	    echo "</table>";
+	    echo "</table><br>We were not able to figure out why this is producing duplicates in time :( Each member tested it over a period of a few hours.";
            }
          }
          $db = null;
