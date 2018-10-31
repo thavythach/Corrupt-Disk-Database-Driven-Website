@@ -35,7 +35,7 @@ if ( strlen($m_name) == 0 ){
 $pattern = '/^[A-Za-z]+/';
 
   // check ssn
-if (!preg_match('(^\d{3}-?\d{2}-?\d{4}$|^XXX-XX-XXXX$)', $ssn, $matches)){
+if (!preg_match('^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]\d{2}[\s.-]\d{4}$', $ssn, $matches)){
   $error = "Social Security Doesn't Match Pattern: (yyy-yy-yyyy).";
   header('Location: updatePass.php?error='.$error."&ssn=".$ossn."&f_name=".$of."&m_name=".$om."&l_name=".$ol);
   exit();
