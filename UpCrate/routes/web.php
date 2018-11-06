@@ -19,6 +19,7 @@ Route::get('/', 'PagesController@index');
 Route::get('/about', 'PagesController@about');
 Route::get('/services', 'PagesController@services');
 Route::get('/proposal', 'PagesController@proposal');
+Route::get('/signin', 'PagesController@signin');
 
 Route::get('/users/{id}', function($id){
     return 'This is user ' . $id;

@@ -28,4 +28,8 @@ class PagesController extends Controller
     public function proposal(){
         return view('pages.proposal');
     }
+
+    public function signin(){
+        return view('pages.signin');
+    }
 }
