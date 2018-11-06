@@ -24,4 +24,8 @@ class PagesController extends Controller
         );
         return view('pages.services')->with($data);
     }
+
+    public function proposal(){
+        return view('pages.proposal');
+    }
 }

@@ -18,11 +18,7 @@
 Route::get('/', 'PagesController@index');
 Route::get('/about', 'PagesController@about');
 Route::get('/services', 'PagesController@services');
-
-// hard coded page for now
-Route::get('/~ubuntu/proposal.html', function () {
-    return "<h1>lmao love and design #laravel`</h1>";
-});
+Route::get('/~ubuntu/proposal.html', 'PagesController@proposal');
 
 Route::get('/users/{id}', function($id){
     return 'This is user ' . $id;
