@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="icon" href="../../../../favicon.ico">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/public/css/style.css" />
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+  <style>
+  body { padding-top: 70px; }
+</style>
+
+<title>Proposal</title>
+</head>
+<body>
+  <header>
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+      <a class="navbar-brand" href="#">TeamCorruptDisk</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarCollapse">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="/~ubuntu">Home <span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" href="showPassengers.php">Show All Passengers <span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" href="insertPass.php">Create Passenger <span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" href="sqlquery.php">SQL Form <span class="sr-only">(current)</span></a>
+          </li>
+        </ul>
+        <form class="form-inline mt-2 mt-md-0">
+          <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
+      </div>
+    </nav>
+  </header>
+
+  <main role="main">
+    <div class="container">
+      <p>Jake Redmond, Rachel Gilligan, Nick Bigger, Thavy Thach<br>
+      Database Management<br>
+      Professor Chiu<br>
+      October 31, 2018<br>
+      <center>Project Proposal: UpCrate</center><br>
+        A dynamic file sharing web application built on the php-apache architecture.<br>
+        <br>
+        <br>
+
+        <b>Intro:</b>
+        Our client's requirements include being able to share files that are located on their local computer with other computers across the world. This includes the ability to securely share access to certain users and groups, or keep files private, while maintaining the files on our server. Our proposed solution uses a database to hold all of these files for each user and information relating to access and visibilty for certain users so that this goal can be achieved.
+        <br>
+        <br>
+        <b>Use Cases</b>: As a user, I’d like to…<br></p>
+      <ul>
+        <li>...create an account, and have that information stored securely via encryption on the database.</li>
+        <li>...update my password after account creation, have the updated password encryted, and any trace of the old password removed.</li>
+        <li>...delete my account and any personal information associated with it at any time.</li>
+        <li>...upload files to the server, and determine if they can be publically viewed or not.</li>
+        <li>...download files I've previously uploaded, allowing me to aquire a copy of the data without modifying it in the database.</li>
+        <li>...see the list of all files I have access to, organized by my files and files shared with me.</li>
+        <li>...update, delete, or rename files that I have uploaded to the database previosuly.</li>
+        <li>...specify other users as being able to see specific documents from my collection, and have the server remember that they have access.</li>
+        <li>...be able to get a shareable link to download the document from the server, and have it sendable to others via standard communication methods such as email or social media.</li>
+        <li>...have the ability to be a part of a 'group', which has access to a number of documents and all members of the group will have unrestricted access to these documents.</li>
+        <li>...see a list of all publicly viewable documents and be able to access any given document from this list.</li>
+      </ul>
+      <br>
+      <br>
+      <b>Gantt Chart:</b>
+      <center><img src="public/img/gantt.png" width="1000px" height=500px></center>
+      <br>
+      <br>
+      <b>Proposed Relational Database Schema:</b>
+      <center><img src="public/img/UML.png" width="1000px" height=800px></center>
+      <br>
+      <br>
+    </div>
+  </main>
+</body>
+</form>
+</html>
