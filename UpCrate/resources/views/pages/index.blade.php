@@ -5,136 +5,363 @@
 @endsection
 
 @section('content')
-<main role="main">
+Random Files exist here s.t. it exists 3-7 users with x nodes of different files 
 
-        <div id="myCarousel" class="carousel slide" data-ride="carousel">
-          <div class="carousel-inner">
-            <div class="carousel-item active">
-              <img class="first-slide" src="img/banner.jpg" alt="First slide">
-              <div class="container">
-                <div class="carousel-caption text-left">
-                  <h1>Welcome to our page!</h1>
-                  <p>This page was made by a trio of college seniors with a vision and a dream. Please support us by donating to help fund our use of AWS to keep this page (and our dream) alive.</p>
-                  
-                </div>
-              </div>
-            </div>
-              <!-- <div class="carousel-item">
-                <img class="second-slide" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Second slide">
-                <div class="container">
-                  <div class="carousel-caption">
-                    <h1>Another example headline.</h1>
-                    <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-                    <p><a class="btn btn-lg btn-primary" href="#" role="button">Learn more</a></p>
-                  </div>
-                </div>
-              </div>
-              <div class="carousel-item">
-                <img class="third-slide" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Third slide">
-                <div class="container">
-                  <div class="carousel-caption text-right">
-                    <h1>One more for good measure.</h1>
-                    <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-                    <p><a class="btn btn-lg btn-primary" href="#" role="button">Browse gallery</a></p>
-                  </div>
-                </div>
-              </div>
-            </div> -->
-          </div>
+<script src="http://d3js.org/d3.v3.min.js"></script>
+<script>
+var w = window.innerWidth;
+var h = window.innerHeight;
+
+var keyc = true, keys = true, keyt = true, keyr = true, keyx = true, keyd = true, keyl = true, keym = true, keyh = true, key1 = true, key2 = true, key3 = true, key0 = true
+
+var focus_node = null, highlight_node = null;
+
+var text_center = false;
+var outline = false;
+
+var min_score = 0;
+var max_score = 1;
+
+var color = d3.scale.linear()
+  .domain([min_score, (min_score+max_score)/2, max_score])
+  .range(["lime", "yellow", "red"]);
+
+var highlight_color = "blue";
+var highlight_trans = 0.1;
+  
+var size = d3.scale.pow().exponent(1)
+  .domain([1,100])
+  .range([8,24]);
+	
+var force = d3.layout.force()
+  .linkDistance(60)
+  .charge(-300)
+  .size([w,h]);
+
+var default_node_color = "#ccc";
+//var default_node_color = "rgb(3,190,100)";
+var default_link_color = "#888";
+var nominal_base_node_size = 8;
+var nominal_text_size = 10;
+var max_text_size = 24;
+var nominal_stroke = 1.5;
+var max_stroke = 4.5;
+var max_base_node_size = 36;
+var min_zoom = 0.1;
+var max_zoom = 7;
+var svg = d3.select("body").append("svg");
+var zoom = d3.behavior.zoom().scaleExtent([min_zoom,max_zoom])
+var g = svg.append("g");
+svg.style("cursor","move");
+
+d3.json("{{ asset('json/graph.json') }}", function(error, graph) {
+
+var linkedByIndex = {};
+    graph.links.forEach(function(d) {
+	linkedByIndex[d.source + "," + d.target] = true;
+    });
+
+	function isConnected(a, b) {
+        return linkedByIndex[a.index + "," + b.index] || linkedByIndex[b.index + "," + a.index] || a.index == b.index;
+    }
+
+	function hasConnections(a) {
+		for (var property in linkedByIndex) {
+				s = property.split(",");
+				if ((s[0] == a.index || s[1] == a.index) && linkedByIndex[property]) 					return true;
+		}
+	return false;
+	}
+	
+  force
+    .nodes(graph.nodes)
+    .links(graph.links)
+    .start();
+
+  var link = g.selectAll(".link")
+    .data(graph.links)
+    .enter().append("line")
+    .attr("class", "link")
+	.style("stroke-width",nominal_stroke)
+	.style("stroke", function(d) { 
+	if (isNumber(d.score) && d.score>=0) return color(d.score);
+	else return default_link_color; })
+
+
+  var node = g.selectAll(".node")
+    .data(graph.nodes)
+    .enter().append("g")
+    .attr("class", "node")
+	
+    .call(force.drag)
+
+	
+	node.on("dblclick.zoom", function(d) { d3.event.stopPropagation();
+	var dcx = (window.innerWidth/2-d.x*zoom.scale());
+	var dcy = (window.innerHeight/2-d.y*zoom.scale());
+	zoom.translate([dcx,dcy]);
+	 g.attr("transform", "translate("+ dcx + "," + dcy  + ")scale(" + zoom.scale() + ")");
+	 
+	 
+	});
+	
+
+
+	
+	var tocolor = "fill";
+	var towhite = "stroke";
+	if (outline) {
+		tocolor = "stroke"
+		towhite = "fill"
+	}
+		
+	
+	
+  var circle = node.append("path")
+  
+  
+      .attr("d", d3.svg.symbol()
+        .size(function(d) { return Math.PI*Math.pow(size(d.size)||nominal_base_node_size,2); })
+        .type(function(d) { return d.type; }))
+  
+	.style(tocolor, function(d) { 
+	if (isNumber(d.score) && d.score>=0) return color(d.score);
+	else return default_node_color; })
+    //.attr("r", function(d) { return size(d.size)||nominal_base_node_size; })
+	.style("stroke-width", nominal_stroke)
+	.style(towhite, "white");
+  	
+				
+  var text = g.selectAll(".text")
+    .data(graph.nodes)
+    .enter().append("text")
+    .attr("dy", ".35em")
+	.style("font-size", nominal_text_size + "px")
+
+	if (text_center)
+	 text.text(function(d) { return d.id; })
+	.style("text-anchor", "middle");
+	else 
+	text.attr("dx", function(d) {return (size(d.size)||nominal_base_node_size);})
+    .text(function(d) { return '\u2002'+d.id; });
+
+	node.on("mouseover", function(d) {
+	set_highlight(d);
+	})
+  .on("mousedown", function(d) { d3.event.stopPropagation();
+  	focus_node = d;
+	set_focus(d)
+	if (highlight_node === null) set_highlight(d)
+	
+}	).on("mouseout", function(d) {
+		exit_highlight();
+
+}	);
+
+		d3.select(window).on("mouseup",  
+		function() {
+		if (focus_node!==null)
+		{
+			focus_node = null;
+			if (highlight_trans<1)
+			{
+	
+		circle.style("opacity", 1);
+	  text.style("opacity", 1);
+	  link.style("opacity", 1);
+	}
+		}
+	
+	if (highlight_node === null) exit_highlight();
+		});
+
+function exit_highlight()
+{
+		highlight_node = null;
+	if (focus_node===null)
+	{
+		svg.style("cursor","move");
+		if (highlight_color!="white")
+	{
+  	  circle.style(towhite, "white");
+	  text.style("font-weight", "normal");
+	  link.style("stroke", function(o) {return (isNumber(o.score) && o.score>=0)?color(o.score):default_link_color});
+ }
+			
+	}
+}
+
+function set_focus(d)
+{	
+if (highlight_trans<1)  {
+    circle.style("opacity", function(o) {
+                return isConnected(d, o) ? 1 : highlight_trans;
+            });
+
+			text.style("opacity", function(o) {
+                return isConnected(d, o) ? 1 : highlight_trans;
+            });
+			
+            link.style("opacity", function(o) {
+                return o.source.index == d.index || o.target.index == d.index ? 1 : highlight_trans;
+            });		
+	}
+}
+
+
+function set_highlight(d)
+{
+	svg.style("cursor","pointer");
+	if (focus_node!==null) d = focus_node;
+	highlight_node = d;
+
+	if (highlight_color!="white")
+	{
+		  circle.style(towhite, function(o) {
+                return isConnected(d, o) ? highlight_color : "white";});
+			text.style("font-weight", function(o) {
+                return isConnected(d, o) ? "bold" : "normal";});
+            link.style("stroke", function(o) {
+		      return o.source.index == d.index || o.target.index == d.index ? highlight_color : ((isNumber(o.score) && o.score>=0)?color(o.score):default_link_color);
+
+            });
+	}
+}
+ 	
+ 	
+  zoom.on("zoom", function() {
+  
+    var stroke = nominal_stroke;
+    if (nominal_stroke*zoom.scale()>max_stroke) stroke = max_stroke/zoom.scale();
+    link.style("stroke-width",stroke);
+    circle.style("stroke-width",stroke);
+	   
+	var base_radius = nominal_base_node_size;
+    if (nominal_base_node_size*zoom.scale()>max_base_node_size) base_radius = max_base_node_size/zoom.scale();
+        circle.attr("d", d3.svg.symbol()
+        .size(function(d) { return Math.PI*Math.pow(size(d.size)*base_radius/nominal_base_node_size||base_radius,2); })
+        .type(function(d) { return d.type; }))
+		
+	//circle.attr("r", function(d) { return (size(d.size)*base_radius/nominal_base_node_size||base_radius); })
+	if (!text_center) text.attr("dx", function(d) { return (size(d.size)*base_radius/nominal_base_node_size||base_radius); });
+	
+	var text_size = nominal_text_size;
+    if (nominal_text_size*zoom.scale()>max_text_size) text_size = max_text_size/zoom.scale();
+    text.style("font-size",text_size + "px");
+
+	g.attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
+	});
+	 
+  svg.call(zoom);	  
+	
+  resize();
+  //window.focus();
+  d3.select(window).on("resize", resize).on("keydown", keydown);
+	  
+  force.on("tick", function() {
+  	
+    node.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
+    text.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
+  
+    link.attr("x1", function(d) { return d.source.x; })
+      .attr("y1", function(d) { return d.source.y; })
+      .attr("x2", function(d) { return d.target.x; })
+      .attr("y2", function(d) { return d.target.y; });
+		
+    node.attr("cx", function(d) { return d.x; })
+      .attr("cy", function(d) { return d.y; });
+	});
+  
+  function resize() {
+    var width = window.innerWidth, height = window.innerHeight;
+	svg.attr("width", width).attr("height", height);
     
-          <!-- Marketing messaging and featurettes
-            ================================================== -->
-            <!-- Wrap the rest of the page in another container to center all the content. -->
-    
-            <div class="container marketing">
-    
-              <!-- START THE FEATURETTES -->
-    
-              <hr class="featurette-divider">
-    
-              <div class="row featurette">
-                <div class="col-md-7">
-                  <h2 class="featurette-heading">Questions from <span class="text-muted">Assignment 1</span></h2>
-                </div>
-                <div class="col-md-5">
-                  <ol>
-                   <li>sudo service httpd status</li>
-                   <li>A GET command will retrieve the specified data from the server, POST adds it to the server, and HEAD retrieves metadata.</li>
-                   <li>ServerRoot contains the files for the server. DocumentRoot contains the files for the webpages that are sent through the server</li>
-                   <li>The default value is Port 80.</li>
-                   <li>/var/www/html/index.html (the document root)</li>
-                   <li>the config file specifies an {APACHE_LOG_DIR} that stores all the logs. The tail command is used to access the last few lines of a file.</li>
-                   <li>A directory index file is one that is specified to display when a user tries to look in a specific directory, and this is useful to offer the user a default page.</li>
-                   <li>A VirtualHost block needs to be added to ports.conf and modified in 000-default.conf:
-                    <code>
-                      <br>
-                      Listen 80 <br>
-                      Listen 8080 <br>
-                      &lt;VirtualHost *:80&gt;<br>
-                      &nbsp DocumentRoot "/var/www/html/teamcorruptdisk"
-                      &lt;/VirtualHost&gt;.
-                    </code>
-                  </li>
-                  <li>A password-protected file needs to have an htpasswd file and that must be referenced in the htaccess file which establishes requirements to access that directory.</li>
-                  <li>Automatic redirection requires us to find the 404 error contingency and have it refer to a file of our choice.</li>
-                </ol>
-              </div>
-            </div>
-    
-            <hr class="featurette-divider">
-    
-          <!--   <div class="row featurette">
-              <div class="col-md-7 order-md-2">
-                <h2 class="featurette-heading">Questions from <span class="text-muted">Assignment 2</span></h2>
-              </div>
-              <div class="col-md-5 order-md-1">
-                <h1 class="text-muted">Under Construction</h1>
-              </div>
-            </div>
-    
-            <hr class="featurette-divider"> -->
-    
-            <!-- Three columns of text below the carousel -->
-            <div class="row">
-              <div class="col-lg-4">
-                <img class="rounded-circle" src="{{ asset('img/nick.jpg')}}" alt="Nick Profile Picture" width="140" height="140">
-                <h2>Nick Bigger</h2>
-                <p>Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies vehicula ut id elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna.</p>
-                <p><a class="btn btn-secondary" href="https://github.com/nbigger" role="button">View GitHub &raquo;</a></p>
-              </div><!-- /.col-lg-4 -->
-              <div class="col-lg-4">
-                <img class="rounded-circle" src="{{ asset('img/thavy.jpg')}}" alt="Thavy Profile Picture" width="140" height="140">
-                <h2>Thavy Thach</h2>
-                <p>Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh.</p>
-                <p><a class="btn btn-secondary" href="https://github.com/thavythach" role="button">View GitHub &raquo;</a></p>
-              </div><!-- /.col-lg-4 -->
-              <div class="col-lg-4">
-                <img class="rounded-circle" src="{{asset('img/jake.jpg')}}" alt="Jake Profile Picture" width="140" height="140">
-                <h2>Jake Redmond</h2>
-                <p>Just learned how to use a list item in html and ready to go.</p>
-                <p><a class="btn btn-secondary" href="https://github.com/Jakeredmond22" role="button">View GitHub &raquo;</a></p>
-              </div><!-- /.col-lg-4 -->
-            </div><!-- /.row -->
-    
-            <!-- /END THE FEATURETTES -->
-    
-          </div><!-- /.container -->
-    
-    
-          <!-- FOOTER -->
-          <footer class="container">
-            <p class="float-right"><a href="#">Back to top</a></p>
-            <p>&copy; 2018-2019 TeamCorruptDisk, Inc. &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></p>
-          </footer>
-        </main>
-    
-        <!-- Bootstrap core JavaScript
-          ================================================== -->
-          <!-- Placed at the end of the document so the pages load faster -->
-          <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-          <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
-          <script src="../../assets/js/vendor/popper.min.js"></script>
-          <script src="../../dist/js/bootstrap.min.js"></script>
-          <!-- Just to make our placeholder images work. Don't actually copy the next line! -->
-          <script src="../../assets/js/vendor/holder.min.js"></script>
+	force.size([force.size()[0]+(width-w)/zoom.scale(),force.size()[1]+(height-h)/zoom.scale()]).resume();
+    w = width;
+	h = height;
+	}
+	
+	function keydown() {
+	if (d3.event.keyCode==32) {  force.stop();}
+	else if (d3.event.keyCode>=48 && d3.event.keyCode<=90 && !d3.event.ctrlKey && !d3.event.altKey && !d3.event.metaKey)
+	{
+  switch (String.fromCharCode(d3.event.keyCode)) {
+    case "C": keyc = !keyc; break;
+    case "S": keys = !keys; break;
+	case "T": keyt = !keyt; break;
+	case "R": keyr = !keyr; break;
+    case "X": keyx = !keyx; break;
+	case "D": keyd = !keyd; break;
+	case "L": keyl = !keyl; break;
+	case "M": keym = !keym; break;
+	case "H": keyh = !keyh; break;
+	case "1": key1 = !key1; break;
+	case "2": key2 = !key2; break;
+	case "3": key3 = !key3; break;
+	case "0": key0 = !key0; break;
+  }
+  	
+  link.style("display", function(d) {
+				var flag  = vis_by_type(d.source.type)&&vis_by_type(d.target.type)&&vis_by_node_score(d.source.score)&&vis_by_node_score(d.target.score)&&vis_by_link_score(d.score);
+				linkedByIndex[d.source.index + "," + d.target.index] = flag;
+              return flag?"inline":"none";});
+  node.style("display", function(d) {
+				return (key0||hasConnections(d))&&vis_by_type(d.type)&&vis_by_node_score(d.score)?"inline":"none";});
+  text.style("display", function(d) {
+                return (key0||hasConnections(d))&&vis_by_type(d.type)&&vis_by_node_score(d.score)?"inline":"none";});
+				
+				if (highlight_node !== null)
+				{
+					if ((key0||hasConnections(highlight_node))&&vis_by_type(highlight_node.type)&&vis_by_node_score(highlight_node.score)) { 
+					if (focus_node!==null) set_focus(focus_node);
+					set_highlight(highlight_node);
+					}
+					else {exit_highlight();}
+				}
+
+}	
+}
+ 
+});
+
+function vis_by_type(type)
+{
+	switch (type) {
+	  case "circle": return keyc;
+	  case "square": return keys;
+	  case "triangle-up": return keyt;
+	  case "diamond": return keyr;
+	  case "cross": return keyx;
+	  case "triangle-down": return keyd;
+	  default: return true;
+}
+}
+function vis_by_node_score(score)
+{
+	if (isNumber(score))
+	{
+	if (score>=0.666) return keyh;
+	else if (score>=0.333) return keym;
+	else if (score>=0) return keyl;
+	}
+	return true;
+}
+
+function vis_by_link_score(score)
+{
+	if (isNumber(score))
+	{
+	if (score>=0.666) return key3;
+	else if (score>=0.333) return key2;
+	else if (score>=0) return key1;
+}
+	return true;
+}
+
+function isNumber(n) {
+  return !isNaN(parseFloat(n)) && isFinite(n);
+}	
+
+
+</script>
 @endsection
