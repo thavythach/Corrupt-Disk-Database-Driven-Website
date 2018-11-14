@@ -15,8 +15,9 @@ class FilesController extends Controller
      */
     public function index()
     {
-        $files = File::all();
-        return view('files.index')->with('files', $files);
+        $data['files'] = File::all();
+        $data['count'] = File::all()->count();
+        return view('files.index')->with('data', $data);
     }
 
     /**
@@ -62,8 +63,7 @@ class FilesController extends Controller
         // persist to database
         $file->save();
 
-        $files = File::all();
-        return view('files.index')->with('files', $files);
+        return redirect()->route('files.index');
     }
 
     /**
@@ -131,7 +131,8 @@ class FilesController extends Controller
         
         $tmp->delete();
 
-        $files = File::all();
-        return view('files.index')->with('files', $files);
+        // $files = File::all();
+        // return view('files.index')->with('files', $files);
+        return redirect()->route('files.index');
     }
 }
