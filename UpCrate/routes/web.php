@@ -11,6 +11,7 @@
 |
 */
 use Illuminate\Http\Request;
+use App\File;
 
  Route::get('/', function () {
      return view('home');
@@ -30,19 +31,6 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::resource('users', 'UsersController');
-
 Route::resource('files', 'FilesController');
 
-Route::post('process', function (Request $request) {
-    // cache the file
-    $file = $request->file('file');
-
-    // generate a new filename. getClientOriginalExtension() for the file extension
-    $filename = $file->getClientOriginalName();
-    $garbagefilename = $filename.time();
-
-    // save to storage/app/photos as the new $filename
-    $path = $file->storeAs('files', $garbagefilename);
-    DB::insert('insert into file (id, file_path, visibility, name) values (?, ?, ?, ?)', [null, $path, 0,  $filename]);
-    dd($path);
-});
+Route::post('process', 'FilesController@store');

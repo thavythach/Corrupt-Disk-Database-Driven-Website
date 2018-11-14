@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\File;
 
 class FilesController extends Controller
 {
@@ -13,7 +14,7 @@ class FilesController extends Controller
      */
     public function index()
     {
-        $files = \DB::select('select * from file');
+        $files = File::all();
         return view('files.index')->with('files', $files);
     }
 
@@ -25,6 +26,7 @@ class FilesController extends Controller
     public function create()
     {
         //
+
     }
 
     /**
@@ -35,7 +37,26 @@ class FilesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // TODO: check if size of file is bigger than 2MB to throw error, otherwise continue.
+        
+        // creation of the new file
+        $file = new File;
+        
+        // cache the file
+        $tmp = $request->file('file');
+
+        // generate a new filename. getClientOriginalExtension() for the file extension
+        $file->name = $tmp->getClientOriginalName();
+        
+        // save to storage/app/photos as the new $filename
+        $file->file_path = $tmp->storeAs('files', $file->name . time());
+
+        // set public visibility to false
+        $file->visibility = 0;
+
+        // persist to database
+        $file->save();
+
     }
 
     /**
