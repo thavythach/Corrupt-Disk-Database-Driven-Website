@@ -14,7 +14,7 @@
                 </label>
             </p>
             <button>Upload</button>
-            {{ csrf_field() }}
+          {{ csrf_field() }}
         </form>
         </p>
       </main>

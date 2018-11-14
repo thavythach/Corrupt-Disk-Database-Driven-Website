@@ -5,7 +5,7 @@
     @if(count($files) > 0)
         @foreach ($files as $file)
             <div class="well">
-                <h3><a href="/files/{{$file->id}}">{{$file->name}}</a></h3>
+                <h3><a href="/files/download/{{$file->id}}">{{$file->name}}</a></h3>
             </div>    
         @endforeach
     @else 

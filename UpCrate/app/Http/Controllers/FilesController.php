@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 use App\File;
 
@@ -79,6 +80,19 @@ class FilesController extends Controller
     public function edit($id)
     {
         //
+    }
+
+    /**
+     * Allows for the file to be downloaded.
+     * 
+     * @param int $id
+     * @return \Illuminate\Http\Response
+     */
+    public function download($id){
+        
+        // TODO: if file exists, download.
+        $tmp = File::where('id', '=', $id)->first();
+        return Storage::download($tmp->file_path, $tmp->name);
     }
 
     /**
