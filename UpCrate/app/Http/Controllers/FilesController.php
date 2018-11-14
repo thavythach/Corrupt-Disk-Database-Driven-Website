@@ -58,6 +58,8 @@ class FilesController extends Controller
         // persist to database
         $file->save();
 
+        $files = File::all();
+        return view('files.index')->with('files', $files);
     }
 
     /**
@@ -115,6 +117,17 @@ class FilesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        // TODO: can only destroy if current file is owned by user.
+        $tmp = File::where('id', '=', $id)->first();
+        if (!$tmp){
+            return view('home');
+        }
+
+        Storage::delete($tmp->file_path);
+        
+        $tmp->delete();
+
+        $files = File::all();
+        return view('files.index')->with('files', $files);
     }
 }

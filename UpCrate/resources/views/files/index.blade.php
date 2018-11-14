@@ -6,6 +6,7 @@
         @foreach ($files as $file)
             <div class="well">
                 <h3><a href="/files/download/{{$file->id}}">{{$file->name}}</a></h3>
+                <a href="/files/delete/{{$file->id}}"><button>Delete</button></a>
             </div>    
         @endforeach
     @else 
