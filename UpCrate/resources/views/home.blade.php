@@ -1,23 +1,26 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-default">
-                <div class="panel-heading">Dashboard</div>
+<body class="text-center">
 
-                <div class="panel-body">
-                    @if (session('status'))
-                        <div class="alert alert-success">
-                            {{ session('status') }}
-                        </div>
-                    @endif
+      <main role="main" class="inner cover">
+        <h1 class="cover-heading">Get started.</h1>
+        <p class="lead">Upload a file and get started storing with UpCrate.</p>
+        <p class="lead">
+          <form action="/process" enctype="multipart/form-data" method="POST">
+            <p>
+                <label for="file">
+                    <input type="file" name="file" id="file">
+                </label>
+            </p>
+            <button>Upload</button>
+            {{ csrf_field() }}
+        </form>
+        </p>
+      </main>
 
-                    You are logged in!
-                </div>
-            </div>
-        </div>
+      <footer class="row">
+        @include('includes.footer')
+      </footer>
     </div>
-</div>
 @endsection

@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <h1>users</h1>
+    <h1>Users</h1>
     @if(count($users) > 0)
         @foreach ($users as $user)
             <div class="well">
