@@ -7,6 +7,7 @@
             <div class="well">
                 <h3><a href="/files/download/{{$file->id}}">{{$file->name}}</a></h3>
                 <a href="/files/delete/{{$file->id}}"><button>Delete</button></a>
+                <p> Visibility: {{ $file->visibility }} </p>
             </div>    
         @endforeach
     @else 

@@ -10,7 +10,9 @@
           <form action="/process" enctype="multipart/form-data" method="POST">
             <p>
                 <label for="file">
-                    <input type="file" name="file" id="file">
+                    <input type="file" name="file" id="file"><br>
+                    <input type="radio" name="visibility" value="Private" checked> Private
+                    <input type="radio" name="visibility" value="Public">Public<br>
                 </label>
             </p>
             <button>Upload</button>

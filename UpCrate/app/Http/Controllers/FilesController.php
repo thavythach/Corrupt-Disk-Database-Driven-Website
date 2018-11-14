@@ -53,7 +53,11 @@ class FilesController extends Controller
         $file->file_path = $tmp->storeAs('files', $file->name . time());
 
         // set public visibility to false
-        $file->visibility = 0;
+        if ($request->get('visibility', 0) == 'Private'){
+            $file->visibility = 0;
+        } else {
+            $file->visibility = 1;
+        }
 
         // persist to database
         $file->save();
