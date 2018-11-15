@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateIndividualAccessTable extends Migration
+class CreateOwnsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateIndividualAccessTable extends Migration
      */
     public function up()
     {
-        Schema::create('individualAccess', function (Blueprint $table) {
+        Schema::create('owns', function (Blueprint $table) {
             $table->integer('user_id');
             $table->integer('file_id');
         });
@@ -26,6 +26,6 @@ class CreateIndividualAccessTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('individualAccess');
+        Schema::dropIfExists('owns');
     }
 }
