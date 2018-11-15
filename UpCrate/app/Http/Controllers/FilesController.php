@@ -29,8 +29,7 @@ class FilesController extends Controller
 
         // select * from Owns natural join File where userID = pm34;
         
-
-        $data['count'] = File::all()->count();
+        $data['count'] = $data['files']->count();
         return view('files.index')->with('data', $data);
     }
 
@@ -76,7 +75,6 @@ class FilesController extends Controller
 
         // persist to database
         $file->save();
-
 
         // inserts into owns relation 
         $owns = new Owns;
@@ -144,17 +142,26 @@ class FilesController extends Controller
     public function destroy($id)
     {
         // TODO: can only destroy if current file is owned by user.
-        $tmp = File::where('id', '=', $id)->first();
-        if (!$tmp){
+        // $tmp = File::where('id', '=', $id)->first();
+
+        $data['files'] = Owns
+            ::where('user_id', '=', Auth::id())
+            ->join('file', 'owns.file_id', '=', 'file.id')
+            ->select('file.id', 'file.file_path', 'file.visibility', 'file.name')
+            ->getQuery()
+            ->get();
+        
+        $toDelete = $data['files']->where('id', '=', $id)->first();
+
+        if (!$toDelete){
             return view('home');
         }
 
-        Storage::delete($tmp->file_path);
+        Storage::delete($toDelete->file_path);
         
-        $tmp->delete();
+        $toDelete->delete();
 
-        // $files = File::all();
-        // return view('files.index')->with('files', $files);
+
         return redirect()->route('files.index');
     }
 }
