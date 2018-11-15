@@ -18,7 +18,12 @@ class FilesController extends Controller
      */
     public function index()
     {
-        // $data['files'] = File::all();
+        // if not logged in, then redirect to register page.
+        /*if (!Auth::id()){
+            return view('auth.register');
+        }
+
+        */
 
         $data['files'] = Owns
             ::where('user_id', '=', Auth::id())
@@ -26,8 +31,6 @@ class FilesController extends Controller
             ->select('file.id', 'file.file_path', 'file.visibility', 'file.name')
             ->getQuery()
             ->get();
-
-        // select * from Owns natural join File where userID = pm34;
         
         $data['count'] = $data['files']->count();
         return view('files.index')->with('data', $data);
@@ -51,7 +54,12 @@ class FilesController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
+    {  
+        // if not logged in, then redirect to register page.
+        if (!Auth::id()){
+            return view('auth.register');
+        }
+
         // TODO: check if size of file is bigger than 2MB to throw error, otherwise continue.
         
         // creation of the new file
@@ -94,7 +102,26 @@ class FilesController extends Controller
      */
     public function show($id)
     {
-        //
+        // if not logged in, then redirect to register page.
+        if (!Auth::id()){
+            return view('auth.register');
+        }
+
+        $data['files'] = Owns
+            ::where('user_id', '=', Auth::id())
+            ->join('file', 'owns.file_id', '=', 'file.id')
+            ->select('file.id', 'file.file_path', 'file.visibility', 'file.name')
+            ->getQuery()
+            ->get();
+        
+        $tmp = $data['files']->where('id', '=', $id)->first();
+
+        // return if user doesn't have access to resource
+        if (!$tmp){
+            return redirect()->route('files.index');
+        }
+
+        return Storage::download($tmp->file_path, $tmp->name);
     }
 
     /**
@@ -106,19 +133,6 @@ class FilesController extends Controller
     public function edit($id)
     {
         //
-    }
-
-    /**
-     * Allows for the file to be downloaded.
-     * 
-     * @param int $id
-     * @return \Illuminate\Http\Response
-     */
-    public function download($id){
-        
-        // TODO: if file exists, download.
-        $tmp = File::where('id', '=', $id)->first();
-        return Storage::download($tmp->file_path, $tmp->name);
     }
 
     /**
@@ -141,8 +155,10 @@ class FilesController extends Controller
      */
     public function destroy($id)
     {
-        // TODO: can only destroy if current file is owned by user.
-        // $tmp = File::where('id', '=', $id)->first();
+        // if not logged in, then redirect to register page.
+        if (!Auth::id()){
+            return view('auth.register');
+        }
 
         $data['files'] = Owns
             ::where('user_id', '=', Auth::id())
