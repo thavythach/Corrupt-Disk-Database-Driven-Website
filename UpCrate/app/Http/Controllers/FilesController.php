@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\File;
+use App\Owns;
+use App\User; 
 
 class FilesController extends Controller
 {
@@ -15,7 +18,18 @@ class FilesController extends Controller
      */
     public function index()
     {
-        $data['files'] = File::all();
+        // $data['files'] = File::all();
+
+        $data['files'] = Owns
+            ::where('user_id', '=', Auth::id())
+            ->join('file', 'owns.file_id', '=', 'file.id')
+            ->select('file.id', 'file.file_path', 'file.visibility', 'file.name')
+            ->getQuery()
+            ->get();
+
+        // select * from Owns natural join File where userID = pm34;
+        
+
         $data['count'] = File::all()->count();
         return view('files.index')->with('data', $data);
     }
@@ -63,6 +77,14 @@ class FilesController extends Controller
         // persist to database
         $file->save();
 
+
+        // inserts into owns relation 
+        $owns = new Owns;
+        $owns->file_id = $file->id;
+        $owns->user_id = Auth::id();
+
+        $owns->save();
+        
         return redirect()->route('files.index');
     }
 

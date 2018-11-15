@@ -32,6 +32,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::resource('users', 'UsersController');
 Route::resource('files', 'FilesController');
+Route::resource('owns', 'OwnsController');
 Route::get('/files/download/{id}', 'FilesController@download');
 Route::get('/files/delete/{id}', 'FilesController@destroy');
 
