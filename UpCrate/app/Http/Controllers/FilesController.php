@@ -23,7 +23,7 @@ class FilesController extends Controller
     public function index()
     {
         // if not logged in, then redirect to register page.
-        if (!Auth::id()){
+        if (!Auth::check()){
             return view('auth.register');
         }
 
@@ -78,21 +78,22 @@ class FilesController extends Controller
     public function store(Request $request)
     {  
         // if not logged in, then redirect to register page.
-        
-
-
-        if (!Auth::id()){
+        if (!Auth::check()){
             return view('auth.register');
         }
 
         // TODO: check if size of file is bigger than 2MB to throw error, otherwise continue.
-        
+
+        \DB::beginTransaction();
+                
         // creation of the new file
         $file = new File;
         
         // cache the file
         $tmp = $request->file('file');
         if (!$tmp){
+            \DB::rollbackTransaction();
+            \DB::commit();
             return redirect()->action('HomeController@index');
         }
 
@@ -135,8 +136,8 @@ class FilesController extends Controller
                 }
             }
         }
-        
-        
+
+        \DB::commit();
         
         return redirect()->route('files.index');
     }
@@ -150,7 +151,7 @@ class FilesController extends Controller
     public function show($id)
     {
         // if not logged in, then redirect to register page.
-        if (!Auth::id()){
+        if (!Auth::check()){
             return view('auth.register');
         }
 
@@ -228,7 +229,7 @@ class FilesController extends Controller
     public function destroy($id)
     {
         // if not logged in, then redirect to register page.
-        if (!Auth::id()){
+        if (!Auth::check()){
             return view('auth.register');
         }
 
@@ -245,11 +246,19 @@ class FilesController extends Controller
             return redirect()->action('HomeController@index');
         }
 
-        Storage::delete($toDelete->file_path);
         
+
+
+        \DB::beginTransaction(); 
+
         File::destroy($id);
         $deletedOwnsRows = Owns::where('file_id', '=', $id)->delete();
         $deletedIARows = IndividualAccess::where('file_id', '=', $id)->delete();
+
+        \DB::commit();
+
+        Storage::delete($toDelete->file_path);
+
 
         return redirect()->route('files.index');
     }

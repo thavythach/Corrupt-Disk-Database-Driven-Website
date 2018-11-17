@@ -19,7 +19,7 @@
             <b>Use Cases</b>: As a user, I’d like to…<br></p>
           <ul>
             <li><b>done</b>...create an account, and have that information stored securely via encryption on the database.</li>
-            <li>...update my password after account creation, have the updated password encryted, and any trace of the old password removed.</li>
+            <li><b>done</b>...update my password after account creation, have the updated password encryted, and any trace of the old password removed.</li>
             <li>...delete my account and any personal information associated with it at any time.</li>
             <li><b>done</b>...upload files to the server, and determine if they can be publically viewed or not.</li>
             <li><b>done</b>...download files I've previously uploaded, allowing me to aquire a copy of the data without modifying it in the database.</li>
