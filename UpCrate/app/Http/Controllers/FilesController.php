@@ -49,6 +49,17 @@ class FilesController extends Controller
         return view('files.index')->with('data', $data);
     }
 
+    public function vault(){
+        
+        $data['files'] = File
+            ::where('visibility', '=', 1)
+            ->getQuery()
+            ->get();
+        
+        $data['count'] = $data['files']->count();
+        return view('vault')->with('data', $data);
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -112,17 +123,21 @@ class FilesController extends Controller
 
         // insert into IndividualAccess select userID, fileID from User cross join (select * from File natural join owns where userID = pm34 and fileID = fileID) where name in the set of names passed in
         $iaList = $request->item_id;
-        
-        for ($i=0; $i < count($iaList); $i++){
+
+        // if list is countable go through and add file.
+        if ($iaList){
+            for ($i=0; $i < count($iaList); $i++){
             
-            // add to IndividualAccess table // $file->id
-            $ia = new IndividualAccess;
-            if ($iaList[$i] != Auth::id()){
-                $ia->user_id = $iaList[$i];
-                $ia->file_id = $file->id;
-                $ia->save();
+                // add to IndividualAccess table // $file->id
+                $ia = new IndividualAccess;
+                if ($iaList[$i] != Auth::id()){
+                    $ia->user_id = $iaList[$i];
+                    $ia->file_id = $file->id;
+                    $ia->save();
+                }
             }
         }
+        
         
         
         return redirect()->route('files.index');
@@ -141,18 +156,43 @@ class FilesController extends Controller
             return view('auth.register');
         }
 
+        // files owned 
         $data['files'] = Owns
             ::where('user_id', '=', Auth::id())
             ->join('file', 'owns.file_id', '=', 'file.id')
             ->select('file.id', 'file.file_path', 'file.visibility', 'file.name')
             ->getQuery()
             ->get();
+
+        // shared files
+        $data['iaFiles'] = IndividualAccess
+            ::where('user_id', '=', Auth::id())
+            ->join('file', 'individualAccess.file_id', '=', 'file.id')
+            ->select('file.id', 'file.file_path', 'file.visibility', 'file.name')
+            ->getQuery()
+            ->get();
+        
+        $data['publicFiles'] = File
+            ::where('visibility', '=', 1)
+            ->join('owns', 'owns.user_id', '!=', Auth::id())
+            ->getQuery()
+            ->get();
         
         $tmp = $data['files']->where('id', '=', $id)->first();
+        $tmp1 = $data['iaFiles']->where('id', '=', $id)->first();
+        $tmp2 = $data['publicFiles']->where('id', '=', $id)->first();
 
         // return if user doesn't have access to resource
         if (!$tmp){
-            return redirect()->route('files.index');
+            if (!$tmp1){
+                if (!$tmp2)
+                    return redirect()->route('files.index'); 
+                else {
+                    return Storage::download($tmp2->file_path, $tmp2->name);
+                }
+            } else {
+                return Storage::download($tmp1->file_path, $tmp1->name);
+            }
         }
 
         return Storage::download($tmp->file_path, $tmp->name);
