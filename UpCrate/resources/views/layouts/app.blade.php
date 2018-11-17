@@ -53,6 +53,7 @@
 
                                 <ul class="dropdown-menu">
                                     <li>
+                                        <a href="/users/{{ Auth::id() }}">Profile</a>
                                         <a href="{{ route('files.index') }}">Files</a>
                                         <a href="{{ route('logout') }}"
                                             onclick="event.preventDefault();

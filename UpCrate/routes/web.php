@@ -31,6 +31,8 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/', 'HomeController@index')->name('home');
 Route::get('/vault', 'FilesController@vault');
+Route::post('/changePassword','UsersController@changePassword')->name('changePassword');
+
 
 Route::resource('users', 'UsersController');
 Route::resource('files', 'FilesController');
