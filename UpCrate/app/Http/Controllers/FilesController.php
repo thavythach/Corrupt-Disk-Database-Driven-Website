@@ -247,8 +247,9 @@ class FilesController extends Controller
 
         Storage::delete($toDelete->file_path);
         
-        $toDelete->delete();
-
+        File::destroy($id);
+        $deletedOwnsRows = Owns::where('file_id', '=', $id)->delete();
+        $deletedIARows = IndividualAccess::where('file_id', '=', $id)->delete();
 
         return redirect()->route('files.index');
     }

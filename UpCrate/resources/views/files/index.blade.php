@@ -30,8 +30,6 @@
                         @foreach ($data['iaFiles'] as $file)
                             <div class="well">
                                 <h3><a href="/files/{{$file->id}}">{{$file->name}}</a></h3>
-                                <a href="/files/delete/{{$file->id}}"><button>Delete</button></a>
-                                <p> Public Visibility: @if ($file->visibility == 1) On @else Off @endif </p>
                             </div>    
                         @endforeach
                     @else 
