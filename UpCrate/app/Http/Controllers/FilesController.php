@@ -220,6 +220,20 @@ class FilesController extends Controller
         //
     }
 
+    public function rename(Request $request){
+        // $validateData = $request->validate([
+        //     'new_filename' => 'required|string|min:2',
+        //     'fileid' => 'required'
+        // ]);
+
+        // change file name
+        $record = File::find($request->get('fileid'));
+        $record->name = $request->get('new_filename');
+        $record->save();
+
+        return redirect()->route('files.index');
+    }
+
     /**
      * Remove the specified resource from storage.
      *

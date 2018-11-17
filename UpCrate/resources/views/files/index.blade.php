@@ -15,7 +15,38 @@
                         @if(count($data['files']) > 0)
                             @foreach ($data['files'] as $file)
                                 <div class="well">
-                                    <h3><a href="/files/{{$file->id}}">{{$file->name}}</a></h3>
+                                    <h3><a href="/files/{{$file->id}}">{{$file->name}}</a> </h3>
+                                    <!-- Trigger the modal with a button -->
+                                    <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#myModal">Rename</button>
+                                  
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="myModal" role="dialog">
+                                      <div class="modal-dialog">
+                                      
+                                        <!-- Modal content-->
+                                        <div class="modal-content">
+                                          <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                            <h4 class="modal-title">Rename File</h4>
+                                          </div>
+                                          <div class="modal-body">
+                                            <p>Fill in the form with a new name to rename the file</p>
+                                            <form action="/renameFile" method="POST" enctype="multipart/form-data">
+                                                <label for="file">Filename:</label>
+                                                <input type="text" name="new_filename" value="{{ $file->name }}">
+                                                <input type="hidden" id="fileid" name="fileid" value="{{$file->id}}">
+                                                <input type="submit" name="submit" value="Submit">
+                                                {{ csrf_field() }}
+                                            </form>
+                                          </div>
+                                          <div class="modal-footer">
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                          </div>
+                                        </div>
+                                        
+                                      </div>
+                                    </div>
+
                                     <a href="/files/delete/{{$file->id}}"><button>Delete</button></a>
                                     <p> Public Visibility: @if ($file->visibility == 1) On @else Off @endif </p>
                                 </div>    
