@@ -13,9 +13,9 @@
 use Illuminate\Http\Request;
 use App\File;
 
- Route::get('/', function () {
-     return view('home');
- });
+//  Route::get('/', function () {
+//      return view('home');
+//  });
 
 //Route::get('/', 'PagesController@proposal');
 Route::get('/about', 'PagesController@about');
@@ -23,17 +23,18 @@ Route::get('/services', 'PagesController@services');
 Route::get('/proposal', 'PagesController@proposal');
 Route::get('/signin', 'PagesController@signin');
 
-Route::get('/users/{id}', function($id){
-    return 'This is user ' . $id;
-});
+// Route::get('/users/{id}', function($id){
+//     return 'This is user ' . $id;
+// });
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/', 'HomeController@index')->name('home');
+
 
 Route::resource('users', 'UsersController');
 Route::resource('files', 'FilesController');
 Route::resource('owns', 'OwnsController');
-// Route::get('/files/download/{id}', 'FilesController@download');
 Route::get('/files/delete/{id}', 'FilesController@destroy');
 
 

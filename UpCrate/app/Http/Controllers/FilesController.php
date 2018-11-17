@@ -4,10 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\HomeController;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Input;
 use App\File;
 use App\Owns;
 use App\User; 
+use App\IndividualAccess;
+
 
 class FilesController extends Controller
 {
@@ -31,8 +35,17 @@ class FilesController extends Controller
             ->select('file.id', 'file.file_path', 'file.visibility', 'file.name')
             ->getQuery()
             ->get();
+
+        // select * from File natural join IndividualAccess where userID = pm34;
+        $data['iaFiles'] = IndividualAccess
+            ::where('user_id', '=', Auth::id())
+            ->join('file', 'individualAccess.file_id', '=', 'file.id')
+            ->select('file.id', 'file.file_path', 'file.visibility', 'file.name')
+            ->getQuery()
+            ->get();
         
         $data['count'] = $data['files']->count();
+        $data['iaCount'] = $data['iaFiles']->count();
         return view('files.index')->with('data', $data);
     }
 
@@ -56,6 +69,9 @@ class FilesController extends Controller
     public function store(Request $request)
     {  
         // if not logged in, then redirect to register page.
+        
+
+
         if (!Auth::id()){
             return view('auth.register');
         }
@@ -67,6 +83,9 @@ class FilesController extends Controller
         
         // cache the file
         $tmp = $request->file('file');
+        if (!$tmp){
+            return redirect()->action('HomeController@index');
+        }
 
         // generate a new filename. getClientOriginalExtension() for the file extension
         $file->name = $tmp->getClientOriginalName();
@@ -90,6 +109,21 @@ class FilesController extends Controller
         $owns->user_id = Auth::id();
 
         $owns->save();
+
+        // insert into IndividualAccess select userID, fileID from User cross join (select * from File natural join owns where userID = pm34 and fileID = fileID) where name in the set of names passed in
+        $iaList = $request->item_id;
+        
+        for ($i=0; $i < count($iaList); $i++){
+            
+            // add to IndividualAccess table // $file->id
+            $ia = new IndividualAccess;
+            if ($iaList[$i] != Auth::id()){
+                $ia->user_id = $iaList[$i];
+                $ia->file_id = $file->id;
+                $ia->save();
+            }
+        }
+        
         
         return redirect()->route('files.index');
     }
@@ -170,7 +204,7 @@ class FilesController extends Controller
         $toDelete = $data['files']->where('id', '=', $id)->first();
 
         if (!$toDelete){
-            return view('home');
+            return redirect()->action('HomeController@index');
         }
 
         Storage::delete($toDelete->file_path);
