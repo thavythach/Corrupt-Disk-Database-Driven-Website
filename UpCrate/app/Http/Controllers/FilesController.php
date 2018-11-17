@@ -23,11 +23,9 @@ class FilesController extends Controller
     public function index()
     {
         // if not logged in, then redirect to register page.
-        /*if (!Auth::id()){
+        if (!Auth::id()){
             return view('auth.register');
         }
-
-        */
 
         $data['files'] = Owns
             ::where('user_id', '=', Auth::id())
