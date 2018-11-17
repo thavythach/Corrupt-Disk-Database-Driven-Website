@@ -220,6 +220,30 @@ class FilesController extends Controller
         //
     }
 
+    public function replace(Request $request){
+
+        $record = File::find($request->get('fileid'));
+
+        // cache and check
+        $tmp = $request->file('new_file');
+        if (!$tmp){
+            return redirect()->route('files.index'); 
+        }
+
+        // delete file from server
+        Storage::delete($record->file_path);
+
+        // generate a new filename. getClientOriginalExtension() for the file extension
+        $record->name = $tmp->getClientOriginalName();
+        
+        // save to storage/app/photos as the new $filename
+        $record->file_path = $tmp->storeAs('files', $record->name . time());
+
+        $record->save();
+
+        return redirect()->route('files.index');        
+    }
+
     public function rename(Request $request){
         // $validateData = $request->validate([
         //     'new_filename' => 'required|string|min:2',

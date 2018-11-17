@@ -16,6 +16,40 @@
                             @foreach ($data['files'] as $file)
                                 <div class="well">
                                     <h3><a href="/files/{{$file->id}}">{{$file->name}}</a> </h3>
+
+                                    {{-- Replace File --}}
+                                    <!-- Trigger the modal with a button -->
+                                    <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#replaceModal">Replace</button>
+                                  
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="replaceModal" role="dialog">
+                                      <div class="modal-dialog">
+                                      
+                                        <!-- Modal content-->
+                                        <div class="modal-content">
+                                          <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                            <h4 class="modal-title">Replace File</h4>
+                                          </div>
+                                          <div class="modal-body">
+                                            <p>Fill out the form to replace file.</p>
+                                            <form action="/replaceFile" method="POST" enctype="multipart/form-data">
+                                                <label for="file">Select a file</label>
+                                                <input type="file" class="form-control-file" name="new_file" id="new_file">
+                                                <input type="hidden" id="fileid" name="fileid" value="{{$file->id}}">
+                                                <input type="submit" name="submit" value="Submit">
+                                                {{ csrf_field() }}
+                                            </form>
+                                          </div>
+                                          <div class="modal-footer">
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                          </div>
+                                        </div>
+                                        
+                                      </div>
+                                    </div>
+
+                                    {{-- rename files --}}
                                     <!-- Trigger the modal with a button -->
                                     <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#myModal">Rename</button>
                                   
@@ -46,8 +80,33 @@
                                         
                                       </div>
                                     </div>
+                                    
+                                    {{-- Delete Files --}}
+                                    <!-- Trigger the modal with a button -->
+                                    <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#deleteModal">Delete</button>
+                                  
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="deleteModal" role="dialog">
+                                      <div class="modal-dialog">
+                                      
+                                        <!-- Modal content-->
+                                        <div class="modal-content">
+                                          <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                            <h4 class="modal-title">Delete File</h4>
+                                          </div>
+                                          <div class="modal-body">
+                                            <p>Are you sure you want to delete your file?</p>
+                                            <a href="/files/delete/{{$file->id}}"><button>Delete</button></a>
+                                          </div>
+                                          <div class="modal-footer">
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                          </div>
+                                        </div>
+                                        
+                                      </div>
+                                    </div>
 
-                                    <a href="/files/delete/{{$file->id}}"><button>Delete</button></a>
                                     <p> Public Visibility: @if ($file->visibility == 1) On @else Off @endif </p>
                                 </div>    
                             @endforeach
