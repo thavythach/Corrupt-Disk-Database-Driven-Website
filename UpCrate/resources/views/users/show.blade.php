@@ -71,6 +71,35 @@
             </div>
         </div>
     </div>
+    <div class="row">
+        <center>
+            {{-- Delete Account --}}
+            <!-- Trigger the modal with a button -->
+            <button type="button" class="btn btn-danger btn-lg" data-toggle="modal" data-target="#deleteAccountModal">Delete Account</button>
+            
+            <!-- Modal -->
+            <div class="modal fade" id="deleteAccountModal" role="dialog">
+                <div class="modal-dialog">
+                
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Delete Account</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>Delete Account Permanently</p>
+                        <a href="/deleteAccount"><button type="button" class="btn btn-danger btn-lg">Delete</button></a>
+                    </div>
+                    <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+        </center>
+    </div>
 </div>
 @endsection
 

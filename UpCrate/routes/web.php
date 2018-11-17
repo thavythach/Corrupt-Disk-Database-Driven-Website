@@ -34,6 +34,7 @@ Route::get('/vault', 'FilesController@vault');
 Route::post('/changePassword','UsersController@changePassword')->name('changePassword');
 Route::post('renameFile', 'FilesController@rename');
 Route::post('replaceFile', 'FilesController@replace');
+Route::get('/deleteAccount', 'UsersController@delete');
 
 
 

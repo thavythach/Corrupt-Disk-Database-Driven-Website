@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\FilesController;
 use App\User;
 use App\File;
 use App\Owns;
@@ -109,6 +111,8 @@ class UsersController extends Controller
         //
     }
 
+
+
     /**
      * Remove the specified resource from storage.
      *
@@ -118,5 +122,60 @@ class UsersController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function delete(){
+        
+        if (!\Auth::check()){
+            return redirect()->route('files.index');
+        }
+
+        // Account -> Auth::id()
+        // hasMultipleFiles -> $file->id
+        // files I shared - needs to be removed with: $ia->file_id, Auth::id()
+        // files shared with me - needs to removed with $ia->user_id, Auth::id()
+        // files i own - neesd to removed with: $owns->file_id, Auth::id()
+        
+        // delete all files
+        // delete all owns
+        // delete all individual access 
+        // delete account
+
+        $data = Owns
+            ::where('owns.user_id', '=', \Auth::id())
+            ->join('file', 'owns.file_id', '=', 'file.id')
+            ->join("individualAccess", 'file.id', '=', 'individualAccess.file_id')
+            ->get();
+
+        if ($data){
+            \DB::beginTransaction();
+
+            // revoke access from other users to my files
+            foreach($data as $d){
+                // $deletedRows = IndividualAccess::where('file_id', '=', (int) $d->file_id)->get();
+                $deletedRows = IndividualAccess::where('file_id', '=', (int) $d->file_id)->delete();
+            }
+
+            // delete all files i own
+            foreach($data as $d){
+                
+                // $deletedRows = File::where('id', '=', $d->id)->get();
+                $deletedRows = File::where('id', '=', $d->file_id)->delete();
+                \Storage::delete($d->file_path);
+            }
+
+            // delete all owns i own
+            foreach ($data as $d){
+                // $deletedRows = Owns::where('user_id', '=', \Auth::id())->get();
+                $deletedRows = Owns::where('user_id', '=', \Auth::id())->delete();
+            }
+
+            // get model of user for deletion
+            $user_id = User::find(\Auth::id())->delete();
+            \DB::commit();
+            
+        } 
+
+        return redirect()->action('FilesController@vault');
     }
 }
