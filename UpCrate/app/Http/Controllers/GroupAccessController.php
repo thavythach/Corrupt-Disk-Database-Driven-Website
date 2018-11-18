@@ -62,14 +62,16 @@ class GroupAccessController extends Controller
         $tmp->save();
 
         $gmList = $request->item_id;
-        // return $gmList;
+        // array_push($gmList, (int) \Auth::id());
 
         // if list is countable go through and add file.
         if ($gmList){
             for ($i=0; $i < count($gmList); $i++){
             
                 $gm = new GroupMembers;
-                // if ($gmList[$i] != \Auth::id()){
+                // if ($gmList[$i] == \Auth::id()){
+                //     $j += 1;
+                // }
                 $gm->user_id = $gmList[$i];
                 $gm->group_id = $tmp->group_id; 
                 $gm->save();

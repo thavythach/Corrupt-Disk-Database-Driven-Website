@@ -63,7 +63,20 @@ class GroupFileController extends Controller
         $file->file_path = $tmp->storeAs('files', $file->name . time());
         $file->visibility = 1; // groupFiles are always private
 
-
+        // persist to the database
+        $file->save();
+        
+        $gfList = $request->item_id;
+        
+        if ($gfList){
+            for ($i=0; $i < count($gfList); $i++){
+                    $groupFile = new GroupFile;
+                    $groupFile->file_id = $file->id;
+                    $groupFile->group_id = $gfList[$i];
+                    $groupFile->save();
+            }
+        }
+        
         \DB::commit();
         return redirect()->route('groups.index'); 
     }

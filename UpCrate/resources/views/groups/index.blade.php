@@ -64,7 +64,7 @@
                     <label for="file">Select a file</label>
                     <input type="file" class="form-control-file" name="new_file" id="new_file">
                     <div class="form-group">
-                            <label for="userSelect">Select users that can access: </label>
+                            <label for="userSelect">Select groups that can access: </label>
                             {!! Form::Label('item', 'Item:') !!}
                             <select multiple class="form-control" name="item_id[]">
                                 @foreach($data['groups'] as $group)
@@ -91,7 +91,7 @@
         <ul id="tabs" class="nav nav-tabs" data-tabs="tabs">
             <li class="active"><a href="#red" data-toggle="tab">My Groups</a></li>
             <li><a href="#orange" data-toggle="modal" data-target="#groupModal">Create New Group</a></li>
-            <li><a href="#green" data-toggle="modal" data-target="#replaceModal">Upload Group File</a></li>
+            @if (count($data['groups']) > 0)<li><a href="#green" data-toggle="modal" data-target="#replaceModal">Upload Group File</a></li> @else @endif
         </ul>
         <div id="my-tab-content" class="tab-content">
             <div class="tab-pane active" id="red">
