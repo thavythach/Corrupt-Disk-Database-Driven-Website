@@ -28,7 +28,7 @@
             <li><b>done</b>...specify other users as being able to see specific documents from my collection, and have the server remember that they have access.</li>
             <li><b>BACK LOGGED</b>...be able to get a shareable link to download the document from the server, and have it sendable to others via standard communication methods such as email or social media.</li>
             <li><b>done</b>...Generates an HTML email for the email specified and sends it to them to register for our website.</li>
-            <li>...have the ability to be a part of a 'group', which has access to a number of documents and all members of the group will have unrestricted access to these documents.</li>
+            <li><b>done</b>...have the ability to be a part of a 'group', which has access to a number of documents and all members of the group will have unrestricted access to these documents.</li>
             <li><b>done</b>...see a list of all publicly viewable documents and be able to access any given document from this list.</li>
           </ul>
           <br>

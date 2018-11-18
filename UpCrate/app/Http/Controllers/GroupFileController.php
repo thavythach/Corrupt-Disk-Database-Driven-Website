@@ -76,7 +76,7 @@ class GroupFileController extends Controller
                     $groupFile->save();
             }
         }
-        
+
         \DB::commit();
         return redirect()->route('groups.index'); 
     }
@@ -89,7 +89,60 @@ class GroupFileController extends Controller
      */
     public function show($id)
     {
-        //
+        if (!\Auth::check()){
+            return view.('auth.register');
+        }
+
+        // i can only download files that are part of my group. 
+        //$id = the file id;
+        // file nj groupfile (now have access to group_id)
+
+        // $dl = File
+        //     ::join('groupFile', 'groupFile.file_id', '=', 'file.id')
+        //     ->where('id', '=', $id)
+        //     ->join('group_members', 'group_members.user_id', '=', \Auth::id())
+
+        $dl = File
+            // ::where('file.id','=',$id)
+            ::join('groupFile', 'file.id', '=', 'groupFile.file_id')
+            ->join('group_members', 'group_members.group_id', '=', 'groupFile.group_id')
+            ->orderBy('group_members.user_id')
+            ->where('group_members.user_id', '=', \Auth::id())
+            ->get()->first();
+
+
+            // ::where('groupFile.group_id','=', $id)
+            // ->join('file', 'file.id', '=', 'groupFile.file_id')
+            // ->distinct('file.id')
+            // ->join('group_members', 'group_members.user_id', '=', \Auth::id())
+            // // ->select('file_path', 'name', 'groupFile.file_id')
+            // ->get();
+
+            // ->join('group_members', 'group_members.user_id', '=', \Auth::id())
+            // ->select('file_path', 'id', 'name', 'user_id')
+            // ->get()->first();
+            // ->get();
+
+            // $data['files'] = GroupFile
+                // ::where('group_id','=', $id)
+                // ->join('file', 'file.id', '=', 'groupFile.file_id')
+                // ->distinct('file.id')
+                // ->select('file_path', 'name', 'groupFile.file_id')
+                // ->get();
+
+        // return $dl;
+        
+        if (!$dl){
+            return redirect()->route('groups.index'); 
+        }
+        
+        $tmp = File::find($dl->id)->first();
+
+        if (!$tmp){
+            return redirect()->route('groups.index'); 
+        }
+
+        return \Storage::download($tmp->file_path, $tmp->name);
     }
 
     /**

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\GroupAccess;
 use App\GroupMembers;
 use App\User;
+use App\GroupFile;
 
 class GroupAccessController extends Controller
 {
@@ -101,6 +102,13 @@ class GroupAccessController extends Controller
 
         $data['grpName'] = GroupAccess::where('group_id', '=', $id)->select('name')->get();
 
+        $data['files'] = GroupFile
+            ::where('group_id','=', $id)
+            ->join('file', 'file.id', '=', 'groupFile.file_id')
+            ->distinct('file.id')
+            ->select('file_path', 'name', 'groupFile.file_id')
+            ->get();
+
         return view('groups.show')->with('data', $data);
     }
 
@@ -112,7 +120,8 @@ class GroupAccessController extends Controller
      */
     public function edit($id)
     {
-        //
+        
+        
     }
 
     /**

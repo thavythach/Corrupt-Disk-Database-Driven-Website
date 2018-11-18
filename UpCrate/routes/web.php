@@ -40,6 +40,7 @@ Route::resource('users', 'UsersController');
 Route::resource('files', 'FilesController');
 Route::resource('owns', 'OwnsController');
 Route::resource('groups', 'GroupAccessController');
+Route::resource('groupFile', 'GroupFileController');
 Route::get('/files/delete/{id}', 'FilesController@destroy');
 
 
