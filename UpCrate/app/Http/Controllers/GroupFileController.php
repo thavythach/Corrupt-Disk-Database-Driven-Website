@@ -61,7 +61,7 @@ class GroupFileController extends Controller
         // generate a new filename. getClientOriginalExtension() for the file extension
         $file->name = $tmp->getClientOriginalName();
         $file->file_path = $tmp->storeAs('files', $file->name . time());
-        $file->visibility = 1; // groupFiles are always private
+        $file->visibility = 0; // groupFiles are always private
 
         // persist to the database
         $file->save();
@@ -93,15 +93,6 @@ class GroupFileController extends Controller
             return view.('auth.register');
         }
 
-        // i can only download files that are part of my group. 
-        //$id = the file id;
-        // file nj groupfile (now have access to group_id)
-
-        // $dl = File
-        //     ::join('groupFile', 'groupFile.file_id', '=', 'file.id')
-        //     ->where('id', '=', $id)
-        //     ->join('group_members', 'group_members.user_id', '=', \Auth::id())
-
         $dl = File
             // ::where('file.id','=',$id)
             ::join('groupFile', 'file.id', '=', 'groupFile.file_id')
@@ -109,28 +100,6 @@ class GroupFileController extends Controller
             ->orderBy('group_members.user_id')
             ->where('group_members.user_id', '=', \Auth::id())
             ->get()->first();
-
-
-            // ::where('groupFile.group_id','=', $id)
-            // ->join('file', 'file.id', '=', 'groupFile.file_id')
-            // ->distinct('file.id')
-            // ->join('group_members', 'group_members.user_id', '=', \Auth::id())
-            // // ->select('file_path', 'name', 'groupFile.file_id')
-            // ->get();
-
-            // ->join('group_members', 'group_members.user_id', '=', \Auth::id())
-            // ->select('file_path', 'id', 'name', 'user_id')
-            // ->get()->first();
-            // ->get();
-
-            // $data['files'] = GroupFile
-                // ::where('group_id','=', $id)
-                // ->join('file', 'file.id', '=', 'groupFile.file_id')
-                // ->distinct('file.id')
-                // ->select('file_path', 'name', 'groupFile.file_id')
-                // ->get();
-
-        // return $dl;
         
         if (!$dl){
             return redirect()->route('groups.index'); 
