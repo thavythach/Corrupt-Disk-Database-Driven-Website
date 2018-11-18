@@ -20,7 +20,7 @@
           <ul>
             <li><b>done</b>...create an account, and have that information stored securely via encryption on the database.</li>
             <li><b>done</b>...update my password after account creation, have the updated password encryted, and any trace of the old password removed.</li>
-            <li>...delete my account and any personal information associated with it at any time.</li>
+            <li><b>done</b>...delete my account and any personal information associated with it at any time.</li>
             <li><b>done</b>...upload files to the server, and determine if they can be publically viewed or not.</li>
             <li><b>done</b>...download files I've previously uploaded, allowing me to aquire a copy of the data without modifying it in the database.</li>
             <li><b>done</b>...see the list of all files I have access to, organized by my files and files shared with me.</li>
