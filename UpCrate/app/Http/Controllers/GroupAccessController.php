@@ -92,11 +92,14 @@ class GroupAccessController extends Controller
     public function show($id)
     {   
         $data['members'] = GroupMembers
-        ::select('user_id', 'group_id')
-        ->groupBy('group_id')
-        // ->where('group_id', '=', $id)
+        ::where('group_id', '=', $id)
+        ->join('users', 'users.id', '=', 'group_members.user_id')
+        ->select('group_members.group_id', 'users.id', 'users.email', 'users.name')
         ->get();
-        return $data;
+
+        $data['grpName'] = GroupAccess::where('group_id', '=', $id)->select('name')->get();
+
+        return view('groups.show')->with('data', $data);
     }
 
     /**
