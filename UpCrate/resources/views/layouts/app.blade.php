@@ -62,7 +62,9 @@
                                     <li>
                                         <a href="/users/{{ Auth::id() }}"><center>Profile</center></a>
                                         <a href="{{ route('files.index') }}"><center>Files</center></a>
+                                        <a href="/groups"><center>Groups</center></a>
                                         <a href="/friendShare"><center>Friend Share</center></a>
+                                        
                                         <a href="{{ route('logout') }}"
                                             onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">

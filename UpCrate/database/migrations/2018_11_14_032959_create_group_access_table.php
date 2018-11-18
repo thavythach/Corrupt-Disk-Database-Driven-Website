@@ -14,8 +14,9 @@ class CreateGroupAccessTable extends Migration
     public function up()
     {
         Schema::create('groupAccess', function (Blueprint $table) {
-            $table->integer('group_id');
+            $table->increments('group_id');
             $table->string('name');
+            $table->integer('user_id');
         });
     }
 

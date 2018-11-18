@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\GroupAccess;
 
 class GroupAccessController extends Controller
 {
@@ -13,7 +14,10 @@ class GroupAccessController extends Controller
      */
     public function index()
     {
-        //
+        // $data['groups'] = GroupAccess::where('group_id', '=', \Auth::id());
+        $data['groups'] = GroupAccess::all(); // currently it has my id as a string in the database lmao.
+        $data['count'] = $data['groups']->count();
+        return view('groups.index')->with('data', $data);
     }
 
     /**
@@ -34,7 +38,13 @@ class GroupAccessController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $tmp = new GroupAccess;
+        $tmp->name = $request->group_name;
+        $tmp->user_id = \Auth::id();
+        $tmp->save();
+
+        return redirect()->route('groups.index'); 
+        
     }
 
     /**

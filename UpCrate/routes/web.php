@@ -39,6 +39,7 @@ Route::get('/deleteAccount', 'UsersController@delete');
 Route::resource('users', 'UsersController');
 Route::resource('files', 'FilesController');
 Route::resource('owns', 'OwnsController');
+Route::resource('groups', 'GroupAccessController');
 Route::get('/files/delete/{id}', 'FilesController@destroy');
 
 
@@ -48,4 +49,5 @@ Route::get('sendbasicemail','MailController@basic_email');
 Route::get('sendhtmlemail/{email}','MailController@html_email');
 Route::get('/friendShare', 'UsersController@friendShare');
 Route::Post('/friendShare/process', 'UsersController@friendShareProcess');
+Route::Post('/group/process', 'GroupAccessController@store');
 
