@@ -23,8 +23,17 @@
                 <div class="form-group">
                     <label>Group Name</label>
                     <input type="text" name="group_name" value="">
+                    <br><br>
+                    <label for="userSelect">Select users that can access: </label>
+
+                    {!! Form::Label('item', 'Item:') !!}
+                    <select multiple class="form-control" name="item_id[]">
+                        @foreach($data['users'] as $item)
+                        <option value="{{$item->id}}">{{$item->name}}</option>
+                        @endforeach
+                    </select>
                 </div>
-                <button class="btn btn-primary btn-lg">Upload</button>
+                <button class="btn btn-primary btn-lg">Create Group</button>
                 {{ csrf_field() }}
             </form>
     

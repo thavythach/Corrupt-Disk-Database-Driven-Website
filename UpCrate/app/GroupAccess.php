@@ -11,6 +11,8 @@ class GroupAccess extends Model
 
     // primary key
     public $primaryKey = 'group_id';
+    
+    public $incrementing = true;
 
     public $timestamps = false;
 }

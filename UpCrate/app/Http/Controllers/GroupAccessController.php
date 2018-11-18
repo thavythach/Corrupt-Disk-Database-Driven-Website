@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\GroupAccess;
+use App\GroupMembers;
+use App\User;
 
 class GroupAccessController extends Controller
 {
@@ -14,8 +16,18 @@ class GroupAccessController extends Controller
      */
     public function index()
     {
-        // $data['groups'] = GroupAccess::where('group_id', '=', \Auth::id());
-        $data['groups'] = GroupAccess::all(); // currently it has my id as a string in the database lmao.
+        if (!\Auth::check()){
+            return view('auth.register');
+        }
+        
+        // $data['groups'] = GroupAccess::where('user_id', '=', (int) (\Auth::id()))->get();
+        $data['groups'] = GroupMembers
+            ::where('group_members.user_id', '=', (int) (\Auth::id()))
+            ->join('groupAccess', 'groupAccess.group_id', '=', 'group_members.group_id')
+            ->get();
+        // return $data;
+        // $data['groups'] = GroupAccess::all(); // currently it has my id as a string in the database lmao.
+        $data['users'] = User::all();
         $data['count'] = $data['groups']->count();
         return view('groups.index')->with('data', $data);
     }
@@ -38,10 +50,33 @@ class GroupAccessController extends Controller
      */
     public function store(Request $request)
     {
+        if (!\Auth::check()){
+            return view('auth.register');
+        }
+
+        \DB::beginTransaction();
+
         $tmp = new GroupAccess;
         $tmp->name = $request->group_name;
         $tmp->user_id = \Auth::id();
         $tmp->save();
+
+        $gmList = $request->item_id;
+
+        // if list is countable go through and add file.
+        if ($gmList){
+            for ($i=0; $i < count($gmList); $i++){
+            
+                $gm = new GroupMembers;
+                // if ($gmList[$i] != \Auth::id()){
+                $gm->user_id = $gmList[$i];
+                $gm->group_id = $tmp->id; 
+                $gm->save();
+                // }
+            }
+        }
+
+        \DB::commit();
 
         return redirect()->route('groups.index'); 
         
@@ -55,7 +90,7 @@ class GroupAccessController extends Controller
      */
     public function show($id)
     {
-        //
+
     }
 
     /**
