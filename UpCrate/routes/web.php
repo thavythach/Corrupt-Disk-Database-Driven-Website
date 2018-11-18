@@ -50,4 +50,5 @@ Route::get('sendhtmlemail/{email}','MailController@html_email');
 Route::get('/friendShare', 'UsersController@friendShare');
 Route::Post('/friendShare/process', 'UsersController@friendShareProcess');
 Route::Post('/group/process', 'GroupAccessController@store');
+Route::Post('/groupFile', 'GroupFileController@store');
 

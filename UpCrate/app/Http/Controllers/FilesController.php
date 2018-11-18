@@ -271,6 +271,8 @@ class FilesController extends Controller
             return view('auth.register');
         }
 
+        // TODO: figure out what happens when a file is deleted that is not in owns or individualAccess
+
         $data['files'] = Owns
             ::where('user_id', '=', Auth::id())
             ->join('file', 'owns.file_id', '=', 'file.id')

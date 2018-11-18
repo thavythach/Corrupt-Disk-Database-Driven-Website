@@ -3,6 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\File;
+use App\Owns;
+use App\User; 
+use App\IndividualAccess;
+use App\GroupFile;
+use App\GroupAccess;
+use App\GroupMembers;
 
 class GroupFileController extends Controller
 {
@@ -34,7 +41,31 @@ class GroupFileController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        if (!\Auth::check()){
+            return view.('auth.register');
+        }
+
+        \DB::beginTransaction();
+
+        // TODO: check size larger than 2MB
+        
+        $file = new File;
+        
+        $tmp = $request->file('new_file');
+        if (!$tmp){
+            \DB::rollbackTransaction();
+            \DB::commit();
+            return redirect()->route('groups.index'); 
+        }
+
+        // generate a new filename. getClientOriginalExtension() for the file extension
+        $file->name = $tmp->getClientOriginalName();
+        $file->file_path = $tmp->storeAs('files', $file->name . time());
+        $file->visibility = 1; // groupFiles are always private
+
+
+        \DB::commit();
+        return redirect()->route('groups.index'); 
     }
 
     /**
