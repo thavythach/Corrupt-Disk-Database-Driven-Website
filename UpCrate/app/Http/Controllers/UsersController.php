@@ -178,4 +178,13 @@ class UsersController extends Controller
 
         return redirect()->action('FilesController@vault');
     }
+
+    public function friendShare(){
+        return view('users.friendShare');
+    }
+
+    public function friendShareProcess(Request $request){
+        return redirect('sendhtmlemail/'.$request->email);
+
+    }
 }

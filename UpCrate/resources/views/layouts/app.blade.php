@@ -28,9 +28,15 @@
                     </button>
 
                     <!-- Branding Image -->
+                    <a class="navbar-brand" href="#">|</a>
                     <a class="navbar-brand" href="{{ url('/') }}">
                         {{ config('app.name', 'Laravel') }}
                     </a>
+                    <a class="navbar-brand" href="#">|</a>
+                    
+                    <a class="navbar-brand" href="/vault">Vault</a>
+                    {{-- <a class="navbar-brand" href="#">|</a> --}}
+
                 </div>
 
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
@@ -46,6 +52,7 @@
                             <li><a href="{{ route('login') }}">Login</a></li>
                             <li><a href="{{ route('register') }}">Register</a></li>
                         @else
+                            
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" v-pre>
                                     {{ Auth::user()->name }} <span class="caret"></span>
@@ -53,12 +60,13 @@
 
                                 <ul class="dropdown-menu">
                                     <li>
-                                        <a href="/users/{{ Auth::id() }}">Profile</a>
-                                        <a href="{{ route('files.index') }}">Files</a>
+                                        <a href="/users/{{ Auth::id() }}"><center>Profile</center></a>
+                                        <a href="{{ route('files.index') }}"><center>Files</center></a>
+                                        <a href="/friendShare"><center>Friend Share</center></a>
                                         <a href="{{ route('logout') }}"
                                             onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                            Logout
+                                            <center>Logout</center>
                                         </a>
 
                                         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">

@@ -284,9 +284,6 @@ class FilesController extends Controller
             return redirect()->action('HomeController@index');
         }
 
-        
-
-
         \DB::beginTransaction(); 
 
         File::destroy($id);

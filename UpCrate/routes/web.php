@@ -36,8 +36,6 @@ Route::post('renameFile', 'FilesController@rename');
 Route::post('replaceFile', 'FilesController@replace');
 Route::get('/deleteAccount', 'UsersController@delete');
 
-
-
 Route::resource('users', 'UsersController');
 Route::resource('files', 'FilesController');
 Route::resource('owns', 'OwnsController');
@@ -45,3 +43,9 @@ Route::get('/files/delete/{id}', 'FilesController@destroy');
 
 
 Route::post('process', 'FilesController@store');
+
+Route::get('sendbasicemail','MailController@basic_email');
+Route::get('sendhtmlemail/{email}','MailController@html_email');
+Route::get('/friendShare', 'UsersController@friendShare');
+Route::Post('/friendShare/process', 'UsersController@friendShareProcess');
+

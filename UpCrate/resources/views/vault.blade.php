@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<h1>My Files @if ($data['count'] > 0) ({{ $data['count'] }}) @endif </h1>
+<h1>Public Files @if ($data['count'] > 0) ({{ $data['count'] }}) @endif </h1>
 @if(count($data['files']) > 0)
     @foreach ($data['files'] as $file)
         <div class="well">
