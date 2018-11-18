@@ -24,8 +24,10 @@
                     <label>Group Name</label>
                     <input type="text" name="group_name" value="">
                     <br><br>
-                    <label for="userSelect">Select users that can access: </label>
+                </div>
 
+                <div class="form-group">
+                    <label for="userSelect">Select users that can access: </label>
                     {!! Form::Label('item', 'Item:') !!}
                     <select multiple class="form-control" name="item_id[]">
                         @foreach($data['users'] as $item)

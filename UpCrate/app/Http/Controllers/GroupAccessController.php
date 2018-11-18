@@ -25,7 +25,7 @@ class GroupAccessController extends Controller
             ::where('group_members.user_id', '=', (int) (\Auth::id()))
             ->join('groupAccess', 'groupAccess.group_id', '=', 'group_members.group_id')
             ->get();
-        // return $data;
+       
         // $data['groups'] = GroupAccess::all(); // currently it has my id as a string in the database lmao.
         $data['users'] = User::all();
         $data['count'] = $data['groups']->count();
@@ -62,6 +62,7 @@ class GroupAccessController extends Controller
         $tmp->save();
 
         $gmList = $request->item_id;
+        // return $gmList;
 
         // if list is countable go through and add file.
         if ($gmList){
@@ -70,7 +71,7 @@ class GroupAccessController extends Controller
                 $gm = new GroupMembers;
                 // if ($gmList[$i] != \Auth::id()){
                 $gm->user_id = $gmList[$i];
-                $gm->group_id = $tmp->id; 
+                $gm->group_id = $tmp->group_id; 
                 $gm->save();
                 // }
             }
@@ -89,8 +90,13 @@ class GroupAccessController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show($id)
-    {
-
+    {   
+        $data['members'] = GroupMembers
+        ::select('user_id', 'group_id')
+        ->groupBy('group_id')
+        // ->where('group_id', '=', $id)
+        ->get();
+        return $data;
     }
 
     /**

@@ -10,7 +10,8 @@ class GroupMembers extends Model
         public $table = 'group_members';
 
         // primary key
-        public $primaryKey = 'group_id';
+        public $primaryKey = ['user_id', 'group_id'];
+        public $incrementing = false;
     
         public $timestamps = false;
 }
