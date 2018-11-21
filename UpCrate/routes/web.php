@@ -17,7 +17,7 @@ use App\File;
 //      return view('home');
 //  });
 
-//Route::get('/', 'PagesController@proposal');
+Route::get('/welcome', 'PagesController@landing');
 Route::get('/about', 'PagesController@about');
 Route::get('/services', 'PagesController@services');
 Route::get('/proposal', 'PagesController@proposal');
@@ -52,4 +52,6 @@ Route::get('/friendShare', 'UsersController@friendShare');
 Route::Post('/friendShare/process', 'UsersController@friendShareProcess');
 Route::Post('/group/process', 'GroupAccessController@store');
 Route::Post('/groupFile', 'GroupFileController@store');
+
+Route::get('/loading', 'PagesController@loading');
 

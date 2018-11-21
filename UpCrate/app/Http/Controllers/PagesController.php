@@ -32,4 +32,12 @@ class PagesController extends Controller
     public function signin(){
         return view('pages.signin');
     }
+
+    public function loading(){
+        return view('pages.loading');   
+    }
+
+    public function landing(){
+        return view('welcome');
+    }
 }
