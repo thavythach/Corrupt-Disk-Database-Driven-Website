@@ -18,6 +18,7 @@ use App\File;
 //  });
 
 Route::get('/welcome', 'PagesController@landing');
+Route::get('/navbar', 'PagesController@navbar');
 Route::get('/about', 'PagesController@about');
 Route::get('/services', 'PagesController@services');
 Route::get('/proposal', 'PagesController@proposal');
