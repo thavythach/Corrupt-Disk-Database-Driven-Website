@@ -511,13 +511,13 @@
                 @if ( ($i % 2) == 0 ) 
                 
                 <div class="rellax d1" data-rellax-speed="5">
-                        <a href="#" data-toggle="popover" data-container="body" data-html="true" id="myFilesView" data-placement="bottom" title="{{$data['files'][$i]->name}} by {{ Auth::user()->name }}">
+                        <a href="#" data-toggle="popover" data-container="body" data-html="true" id="{{ "myFilesView-" . $i }}" data-placement="bottom" title="{{$data['files'][$i]->name}} by {{ Auth::user()->name }}">
                                 {{$data['files'][$i]->name}}
                                 <img src="@if( $data['files'][$i]->visibility == 1) {{ asset('img/document.png') }} @else {{ asset('img/priv_document.png') }} @endif" width="5%"/>
 
                         </a>
                         
-                        <div id="popover-content-myFilesView" class="hide">
+                        <div id="{{ "popover-content-myFilesView-" . $i }}" class="hide">
                             <a href="/files/{{$data['files'][$i]->id}}" class="glyphicon glyphicon-download">Download</a><br>
                             Private Content: @if ( $data['files'][$i]->visibility == 1 ) No. @else Yes. @endif <br>
                             <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#renameModal">Rename</button>
@@ -530,31 +530,59 @@
 
                         <!-- Rename Modal -->
                         <div class="modal fade" id="renameModal" role="dialog">
-                                <div class="modal-dialog">
-                                
-                                  <!-- Modal content-->
-                                  <div class="modal-content">
-                                    <div class="modal-header">
-                                      <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                      <h4 class="modal-title">Rename File</h4>
-                                    </div>
-                                    <div class="modal-body">
-                                      <p>Fill in the form with a new name to rename the file</p>
-                                      <form action="/renameFile" method="POST" enctype="multipart/form-data">
-                                          <label for="file">Filename:</label>
-                                          <input type="text" name="new_filename" value="{{ $data['files'][$i]->name }}">
-                                          <input type="hidden" id="fileid" name="fileid" value="{{$data['files'][$i]->id}}">
-                                          <input type="submit" name="submit" value="Submit">
-                                          {{ csrf_field() }}
-                                      </form>
-                                    </div>
-                                    <div class="modal-footer">
-                                      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                    </div>
-                                  </div>
-                                  
+                            <div class="modal-dialog">
+                            
+                                <!-- Modal content-->
+                                <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                    <h4 class="modal-title">Rename File</h4>
                                 </div>
-                              </div>
+                                <div class="modal-body">
+                                    <p>Fill in the form with a new name to rename the file</p>
+                                    <form action="/renameFile" method="POST" enctype="multipart/form-data">
+                                        <label for="file">Filename:</label>
+                                        <input type="text" name="new_filename" value="{{ $data['files'][$i]->name }}">
+                                        <input type="hidden" id="fileid" name="fileid" value="{{$data['files'][$i]->id}}">
+                                        <input type="submit" name="submit" value="Submit">
+                                        {{ csrf_field() }}
+                                    </form>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                </div>
+                                </div>
+                                
+                            </div>
+                        </div>
+                            
+                        <!-- Replace Modal -->
+                        <div class="modal fade" id="replaceModal" role="dialog">
+                            <div class="modal-dialog">
+                            
+                                <!-- Modal content-->
+                                <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                    <h4 class="modal-title">Replace File</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <p>Fill out the form to replace file.</p>
+                                    <form action="/replaceFile" method="POST" enctype="multipart/form-data">
+                                        <label for="file">Select a file</label>
+                                        <input type="file" class="form-control-file" name="new_file" id="new_file">
+                                        <input type="hidden" id="fileid" name="fileid" value="{{$data['files'][$i]->id}}">
+                                        <input type="submit" name="submit" value="Submit">
+                                        {{ csrf_field() }}
+                                    </form>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                </div>
+                                </div>
+                                
+                            </div>
+                        </div>
                     
                     
                 </div>
