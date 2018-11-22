@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\File;
 use App\Owns;
 use App\IndividualAccess;
+use App\User;
 
 
 class PagesController extends Controller
@@ -61,6 +62,9 @@ class PagesController extends Controller
             ->select('file.id', 'file.file_path', 'file.visibility', 'file.name')
             ->getQuery()
             ->get();
+        
+        // select all users but the authenticated user
+        $data['users'] = User::where('id', '!=', \Auth::id())->get();
         
         $data['count'] = $data['files']->count();
         $data['iaCount'] = $data['iaFiles']->count();

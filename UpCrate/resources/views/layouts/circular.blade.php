@@ -405,43 +405,102 @@ body{
 <body>
         <script src="{{ asset('js/app.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/app.js') }}"></script>
+    <script>
+            function yesnoCheck() {
+              if (document.getElementById('privateVis').checked) {
+                  document.getElementById('userSelect').style.visibility = 'visible';
+              }
+              else document.getElementById('userSelect').style.visibility = 'hidden';
+            }
+    </script>
+
+<script>
+        var rellax = new Rellax('.rellax', {
+        // center: true
+        callback: function(position) {
+            // callback every position change
+            console.log(position);
+        }
+      });
+    </script>
 
     {{-- MODALS --}}
 
     {{-- uploadModal --}}
     <div class="modal fade" id="uploadModal" role="dialog">
-            <div class="modal-dialog">
+        <div class="modal-dialog">
+        
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">Upload New File</h4>
+            </div>
+            <div class="modal-body">
+            {{-- <div class="container"> --}}
+                    <div id="content">
+                        <ul id="tabs" class="nav nav-tabs" data-tabs="tabs">
+                            <li class="active"><a href="#red" data-toggle="tab">Upload New File</a></li>
+                            <li><a href="#orange" data-toggle="tab">Upload Group File</a></li>
+                        </ul>
+                        <div id="my-tab-content" class="tab-content">
+                            <div class="tab-pane active" id="red">
+                                <br>
+                                    <form action="/process" enctype="multipart/form-data" method="POST" class="md-form">
+                                        
+                                        {{-- <div class="form-row"> --}}
+                                        <div class="form-group">
+                                            <div class="form-row">
+                                                <label for="file">Select a file</label>
+                                                <input type="file" class="form-control-file" name="file" id="file">
+                                            </div>
+
+                                            <br>
+                                            <div class="form-row">
+                                                <div class="form-group">
+                                                    <label for="visibility">Visibility</label><br>
+                                                    <input onclick="javascript:yesnoCheck();" class="form-check-input" type="radio" name="visibility" id="privateVis" value="Private" checked>
+                                                    <label class="form-check-label" for="privateVis">Private</label>
+                                                    <br>
+                                                    <input onclick="javascript:yesnoCheck();"class="form-check-input" type="radio" name="visibility" id="publicVis" value="Public">
+                                                    <label class="form-check-label" for="publicVis">Public</label>
+
+                                                    <div id="userSelect" style="visibility:visible">
+                                                        <div class="form-group col-md-4">
+                                                            <label for="userSelect">Select users that can access: </label>
             
-            <!-- Modal content-->
-            <div class="modal-content">
-                <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Upload New File</h4>
-                </div>
-                <div class="modal-body">
-                {{-- <div class="container"> --}}
-                        <div id="content">
-                            <ul id="tabs" class="nav nav-tabs" data-tabs="tabs">
-                                <li class="active"><a href="#red" data-toggle="tab">Upload New File</a></li>
-                                <li><a href="#orange" data-toggle="tab">Upload Group File</a></li>
-                            </ul>
-                            <div id="my-tab-content" class="tab-content">
-                                <div class="tab-pane active" id="red">
-                                    <br>
-                                        Upload New File
-                                    <br>
-                                </div>
-                                <div class="tab-pane" id="orange">
-                                    <br>
-                                    Upload Group file
-                                    <br>
-                                </div>
+                                                            <select multiple class="form-control" name="item_id[]">
+                                                                @foreach($data['users'] as $item)
+                                                                <option value="{{$item->id}}">{{$item->name}}</option>
+                                                                @endforeach
+                                                            </select> 
+                                                        </div>
+            
+                                                    </div> 
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <br><br>
+                                        
+                                    
+                                        
+                                        <button class="btn btn-primary btn-lg">Upload</button>
+                                        {{ csrf_field() }}
+                                    </form>
+                                <br>
+                            </div>
+                            <div class="tab-pane" id="orange">
+                                <br>
+                                Upload Group file
+                                <br>
                             </div>
                         </div>
-                    </div> 
-                </div>
+                    </div>
+                </div> 
             </div>
         </div>
+    </div>
 
     @if(count($data['files']) > 0)
         {{-- @foreach ($data['files'] as $file) --}}
@@ -1139,14 +1198,6 @@ positionIcons( icons, iconDistance );
 
   </script>
 
-<script>
-        var rellax = new Rellax('.rellax', {
-        // center: true
-        callback: function(position) {
-            // callback every position change
-            console.log(position);
-        }
-      });
-    </script>
+
 </body>
 </html>
