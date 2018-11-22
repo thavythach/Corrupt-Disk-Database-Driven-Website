@@ -35,6 +35,7 @@ class FilesController extends Controller
             ->get();
 
         // select * from File natural join IndividualAccess where userID = pm34;
+        // TODO: need to change to see who shared it with me. Check pagescontroller for more information boss
         $data['iaFiles'] = IndividualAccess
             ::where('user_id', '=', Auth::id())
             ->join('file', 'individualAccess.file_id', '=', 'file.id')

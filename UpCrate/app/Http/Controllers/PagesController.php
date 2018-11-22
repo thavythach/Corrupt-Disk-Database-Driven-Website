@@ -55,17 +55,22 @@ class PagesController extends Controller
             ->getQuery()
             ->get();
 
-        // select * from File natural join IndividualAccess where userID = pm34;
+        // select * from File natural join IndividualAccess where userID = pm34; <-- not really anymore LMFAO
         $data['iaFiles'] = IndividualAccess
-            ::where('user_id', '=', \Auth::id())
+            ::where('individualAccess.user_id', '=', \Auth::id())
             ->join('file', 'individualAccess.file_id', '=', 'file.id')
-            ->select('file.id', 'file.file_path', 'file.visibility', 'file.name')
+            ->select('file.id', 'file.file_path', 'file.visibility', 'file.name', 'owns.user_id', 'users.name as user_name')
+            ->join('owns', 'file.id', '=', 'owns.file_id')
+            ->join('users', 'owns.user_id', '=', 'users.id')
             ->getQuery()
             ->get();
         
+        
         // select all users but the authenticated user
         $data['users'] = User::where('id', '!=', \Auth::id())->get();
-        $data['publicFiles'] = File::where('visibility', '=', 1)->get(); // might want to do a owns so it'd be cool to know who owns the file 
+        $data['publicFiles'] = File
+            ::where('visibility', '=', 1)
+            ->get(); 
         
         $data['count'] = $data['files']->count();
         $data['iaCount'] = $data['iaFiles']->count();

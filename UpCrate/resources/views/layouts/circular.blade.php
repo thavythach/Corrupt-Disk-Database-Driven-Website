@@ -613,25 +613,23 @@
         {{-- show files as I scroll --}}
         @if(count($data['iaFiles']) > 0)
             @for ($i=0; $i < count($data['iaFiles']); $i++)
-            <a href="/files/{{$data['iaFiles'][$i]->id}}">
                 
-                @if ( ($i % 2) == 0 ) 
-                
-                <div class="rellax d1" data-rellax-speed="5">
-                    {{$data['iaFiles'][$i]->name}}
+                <div class="@if ( ($i % 2) == 0 ) rellax d1 @else rellax d2 @endif" data-rellax-speed="5">
+
+                    <a href="#" data-toggle="popover" data-container="body" data-html="true" id="{{ "myIAFilesView-" . $i }}" data-placement="bottom" title="{{$data['iaFiles'][$i]->name}} by {{$data['iaFiles'][$i]->user_name}}" data-trigger="focus">
+                            {{$data['iaFiles'][$i]->name}}
+                            <img src="@if( $data['iaFiles'][$i]->visibility == 1) {{ asset('img/document.png') }} @else {{ asset('img/priv_document.png') }} @endif" width="@if ( ($i % 2) == 0 ) 5% @else 19% @endif"/>
+
+                    </a>
+
+                    <div id="{{ "popover-content-myIAFilesView-" . $i }}" class="hide">
+                        <a href="/files/{{$data['iaFiles'][$i]->id}}" class="glyphicon glyphicon-download">Download</a><br>
+                    </div>
+
                     
-                    <img src="@if( $data['iaFiles'][$i]->visibility == 1) {{ asset('img/document.png') }} @else {{ asset('img/priv_document.png') }} @endif" width="5%"/>
+                    
                 </div>
 
-                @else 
-                
-                <div class="rellax d2" data-rellax-speed="8">
-                    <div>
-                    {{$data['files'][$i]->name}}
-                    <img src="@if( $data['iaFiles'][$i]->visibility == 1) {{ asset('img/document.png') }} @else {{ asset('img/priv_document.png') }} @endif" width="19%"/>
-                    </div>
-                </div>
-                @endif 
             </a>
             @endfor
                 @else 
@@ -642,25 +640,21 @@
         {{-- show files as I scroll --}}
         @if(count($data['publicFiles']) > 0)
             @for ($i=0; $i < count($data['publicFiles']); $i++)
-            <a href="/files/{{$data['publicFiles'][$i]->id}}">
-                
-                @if ( ($i % 2) == 0 ) 
-                
-                <div class="rellax d1" data-rellax-speed="5">
-                    {{$data['publicFiles'][$i]->name}}
-                    
-                    <img src="@if( $data['publicFiles'][$i]->visibility == 1) {{ asset('img/document.png') }} @else {{ asset('img/priv_document.png') }} @endif" width="5%"/>
-                </div>
+                <div class="@if ( ($i % 2) == 0 ) rellax d1 @else rellax d2 @endif" data-rellax-speed="5">
 
-                @else 
-                
-                <div class="rellax d2" data-rellax-speed="8">
-                    <div>
-                    {{$data['files'][$i]->name}}
-                    <img src="@if( $data['publicFiles'][$i]->visibility == 1) {{ asset('img/document.png') }} @else {{ asset('img/priv_document.png') }} @endif" width="19%"/>
+                    <a href="#" data-toggle="popover" data-container="body" data-html="true" id="{{ "myPublicFilesView-" . $i }}" data-placement="bottom" title="{{$data['publicFiles'][$i]->name}} by {{$data['publicFiles'][$i]->user_name}}" data-trigger="focus">
+                            {{$data['publicFiles'][$i]->name}}
+                            <img src="@if( $data['publicFiles'][$i]->visibility == 1) {{ asset('img/document.png') }} @else {{ asset('img/priv_document.png') }} @endif" width="@if ( ($i % 2) == 0 ) 5% @else 19% @endif"/>
+
+                    </a>
+
+                    <div id="{{ "popover-content-myPublicFilesView-" . $i }}" class="hide">
+                        <a href="/files/{{$data['publicFiles'][$i]->id}}" class="glyphicon glyphicon-download">Download</a><br>
                     </div>
+
+                    
+                    
                 </div>
-                @endif 
             </a>
             @endfor
                 @else 
