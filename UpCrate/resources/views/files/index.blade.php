@@ -19,7 +19,7 @@
 
                                     {{-- Replace File --}}
                                     <!-- Trigger the modal with a button -->
-                                    <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#replaceModal">Replace</button>
+                                    <button type="button" class="btn btn-info btn-sm" >Replace</button>
                                   
                                     <!-- Modal -->
                                     <div class="modal fade" id="replaceModal" role="dialog">

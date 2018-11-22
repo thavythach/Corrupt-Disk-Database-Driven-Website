@@ -143,6 +143,7 @@ class FilesController extends Controller
         return redirect()->route('files.index');
     }
 
+
     /**
      * Display the specified resource.
      *

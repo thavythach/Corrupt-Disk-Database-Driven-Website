@@ -504,6 +504,49 @@
         </div>
     </div>
 
+    {{-- friendShareModal --}}
+    <div class="modal fade" id="friendShareModal" role="dialog">
+            <div class="modal-dialog">
+            
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Tell your friends to register!</h4>
+                </div>
+                <div class="modal-body">
+                {{-- <div class="container"> --}}
+                        <div id="content">
+                            <ul id="tabs" class="nav nav-tabs" data-tabs="tabs">
+                                <li class="active"><a href="#red" data-toggle="tab">Generate Registration Email!</a></li>
+                                {{-- <li><a href="#orange" data-toggle="tab">Upload Group File</a></li> --}}
+                            </ul>
+                            <div id="my-tab-content" class="tab-content">
+                                <div class="tab-pane active" id="red">
+                                    <br>
+                                        <center>
+                                        <p>Fill in the form with an email.</p>
+                                        <form action="/friendShare/process" method="POST" enctype="multipart/form-data">
+                                            <label for="file">Friend's Email:</label>
+                                            <input type="text" name="email" value="">
+                                            <input type="submit" name="submit" value="Submit">
+                                            {{ csrf_field() }}
+                                        </form>
+                                        </center>
+                                    <br>
+                                </div>
+                                {{-- <div class="tab-pane" id="orange">
+                                    <br>
+                                    Too much swag
+                                    <br>
+                                </div> --}}
+                            </div>
+                        </div>
+                    </div> 
+                </div>
+            </div>
+        </div>
+
     <div id="OwnedFiles" style="display: none;">
          {{-- show files as I scroll --}}
         @if(count($data['files']) > 0)
@@ -760,7 +803,9 @@
                             </p>
                           </div>
                         </div>
-                        <a href="/friendShare" class="radial-menu__menu-link"></a>
+                        <a href="#" class="radial-menu__menu-link" data-toggle="modal" data-target="#friendShareModal"></a>
+
+                        
                       </li>
                   
                       <li class="radial-menu__menu-item">
