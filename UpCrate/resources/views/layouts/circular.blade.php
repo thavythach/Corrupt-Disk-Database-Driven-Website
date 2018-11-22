@@ -380,56 +380,61 @@ body{
                       <li class="radial-menu__menu-item">
                         <div class="radial-menu__menu-link-bg"></div>
                         <div class="radial-menu__menu-icon">
-                          <span class="oi" data-glyph="bold" title="Bold" aria-hidden="true"></span>
+                          <span class="oi glyphicon glyphicon-cloud-upload" aria-hidden="true"></span>
                         </div>
                         <div class="radial-menu__menu-content">
                           <div class="radial-menu__menu-content-wrapper">
                             <h6 class="radial-menu__menu-content-title">
-                              Bold
+                              Upload New File
                             </h6>
                             <p class="radial-menu__menu-content-description">
-                              Make text bold
+                              Upload New Files
                             </p>
                           </div>
                         </div>
-                        <a href="/" class="radial-menu__menu-link"></a>
+                        <a href="/upload" class="radial-menu__menu-link"></a>
                       </li>
                   
                       <li class="radial-menu__menu-item">
                         <div class="radial-menu__menu-link-bg"></div>
                         <div class="radial-menu__menu-icon">
-                          <span class="oi" data-glyph="italic" title="Italic" aria-hidden="true"></span>
+                          <span class="oi glyphicon glyphicon-user" aria-hidden="true"></span>
                         </div>
                         <div class="radial-menu__menu-content">
                           <div class="radial-menu__menu-content-wrapper">
                             <h6 class="radial-menu__menu-content-title">
-                              Italic
+                             {{ Auth::user()->name }}
                             </h6>
                             <p class="radial-menu__menu-content-description">
-                              Make text italic
+                              Profile
                             </p>
                           </div>
                         </div>
-                        <a href="/" class="radial-menu__menu-link"></a>
+                        <a href="/users/{{ Auth::id() }}"" class="radial-menu__menu-link"></a>
                       </li>
                   
                       <li class="radial-menu__menu-item">
                         <div class="radial-menu__menu-link-bg"></div>
                         <div class="radial-menu__menu-icon">
-                          <span class="oi" data-glyph="underline" title="Underline" aria-hidden="true"></span>
+                          <span class="oi glyphicon glyphicon-log-out" aria-hidden="true"></span>
                         </div>
                         <div class="radial-menu__menu-content">
                           <div class="radial-menu__menu-content-wrapper">
                             <h6 class="radial-menu__menu-content-title">
-                              Underline
+                              Exit
                             </h6>
                             <p class="radial-menu__menu-content-description">
-                              Underline text
+                              Logout
                             </p>
                           </div>
                         </div>
-                        <a href="/" class="radial-menu__menu-link"></a>
-                      </li>
+                        <a href="{{ route('logout') }}" class="radial-menu__menu-link"
+                        onclick="event.preventDefault(); 
+                        document.getElementById('logout-form').submit();"></a>                      
+                            </li>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                    {{ csrf_field() }}
+                                </form>
                   
                       <li class="radial-menu__menu-item">
                         <div class="radial-menu__menu-link-bg"></div>
@@ -452,55 +457,19 @@ body{
                       <li class="radial-menu__menu-item">
                         <div class="radial-menu__menu-link-bg"></div>
                         <div class="radial-menu__menu-icon">
-                          <span class="oi" data-glyph="list-rich" title="Bulleted List" aria-hidden="true"></span>
+                          <span class="oi glyphicon glyphicon-envelope" aria-hidden="true"></span>
                         </div>
                         <div class="radial-menu__menu-content">
                           <div class="radial-menu__menu-content-wrapper">
                             <h6 class="radial-menu__menu-content-title">
-                              Bulleted List
+                              Friend Share
                             </h6>
                             <p class="radial-menu__menu-content-description">
-                              Add a bulleted list
+                              Email Friends!
                             </p>
                           </div>
                         </div>
-                        <a href="/" class="radial-menu__menu-link"></a>
-                      </li>
-                  
-                      <li class="radial-menu__menu-item">
-                        <div class="radial-menu__menu-link-bg"></div>
-                        <div class="radial-menu__menu-icon">
-                          <span class="oi" data-glyph="list" title="Numbered List" aria-hidden="true"></span>
-                        </div>
-                        <div class="radial-menu__menu-content">
-                          <div class="radial-menu__menu-content-wrapper">
-                            <h6 class="radial-menu__menu-content-title">
-                              Numbered List
-                            </h6>
-                            <p class="radial-menu__menu-content-description">
-                              Add a numbered list
-                            </p>
-                          </div>
-                        </div>
-                        <a href="/" class="radial-menu__menu-link"></a>
-                      </li>
-                  
-                      <li class="radial-menu__menu-item">
-                        <div class="radial-menu__menu-link-bg"></div>
-                        <div class="radial-menu__menu-icon">
-                          <span class="oi" data-glyph="header" title="Heading" aria-hidden="true"></span>
-                        </div>
-                        <div class="radial-menu__menu-content">
-                          <div class="radial-menu__menu-content-wrapper">
-                            <h6 class="radial-menu__menu-content-title">
-                              Heading
-                            </h6>
-                            <p class="radial-menu__menu-content-description">
-                              Add a heading
-                            </p>
-                          </div>
-                        </div>
-                        <a href="/" class="radial-menu__menu-link"></a>
+                        <a href="/friendShare" class="radial-menu__menu-link"></a>
                       </li>
                   
                       <li class="radial-menu__menu-item">
@@ -648,11 +617,12 @@ body{
                       </li>
                     </ul>
                     <div class="radial-menu__label">
-                      Menu
+                      {{-- <p>{{ Auth::user()->name }}</p> --}}
+                      <a href="/" style="text-decoration: none">UpCrate</a>
                     </div>
                   </div>
                   
-                  <div class="menu-items-select">
+                  {{-- <div class="menu-items-select">
                     <label class="menu-items-select__label" for="menu-items-to-show">Menu items</label>
                     <select class="menu-items-select__select" name="menu-items-to-show" id="menu-items-to-show">
                       <option value="3">Three</option>
@@ -669,7 +639,7 @@ body{
                       <option value="14">Fourteen</option>
                       <option value="15">Fifteen</option>
                     </select>
-                  </div>
+                  </div> --}}
                   
                   <div class="right-click-prompt">
                     <p class="right-click-prompt__label">
