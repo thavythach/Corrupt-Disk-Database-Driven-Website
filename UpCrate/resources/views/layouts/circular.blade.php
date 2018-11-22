@@ -164,8 +164,73 @@
     z-index: 1;
     }
 
-    .radial-menu__menu-item.hovered .radial-menu__menu-content {
+    /* .radial-menu__menu-item.hovered .radial-menu__menu-content {
     background-color: #578cbc;
+    border-color: #578cbc;
+    -webkit-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+    z-index: 4;
+    } */
+
+    .radial-menu__menu-item.hovered .glyph-color-file  {
+        background-color: purple;
+        border-color: #578cbc;
+        -webkit-transform: translate(-50%, -50%);
+                transform: translate(-50%, -50%);
+        z-index: 4;
+    }
+    .radial-menu__menu-item.hovered .glyph-color-question-sign {
+        background-color: blue;
+        border-color: #578cbc;
+        -webkit-transform: translate(-50%, -50%);
+                transform: translate(-50%, -50%);
+        z-index: 4;
+    }
+    .radial-menu__menu-item.hovered .glyph-color-duplicate {
+        background-color: gray;
+        border-color: #578cbc;
+        -webkit-transform: translate(-50%, -50%);
+                transform: translate(-50%, -50%);
+        z-index: 4;
+    }
+    .radial-menu__menu-item.hovered .glyph-color-envelope {
+        background-color: brown;
+        border-color: brown;
+        -webkit-transform: translate(-50%, -50%);
+                transform: translate(-50%, -50%);
+        z-index: 4;
+    }
+    .radial-menu__menu-item.hovered .glyph-color-heart {
+        background-color: pink;
+        border-color: #578cbc;
+        -webkit-transform: translate(-50%, -50%);
+                transform: translate(-50%, -50%);
+        z-index: 4;
+    }
+    .radial-menu__menu-item.hovered .glyph-color-remove {
+        background-color: red;
+        border-color: #578cbc;
+        -webkit-transform: translate(-50%, -50%);
+                transform: translate(-50%, -50%);
+        z-index: 4;
+    }
+    .radial-menu__menu-item.hovered .glyph-color-user {
+        background-color: black;
+        border-color: #578cbc;
+        -webkit-transform: translate(-50%, -50%);
+                transform: translate(-50%, -50%);
+        z-index: 4;
+    }
+    .radial-menu__menu-item.hovered .glyph-color-upload {
+        background-color: green;
+        border-color: #578cbc;
+        -webkit-transform: translate(-50%, -50%);
+                transform: translate(-50%, -50%);
+        z-index: 4;
+    }
+    
+     .radial-menu__menu-item.hovered .glyph-color-remove {
+    background-color: red;
     border-color: #578cbc;
     -webkit-transform: translate(-50%, -50%);
             transform: translate(-50%, -50%);
@@ -408,131 +473,131 @@
   bottom: 0;
   -webkit-perspective: 400;
           perspective: 400;
-}
+    }
 
-.plane {
-  width: 120px;
-  height: 120px;
-  -webkit-transform-style: preserve-3d;
-          transform-style: preserve-3d;
-}
-.plane.main {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  margin: auto;
-  -webkit-transform: rotateX(60deg) rotateZ(-30deg);
-          transform: rotateX(60deg) rotateZ(-30deg);
-  -webkit-animation: rotate 20s infinite linear;
-          animation: rotate 20s infinite linear;
-}
-.plane.main .circle {
-  width: 120px;
-  height: 120px;
-  position: absolute;
-  -webkit-transform-style: preserve-3d;
-          transform-style: preserve-3d;
-  border-radius: 100%;
-  box-sizing: border-box;
-  box-shadow: 0 0 60px crimson, inset 0 0 60px crimson;
-}
+    .plane {
+    width: 120px;
+    height: 120px;
+    -webkit-transform-style: preserve-3d;
+            transform-style: preserve-3d;
+    }
+    .plane.main {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    -webkit-transform: rotateX(60deg) rotateZ(-30deg);
+            transform: rotateX(60deg) rotateZ(-30deg);
+    -webkit-animation: rotate 20s infinite linear;
+            animation: rotate 20s infinite linear;
+    }
+    .plane.main .circle {
+    width: 120px;
+    height: 120px;
+    position: absolute;
+    -webkit-transform-style: preserve-3d;
+            transform-style: preserve-3d;
+    border-radius: 100%;
+    box-sizing: border-box;
+    box-shadow: 0 0 60px crimson, inset 0 0 60px crimson;
+    }
 
-a:hover .plane.main .circle {
-  width: 120px;
-  height: 120px;
-  position: absolute;
-  -webkit-transform-style: preserve-3d;
-          transform-style: preserve-3d;
-  border-radius: 100%;
-  box-sizing: border-box;
-  box-shadow: 0 0 60px green, inset 0 0 60px crimson;
-}
+    a:hover .plane.main .circle {
+    width: 120px;
+    height: 120px;
+    position: absolute;
+    -webkit-transform-style: preserve-3d;
+            transform-style: preserve-3d;
+    border-radius: 100%;
+    box-sizing: border-box;
+    box-shadow: 0 0 60px green, inset 0 0 60px crimson;
+    }
 
-a:hover .plane.main .circle::before, .plane.main .circle::after {
-  content: "";
-  display: block;
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  margin: auto;
-  width: 10%;
-  height: 10%;
-  border-radius: 100%;
-  background: crimson;
-  box-sizing: border-box;
-  box-shadow: 0 0 60px 2px crimson;
-}
+    a:hover .plane.main .circle::before, .plane.main .circle::after {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    width: 10%;
+    height: 10%;
+    border-radius: 100%;
+    background: crimson;
+    box-sizing: border-box;
+    box-shadow: 0 0 60px 2px crimson;
+    }
 
-.plane.main .circle::before, .plane.main .circle::after {
-  content: "";
-  display: block;
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  margin: auto;
-  width: 10%;
-  height: 10%;
-  border-radius: 100%;
-  background: crimson;
-  box-sizing: border-box;
-  box-shadow: 0 0 60px 2px crimson;
-}
-.plane.main .circle::before {
-  -webkit-transform: translateZ(-90px);
-          transform: translateZ(-90px);
-}
-.plane.main .circle::after {
-  -webkit-transform: translateZ(90px);
-          transform: translateZ(90px);
-}
-.plane.main .circle:nth-child(1) {
-  -webkit-transform: rotateZ(72deg) rotateX(63.435deg);
-          transform: rotateZ(72deg) rotateX(63.435deg);
-}
-.plane.main .circle:nth-child(2) {
-  -webkit-transform: rotateZ(144deg) rotateX(63.435deg);
-          transform: rotateZ(144deg) rotateX(63.435deg);
-}
-.plane.main .circle:nth-child(3) {
-  -webkit-transform: rotateZ(216deg) rotateX(63.435deg);
-          transform: rotateZ(216deg) rotateX(63.435deg);
-}
-.plane.main .circle:nth-child(4) {
-  -webkit-transform: rotateZ(288deg) rotateX(63.435deg);
-          transform: rotateZ(288deg) rotateX(63.435deg);
-}
-.plane.main .circle:nth-child(5) {
-  -webkit-transform: rotateZ(360deg) rotateX(63.435deg);
-          transform: rotateZ(360deg) rotateX(63.435deg);
-}
+    .plane.main .circle::before, .plane.main .circle::after {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    width: 10%;
+    height: 10%;
+    border-radius: 100%;
+    background: crimson;
+    box-sizing: border-box;
+    box-shadow: 0 0 60px 2px crimson;
+    }
+    .plane.main .circle::before {
+    -webkit-transform: translateZ(-90px);
+            transform: translateZ(-90px);
+    }
+    .plane.main .circle::after {
+    -webkit-transform: translateZ(90px);
+            transform: translateZ(90px);
+    }
+    .plane.main .circle:nth-child(1) {
+    -webkit-transform: rotateZ(72deg) rotateX(63.435deg);
+            transform: rotateZ(72deg) rotateX(63.435deg);
+    }
+    .plane.main .circle:nth-child(2) {
+    -webkit-transform: rotateZ(144deg) rotateX(63.435deg);
+            transform: rotateZ(144deg) rotateX(63.435deg);
+    }
+    .plane.main .circle:nth-child(3) {
+    -webkit-transform: rotateZ(216deg) rotateX(63.435deg);
+            transform: rotateZ(216deg) rotateX(63.435deg);
+    }
+    .plane.main .circle:nth-child(4) {
+    -webkit-transform: rotateZ(288deg) rotateX(63.435deg);
+            transform: rotateZ(288deg) rotateX(63.435deg);
+    }
+    .plane.main .circle:nth-child(5) {
+    -webkit-transform: rotateZ(360deg) rotateX(63.435deg);
+            transform: rotateZ(360deg) rotateX(63.435deg);
+    }
 
-@-webkit-keyframes rotate {
-  0% {
-    -webkit-transform: rotateX(0) rotateY(0) rotateZ(0);
-            transform: rotateX(0) rotateY(0) rotateZ(0);
-  }
-  100% {
-    -webkit-transform: rotateX(360deg) rotateY(360deg) rotateZ(360deg);
-            transform: rotateX(360deg) rotateY(360deg) rotateZ(360deg);
-  }
-}
+    @-webkit-keyframes rotate {
+    0% {
+        -webkit-transform: rotateX(0) rotateY(0) rotateZ(0);
+                transform: rotateX(0) rotateY(0) rotateZ(0);
+    }
+    100% {
+        -webkit-transform: rotateX(360deg) rotateY(360deg) rotateZ(360deg);
+                transform: rotateX(360deg) rotateY(360deg) rotateZ(360deg);
+    }
+    }
 
-@keyframes rotate {
-  0% {
-    -webkit-transform: rotateX(0) rotateY(0) rotateZ(0);
-            transform: rotateX(0) rotateY(0) rotateZ(0);
-  }
-  100% {
-    -webkit-transform: rotateX(360deg) rotateY(360deg) rotateZ(360deg);
-            transform: rotateX(360deg) rotateY(360deg) rotateZ(360deg);
-  }
-}
+    @keyframes rotate {
+    0% {
+        -webkit-transform: rotateX(0) rotateY(0) rotateZ(0);
+                transform: rotateX(0) rotateY(0) rotateZ(0);
+    }
+    100% {
+        -webkit-transform: rotateX(360deg) rotateY(360deg) rotateZ(360deg);
+                transform: rotateX(360deg) rotateY(360deg) rotateZ(360deg);
+    }
+    }
 
     @yield('css');
 </style>
@@ -784,8 +849,8 @@ a:hover .plane.main .circle::before, .plane.main .circle::after {
         </div>
     </div>
 
-    <div class="rellax d5" data-rellax-speed="1">
-            {{-- <img src="{{ asset('img/nick.jpg') }}" width="15%"/> --}}
+    {{-- <div class="rellax d1" data-rellax-speed="1">
+            {{-- <img src="{{ asset('img/nick.jpg') }}" width="15%"/> 
         <a href="#"><div class="view">
                 <div class="plane main">
                     <div class="circle"></div>
@@ -796,7 +861,7 @@ a:hover .plane.main .circle::before, .plane.main .circle::after {
                     <div class="circle"></div>
                 </div>
             </a>
-      </div>
+      </div> --}}
 
 
     <div id="OwnedFiles" style="display: none;">
@@ -966,7 +1031,7 @@ a:hover .plane.main .circle::before, .plane.main .circle::after {
                         <div class="radial-menu__menu-icon">
                           <span class="oi glyphicon glyphicon-cloud-upload" style="color:green" aria-hidden="true"></span>
                         </div>
-                        <div class="radial-menu__menu-content">
+                        <div class="radial-menu__menu-content glyph-color-upload">
                           <div class="radial-menu__menu-content-wrapper">
                             <h6 class="radial-menu__menu-content-title">
                               Upload New File
@@ -986,7 +1051,7 @@ a:hover .plane.main .circle::before, .plane.main .circle::after {
                         <div class="radial-menu__menu-icon">
                           <span class="oi glyphicon glyphicon-user" style="color:black" aria-hidden="true"></span>
                         </div>
-                        <div class="radial-menu__menu-content">
+                        <div class="radial-menu__menu-content glyph-color-user">
                           <div class="radial-menu__menu-content-wrapper">
                             <h6 class="radial-menu__menu-content-title">
                              {{ Auth::user()->name }}
@@ -1004,7 +1069,7 @@ a:hover .plane.main .circle::before, .plane.main .circle::after {
                         <div class="radial-menu__menu-icon">
                           <span class="oi glyphicon glyphicon-remove" style="color:red" aria-hidden="true"></span>
                         </div>
-                        <div class="radial-menu__menu-content">
+                        <div class="radial-menu__menu-content glyph-color-remove">
                           <div class="radial-menu__menu-content-wrapper">
                             <h6 class="radial-menu__menu-content-title">
                               Logout
@@ -1027,7 +1092,7 @@ a:hover .plane.main .circle::before, .plane.main .circle::after {
                         <div class="radial-menu__menu-icon">
                           <span class="oi glyphicon glyphicon-heart" style="color:pink" aria-hidden="true"></span>
                         </div>
-                        <div class="radial-menu__menu-content">
+                        <div class="radial-menu__menu-content glyph-color-heart">
                           <div class="radial-menu__menu-content-wrapper">
                             <h6 class="radial-menu__menu-content-title">
                               Surprise
@@ -1045,7 +1110,7 @@ a:hover .plane.main .circle::before, .plane.main .circle::after {
                         <div class="radial-menu__menu-icon">
                           <span class="oi glyphicon glyphicon-envelope" style="color:brown" aria-hidden="true"></span>
                         </div>
-                        <div class="radial-menu__menu-content">
+                        <div class="radial-menu__menu-content glyph-color-envelope">
                           <div class="radial-menu__menu-content-wrapper">
                             <h6 class="radial-menu__menu-content-title">
                               Friend Share
@@ -1065,7 +1130,7 @@ a:hover .plane.main .circle::before, .plane.main .circle::after {
                         <div class="radial-menu__menu-icon">
                           <span class="oi glyphicon glyphicon-file" style="color:purple" aria-hidden="true"></span>
                         </div>
-                        <div class="radial-menu__menu-content">
+                        <div class="radial-menu__menu-content glyph-color-file">
                           <div class="radial-menu__menu-content-wrapper">
                             <h6 class="radial-menu__menu-content-title">
                               <div id="toggleFileView_label"> Show Files </div>
@@ -1081,9 +1146,9 @@ a:hover .plane.main .circle::before, .plane.main .circle::after {
                       <li class="radial-menu__menu-item">
                         <div class="radial-menu__menu-link-bg"></div>
                         <div class="radial-menu__menu-icon">
-                          <span class="oi glyphicon glyphicon-question-sign" style="color:turquoise" aria-hidden="true"></span>
+                          <span class="oi glyphicon glyphicon-question-sign" style="color:blue" aria-hidden="true"></span>
                         </div>
-                        <div class="radial-menu__menu-content">
+                        <div class="radial-menu__menu-content glyph-color-question-sign">
                           <div class="radial-menu__menu-content-wrapper">
                             <h6 class="radial-menu__menu-content-title">
                               Help me!
@@ -1099,9 +1164,9 @@ a:hover .plane.main .circle::before, .plane.main .circle::after {
                       <li class="radial-menu__menu-item">
                         <div class="radial-menu__menu-link-bg"></div>
                         <div class="radial-menu__menu-icon">
-                          <span class="oi glyphicon glyphicon-duplicate" style="color:white" aria-hidden="true"></span>
+                          <span class="oi glyphicon glyphicon-duplicate" style="color:gray" aria-hidden="true"></span>
                         </div>
-                        <div class="radial-menu__menu-content">
+                        <div class="radial-menu__menu-content glyph-color-duplicate">
                           <div class="radial-menu__menu-content-wrapper">
                             <h6 class="radial-menu__menu-content-title">
                               Group Management
