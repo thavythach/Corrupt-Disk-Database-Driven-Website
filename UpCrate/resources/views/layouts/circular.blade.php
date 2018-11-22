@@ -13,395 +13,395 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
-    <style>
-    *, *:before, *:after {
-  box-sizing: border-box;
-}
+<style>
+        *, *:before, *:after {
+    box-sizing: border-box;
+    }
 
 
 
-html,
-body{
-    margin: 0px;
-    padding: 0px;
-    background-image: url('img/BG.jpg');
-    background-size: 100% 100%;
-    background-attachment: fixed;
-}    
+    html,
+    body{
+        margin: 0px;
+        padding: 0px;
+        background-image: url('img/BG.jpg');
+        background-size: 100% 100%;
+        background-attachment: fixed;
+    }    
 
-.radial-menu {
-  background: #c1ced9;
-  border: 0 solid transparent;
-  border-radius: 50%;
-  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.05);
-  height: 300px;
-  left: 50%;
-  opacity: 1;
-  position: absolute;
-  top: 50%;
-  -webkit-transform: translate(-50%, -50%) scale(1);
-          transform: translate(-50%, -50%) scale(1);
-  transition: opacity .1s ease, background .1s ease;
-  width: 300px;
-}
-.radial-menu.is-hidden {
-  -webkit-animation-name: scale-down;
-          animation-name: scale-down;
-  -webkit-animation-duration: .2s;
-          animation-duration: .2s;
-  -webkit-animation-delay: 0;
-          animation-delay: 0;
-  -webkit-animation-iteration-count: 1;
-          animation-iteration-count: 1;
-  -webkit-animation-fill-mode: forwards;
-          animation-fill-mode: forwards;
-  /* this prevents the animation from restarting! */
-  -webkit-animation-timing-function: cubic-bezier(0.25, 0.25, 0.25, 1.25);
-          animation-timing-function: cubic-bezier(0.25, 0.25, 0.25, 1.25);
-  -webkit-transform: translate(-50%, -50%) scale(0) !important;
-          transform: translate(-50%, -50%) scale(0) !important;
-  opacity: 0;
-}
-.radial-menu.is-active {
-  -webkit-animation-name: scale-up;
-          animation-name: scale-up;
-  -webkit-animation-duration: .2s;
-          animation-duration: .2s;
-  -webkit-animation-delay: 0;
-          animation-delay: 0;
-  -webkit-animation-iteration-count: 1;
-          animation-iteration-count: 1;
-  -webkit-animation-fill-mode: forwards;
-          animation-fill-mode: forwards;
-  /* this prevents the animation from restarting! */
-  -webkit-animation-timing-function: cubic-bezier(0.25, 0.25, 0.25, 1.25);
-          animation-timing-function: cubic-bezier(0.25, 0.25, 0.25, 1.25);
-  opacity: 1;
-  -webkit-transform: translate(-50%, -50%) scale(1);
-          transform: translate(-50%, -50%) scale(1);
-}
-.radial-menu.item-is-hovered {
-  background-color: #6d9bc5;
-  border-color: transparent;
-  border-width: 0;
-}
-
-@-webkit-keyframes scale-up {
-  0% {
-    -webkit-transform: translate(-50%, -50%) scale(0);
-            transform: translate(-50%, -50%) scale(0);
-  }
-  100% {
-    -webkit-transform: translateX(-50%, -50%) scale(1);
-            transform: translateX(-50%, -50%) scale(1);
-  }
-}
-
-@keyframes scale-up {
-  0% {
-    -webkit-transform: translate(-50%, -50%) scale(0);
-            transform: translate(-50%, -50%) scale(0);
-  }
-  100% {
-    -webkit-transform: translateX(-50%, -50%) scale(1);
-            transform: translateX(-50%, -50%) scale(1);
-  }
-}
-@-webkit-keyframes scale-down {
-  0% {
+    .radial-menu {
+    background: #c1ced9;
+    border: 0 solid transparent;
+    border-radius: 50%;
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.05);
+    height: 300px;
+    left: 50%;
+    opacity: 1;
+    position: absolute;
+    top: 50%;
     -webkit-transform: translate(-50%, -50%) scale(1);
             transform: translate(-50%, -50%) scale(1);
-  }
-  100% {
-    -webkit-transform: translateX(-50%, -50%) scale(0);
-            transform: translateX(-50%, -50%) scale(0);
-  }
-}
-@keyframes scale-down {
-  0% {
+    transition: opacity .1s ease, background .1s ease;
+    width: 300px;
+    }
+    .radial-menu.is-hidden {
+    -webkit-animation-name: scale-down;
+            animation-name: scale-down;
+    -webkit-animation-duration: .2s;
+            animation-duration: .2s;
+    -webkit-animation-delay: 0;
+            animation-delay: 0;
+    -webkit-animation-iteration-count: 1;
+            animation-iteration-count: 1;
+    -webkit-animation-fill-mode: forwards;
+            animation-fill-mode: forwards;
+    /* this prevents the animation from restarting! */
+    -webkit-animation-timing-function: cubic-bezier(0.25, 0.25, 0.25, 1.25);
+            animation-timing-function: cubic-bezier(0.25, 0.25, 0.25, 1.25);
+    -webkit-transform: translate(-50%, -50%) scale(0) !important;
+            transform: translate(-50%, -50%) scale(0) !important;
+    opacity: 0;
+    }
+    .radial-menu.is-active {
+    -webkit-animation-name: scale-up;
+            animation-name: scale-up;
+    -webkit-animation-duration: .2s;
+            animation-duration: .2s;
+    -webkit-animation-delay: 0;
+            animation-delay: 0;
+    -webkit-animation-iteration-count: 1;
+            animation-iteration-count: 1;
+    -webkit-animation-fill-mode: forwards;
+            animation-fill-mode: forwards;
+    /* this prevents the animation from restarting! */
+    -webkit-animation-timing-function: cubic-bezier(0.25, 0.25, 0.25, 1.25);
+            animation-timing-function: cubic-bezier(0.25, 0.25, 0.25, 1.25);
+    opacity: 1;
     -webkit-transform: translate(-50%, -50%) scale(1);
             transform: translate(-50%, -50%) scale(1);
-  }
-  100% {
-    -webkit-transform: translateX(-50%, -50%) scale(0);
-            transform: translateX(-50%, -50%) scale(0);
-  }
-}
-.radial-menu__label {
-  background-color: #e7ecf1;
-  border: 3px solid #ced8e1;
-  border-radius: 50%;
-  color: #c1ced9;
-  cursor: default;
-  font-size: 12px;
-  font-weight: bold;
-  height: 80px;
-  left: 50%;
-  letter-spacing: .1em;
-  line-height: 74px;
-  position: absolute;
-  text-align: center;
-  text-transform: uppercase;
-  top: 50%;
-  -webkit-transform: translate(-50%, -50%);
-          transform: translate(-50%, -50%);
-  width: 80px;
-  z-index: 4;
-}
+    }
+    .radial-menu.item-is-hovered {
+    background-color: #6d9bc5;
+    border-color: transparent;
+    border-width: 0;
+    }
 
-.radial-menu__menu-content {
-  background-color: #e7ecf1;
-  border: 3px solid #ced8e1;
-  border-radius: 50%;
-  height: 80px;
-  left: 50%;
-  position: absolute;
-  text-align: center;
-  top: 50%;
-  -webkit-transform: translate(-50%, -50%);
-          transform: translate(-50%, -50%);
-  width: 80px;
-  z-index: 1;
-}
+    @-webkit-keyframes scale-up {
+    0% {
+        -webkit-transform: translate(-50%, -50%) scale(0);
+                transform: translate(-50%, -50%) scale(0);
+    }
+    100% {
+        -webkit-transform: translateX(-50%, -50%) scale(1);
+                transform: translateX(-50%, -50%) scale(1);
+    }
+    }
 
-.radial-menu__menu-item.hovered .radial-menu__menu-content {
-  background-color: #578cbc;
-  border-color: #578cbc;
-  -webkit-transform: translate(-50%, -50%);
-          transform: translate(-50%, -50%);
-  z-index: 4;
-}
+    @keyframes scale-up {
+    0% {
+        -webkit-transform: translate(-50%, -50%) scale(0);
+                transform: translate(-50%, -50%) scale(0);
+    }
+    100% {
+        -webkit-transform: translateX(-50%, -50%) scale(1);
+                transform: translateX(-50%, -50%) scale(1);
+    }
+    }
+    @-webkit-keyframes scale-down {
+    0% {
+        -webkit-transform: translate(-50%, -50%) scale(1);
+                transform: translate(-50%, -50%) scale(1);
+    }
+    100% {
+        -webkit-transform: translateX(-50%, -50%) scale(0);
+                transform: translateX(-50%, -50%) scale(0);
+    }
+    }
+    @keyframes scale-down {
+    0% {
+        -webkit-transform: translate(-50%, -50%) scale(1);
+                transform: translate(-50%, -50%) scale(1);
+    }
+    100% {
+        -webkit-transform: translateX(-50%, -50%) scale(0);
+                transform: translateX(-50%, -50%) scale(0);
+    }
+    }
+    .radial-menu__label {
+    background-color: #e7ecf1;
+    border: 3px solid #ced8e1;
+    border-radius: 50%;
+    color: #c1ced9;
+    cursor: default;
+    font-size: 12px;
+    font-weight: bold;
+    height: 80px;
+    left: 50%;
+    letter-spacing: .1em;
+    line-height: 74px;
+    position: absolute;
+    text-align: center;
+    text-transform: uppercase;
+    top: 50%;
+    -webkit-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+    width: 80px;
+    z-index: 4;
+    }
 
-.radial-menu__menu-content-wrapper {
-  padding-left: 10px;
-  padding-right: 10px;
-  position: absolute;
-  top: 50%;
-  -webkit-transform: translateY(-50%);
-          transform: translateY(-50%);
-  width: 100%;
-}
+    .radial-menu__menu-content {
+    background-color: #e7ecf1;
+    border: 3px solid #ced8e1;
+    border-radius: 50%;
+    height: 80px;
+    left: 50%;
+    position: absolute;
+    text-align: center;
+    top: 50%;
+    -webkit-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+    width: 80px;
+    z-index: 1;
+    }
 
-.radial-menu__menu-content-title {
-  color: #fff;
-  font-size: 0.7em;
-  font-weight: bold;
-  line-height: 1.3;
-}
+    .radial-menu__menu-item.hovered .radial-menu__menu-content {
+    background-color: #578cbc;
+    border-color: #578cbc;
+    -webkit-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+    z-index: 4;
+    }
 
-.radial-menu__menu-content-description {
-  color: rgba(255, 255, 255, 0.5);
-  display: none;
-  font-size: 0.4em;
-  font-weight: normal;
-  letter-spacing: .1em;
-  line-height: 1.3;
-  text-transform: uppercase;
-}
+    .radial-menu__menu-content-wrapper {
+    padding-left: 10px;
+    padding-right: 10px;
+    position: absolute;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+            transform: translateY(-50%);
+    width: 100%;
+    }
 
-.radial-menu__menu-icon {
-  background-color: transparent;
-  height: 25px;
-  left: 0;
-  position: absolute;
-  text-align: center;
-  top: 0;
-  -webkit-transform: translateY(-50%) translateX(-50%);
-          transform: translateY(-50%) translateX(-50%);
-  width: 25px;
-  z-index: 2;
-}
-.radial-menu__menu-icon .oi {
-  color: #8ea6bb;
-  font-size: 16px;
-  line-height: 25px;
-  transition: font-size 0.3s cubic-bezier(0.25, 0.25, 0.25, 1.5), color 0.1s ease;
-}
+    .radial-menu__menu-content-title {
+    color: #fff;
+    font-size: 0.7em;
+    font-weight: bold;
+    line-height: 1.3;
+    }
 
-.radial-menu.item-is-hovered .radial-menu__menu-icon {
-  background-color: transparent;
-}
-.radial-menu.item-is-hovered .radial-menu__menu-icon .oi {
-  color: #a8baca;
-}
+    .radial-menu__menu-content-description {
+    color: rgba(255, 255, 255, 0.5);
+    display: none;
+    font-size: 0.4em;
+    font-weight: normal;
+    letter-spacing: .1em;
+    line-height: 1.3;
+    text-transform: uppercase;
+    }
 
-.radial-menu.item-is-hovered .radial-menu__menu-item.hovered .radial-menu__menu-icon {
-  background-color: transparent;
-  height: 50px;
-  width: 50px;
-}
-.radial-menu.item-is-hovered .radial-menu__menu-item.hovered .radial-menu__menu-icon .oi {
-  color: #fff;
-  font-size: 21px;
-  line-height: 50px;
-}
-
-.radial-menu__menu-list {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-}
-
-.radial-menu__menu-item {
-  display: block;
-  left: 50%;
-  position: absolute;
-  top: 50%;
-  z-index: 1;
-}
-.radial-menu__menu-item.hovered {
-  z-index: 10;
-}
-
-.radial-menu__menu-link,
-.radial-menu__menu-link-bg {
-  height: 22px;
-  padding: 5px 20px;
-  position: absolute;
-  -webkit-transform: translateY(-50%) perspective(200px) rotateY(-77.5deg) scaleX(1.25);
-          transform: translateY(-50%) perspective(200px) rotateY(-77.5deg) scaleX(1.25);
-  -webkit-transform-origin: 0;
-          transform-origin: 0;
-  -webkit-transform-style: preserve-3d;
-          transform-style: preserve-3d;
-  width: 125px;
-}
-
-.radial-menu__menu-link {
-  border-bottom: 1px solid transparent;
-  border-top: 1px solid transparent;
-  display: block;
-  z-index: 3;
-}
-
-.radial-menu__menu-link-bg {
-  background-color: #dae2e9;
-  border-bottom: 1px solid #d4dde5;
-  border-top: 1px solid #d4dde5;
-  font-size: 12px;
-  text-decoration: none;
-  text-transform: uppercase;
-  transition: background .1s ease;
-  z-index: 1;
-}
-.radial-menu__menu-link-bg:after {
-  background: #c1ced9;
-  content: '';
-  display: none;
-  height: 106%;
-  right: -1px;
-  position: absolute;
-  top: 0;
-  transition: all .1s ease;
-  -webkit-transform: translateY(-3%);
-          transform: translateY(-3%);
-  width: 2px;
-}
-
-.radial-menu__menu-item.hovered .radial-menu__menu-link-bg {
-  background-color: #6d9bc5;
-  border: 0;
-}
-.radial-menu__menu-item.hovered .radial-menu__menu-link-bg:after {
-  background: #6d9bc5;
-  height: 106%;
-  -webkit-transform: translateY(-3%);
-          transform: translateY(-3%);
-  width: 0;
-}
-
-.menu-items-select {
-  bottom: 0;
-  right: 0;
-  margin: 0 auto;
-  padding: 40px;
-  position: absolute;
-}
-
-.menu-items-select__label {
-  color: #c1ced9;
-  display: block;
-  font-size: .7em;
-  font-weight: bold;
-  letter-spacing: .05em;
-  margin-bottom: 10px;
-  text-transform: uppercase;
-}
-
-.menu-items-select__select {
-  -webkit-appearance: none;
-     -moz-appearance: none;
-          appearance: none;
-  background-color: #e7ecf1;
-  background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA3ppVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNi1jMTMyIDc5LjE1OTI4NCwgMjAxNi8wNC8xOS0xMzoxMzo0MCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDpjYmU2ZGJmMC0zMWRkLTQyN2EtYjIyYi02YjExMGU5ZDVmODciIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6REM2MzE0REVCNjkzMTFFNkIxODVBOTBFNDM1NDFDOEUiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6REM2MzE0RERCNjkzMTFFNkIxODVBOTBFNDM1NDFDOEUiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIDIwMTUuNSAoTWFjaW50b3NoKSI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOmI4YTU2Zjg5LTM0MzAtNDcxNS1iOGQyLWQ5NWM4NzdmYmIyOSIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDpjYmU2ZGJmMC0zMWRkLTQyN2EtYjIyYi02YjExMGU5ZDVmODciLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz4RdGokAAAAf0lEQVR42mL8//8/AzUBEwOVwaiBlAMWbIKMjIxEG4CeSujq5fkgB+DBC3E6GR1DARcQX8Zh2HUg5samH5+BIKABxF/QDPsKxLq4HETIQBCIQTMwFZ8PiTEQBGZBDVtKKMiINZATiFcCMS8hAxmxGUBJOmQhRtFo4UBfAwECDADAD7B6p+ae7AAAAABJRU5ErkJggg==");
-  background-position: 97.5% 50%;
-  background-repeat: no-repeat;
-  border: 2px solid #d4dde5;
-  border-radius: 0;
-  display: block;
-  font-family: sans-serif;
-  font-size: .9em;
-  font-weight: bold;
-  height: 40px;
-  padding: 5px 10px;
-  width: 100px;
-}
-
-.right-click-prompt {
-  bottom: 0;
-  color: #c1ced9;
-  font-size: .7em;
-  font-weight: bold;
-  left: 50%;
-  letter-spacing: .05em;
-  padding: 40px;
-  position: absolute;
-  text-transform: uppercase;
-  -webkit-transform: translateX(-50%);
-          transform: translateX(-50%);
-}
-
-@media (max-height: 430px) {
-  .right-click-prompt {
+    .radial-menu__menu-icon {
+    background-color: transparent;
+    height: 25px;
     left: 0;
-    -webkit-transform: translateX(0);
-            transform: translateX(0);
-  }
-}
+    position: absolute;
+    text-align: center;
+    top: 0;
+    -webkit-transform: translateY(-50%) translateX(-50%);
+            transform: translateY(-50%) translateX(-50%);
+    width: 25px;
+    z-index: 2;
+    }
+    .radial-menu__menu-icon .oi {
+    color: #8ea6bb;
+    font-size: 16px;
+    line-height: 25px;
+    transition: font-size 0.3s cubic-bezier(0.25, 0.25, 0.25, 1.5), color 0.1s ease;
+    }
 
-        .d1{
-            margin-top: 135px;
-            margin-left: 300px;
-        }
-        .d8{
-            margin-top: 135px;
-            margin-left: 1200px;
-        }
-        .d2{
-            margin-top: 135px;
-            margin-left: 1500px;
-        }
-        .d3{
-            margin-top: -650px;
-        }
-        .d4{
-            margin-top: -1050px;
-        }
-        .d5{
-            margin-top: -600px;
-            margin-left: 100px;
-        }
-        .d6{
-            margin-top: 250px;
-            margin-left: 840px;
-        }
-        .d7{
-            margin-top: 500px;
-            margin-left: 800px;
-        }
+    .radial-menu.item-is-hovered .radial-menu__menu-icon {
+    background-color: transparent;
+    }
+    .radial-menu.item-is-hovered .radial-menu__menu-icon .oi {
+    color: #a8baca;
+    }
+
+    .radial-menu.item-is-hovered .radial-menu__menu-item.hovered .radial-menu__menu-icon {
+    background-color: transparent;
+    height: 50px;
+    width: 50px;
+    }
+    .radial-menu.item-is-hovered .radial-menu__menu-item.hovered .radial-menu__menu-icon .oi {
+    color: #fff;
+    font-size: 21px;
+    line-height: 50px;
+    }
+
+    .radial-menu__menu-list {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    }
+
+    .radial-menu__menu-item {
+    display: block;
+    left: 50%;
+    position: absolute;
+    top: 50%;
+    z-index: 1;
+    }
+    .radial-menu__menu-item.hovered {
+    z-index: 10;
+    }
+
+    .radial-menu__menu-link,
+    .radial-menu__menu-link-bg {
+    height: 22px;
+    padding: 5px 20px;
+    position: absolute;
+    -webkit-transform: translateY(-50%) perspective(200px) rotateY(-77.5deg) scaleX(1.25);
+            transform: translateY(-50%) perspective(200px) rotateY(-77.5deg) scaleX(1.25);
+    -webkit-transform-origin: 0;
+            transform-origin: 0;
+    -webkit-transform-style: preserve-3d;
+            transform-style: preserve-3d;
+    width: 125px;
+    }
+
+    .radial-menu__menu-link {
+    border-bottom: 1px solid transparent;
+    border-top: 1px solid transparent;
+    display: block;
+    z-index: 3;
+    }
+
+    .radial-menu__menu-link-bg {
+    background-color: #dae2e9;
+    border-bottom: 1px solid #d4dde5;
+    border-top: 1px solid #d4dde5;
+    font-size: 12px;
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: background .1s ease;
+    z-index: 1;
+    }
+    .radial-menu__menu-link-bg:after {
+    background: #c1ced9;
+    content: '';
+    display: none;
+    height: 106%;
+    right: -1px;
+    position: absolute;
+    top: 0;
+    transition: all .1s ease;
+    -webkit-transform: translateY(-3%);
+            transform: translateY(-3%);
+    width: 2px;
+    }
+
+    .radial-menu__menu-item.hovered .radial-menu__menu-link-bg {
+    background-color: #6d9bc5;
+    border: 0;
+    }
+    .radial-menu__menu-item.hovered .radial-menu__menu-link-bg:after {
+    background: #6d9bc5;
+    height: 106%;
+    -webkit-transform: translateY(-3%);
+            transform: translateY(-3%);
+    width: 0;
+    }
+
+    .menu-items-select {
+    bottom: 0;
+    right: 0;
+    margin: 0 auto;
+    padding: 40px;
+    position: absolute;
+    }
+
+    .menu-items-select__label {
+    color: #c1ced9;
+    display: block;
+    font-size: .7em;
+    font-weight: bold;
+    letter-spacing: .05em;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    }
+
+    .menu-items-select__select {
+    -webkit-appearance: none;
+        -moz-appearance: none;
+            appearance: none;
+    background-color: #e7ecf1;
+    background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA3ppVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNi1jMTMyIDc5LjE1OTI4NCwgMjAxNi8wNC8xOS0xMzoxMzo0MCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDpjYmU2ZGJmMC0zMWRkLTQyN2EtYjIyYi02YjExMGU5ZDVmODciIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6REM2MzE0REVCNjkzMTFFNkIxODVBOTBFNDM1NDFDOEUiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6REM2MzE0RERCNjkzMTFFNkIxODVBOTBFNDM1NDFDOEUiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIDIwMTUuNSAoTWFjaW50b3NoKSI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOmI4YTU2Zjg5LTM0MzAtNDcxNS1iOGQyLWQ5NWM4NzdmYmIyOSIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDpjYmU2ZGJmMC0zMWRkLTQyN2EtYjIyYi02YjExMGU5ZDVmODciLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz4RdGokAAAAf0lEQVR42mL8//8/AzUBEwOVwaiBlAMWbIKMjIxEG4CeSujq5fkgB+DBC3E6GR1DARcQX8Zh2HUg5samH5+BIKABxF/QDPsKxLq4HETIQBCIQTMwFZ8PiTEQBGZBDVtKKMiINZATiFcCMS8hAxmxGUBJOmQhRtFo4UBfAwECDADAD7B6p+ae7AAAAABJRU5ErkJggg==");
+    background-position: 97.5% 50%;
+    background-repeat: no-repeat;
+    border: 2px solid #d4dde5;
+    border-radius: 0;
+    display: block;
+    font-family: sans-serif;
+    font-size: .9em;
+    font-weight: bold;
+    height: 40px;
+    padding: 5px 10px;
+    width: 100px;
+    }
+
+    .right-click-prompt {
+    bottom: 0;
+    color: #c1ced9;
+    font-size: .7em;
+    font-weight: bold;
+    left: 50%;
+    letter-spacing: .05em;
+    padding: 40px;
+    position: absolute;
+    text-transform: uppercase;
+    -webkit-transform: translateX(-50%);
+            transform: translateX(-50%);
+    }
+
+    @media (max-height: 430px) {
+    .right-click-prompt {
+        left: 0;
+        -webkit-transform: translateX(0);
+                transform: translateX(0);
+    }
+    }
+
+            .d1{
+                margin-top: 135px;
+                margin-left: 300px;
+            }
+            .d8{
+                margin-top: 135px;
+                margin-left: 1200px;
+            }
+            .d2{
+                margin-top: 135px;
+                margin-left: 1500px;
+            }
+            .d3{
+                margin-top: -650px;
+            }
+            .d4{
+                margin-top: -1050px;
+            }
+            .d5{
+                margin-top: -600px;
+                margin-left: 100px;
+            }
+            .d6{
+                margin-top: 250px;
+                margin-left: 840px;
+            }
+            .d7{
+                margin-top: 500px;
+                margin-left: 800px;
+            }
 
     @yield('css');
-    </style>
+</style>
 
 </head>
 <body>
@@ -504,15 +504,6 @@ body{
         </div>
     </div>
 
-    {{-- <div class="container"> --}}
-          {{-- <a data-toggle="popover" data-container="body" data-placement="right" type="button" data-html="true" href="#" id="login"><span class="glyphicon glyphicon-list" style="margin:3px 0 0 0"></span></a> --}}
-        
-            
-              
-          
-          {{-- </div> --}}
-
-
     <div id="OwnedFiles" style="display: none;">
          {{-- show files as I scroll --}}
         @if(count($data['files']) > 0)
@@ -520,7 +511,6 @@ body{
                 @if ( ($i % 2) == 0 ) 
                 
                 <div class="rellax d1" data-rellax-speed="5">
-                            {{-- <a href="/files/{{$data['files'][$i]->id}}"> --}}
                         <a href="#" data-toggle="popover" data-container="body" data-html="true" id="myFilesView" data-placement="bottom" title="{{$data['files'][$i]->name}} by {{ Auth::user()->name }}">
                                 {{$data['files'][$i]->name}}
                                 <img src="@if( $data['files'][$i]->visibility == 1) {{ asset('img/document.png') }} @else {{ asset('img/priv_document.png') }} @endif" width="5%"/>
@@ -528,14 +518,43 @@ body{
                         </a>
                         
                         <div id="popover-content-myFilesView" class="hide">
-                                <ul class="list-group">
-                            <li class="list-group-item">Cras justo odio</li>
-                            <li class="list-group-item">Dapibus ac facilisis in</li>
-                            <li class="list-group-item">Morbi leo risus</li>
-                            <li class="list-group-item">Porta ac consectetur ac</li>
-                            <li class="list-group-item">Vestibulum at eros</li>
-                          </ul> 
+                            <a href="/files/{{$data['files'][$i]->id}}" class="glyphicon glyphicon-download">Download</a><br>
+                            Private Content: @if ( $data['files'][$i]->visibility == 1 ) No. @else Yes. @endif <br>
+                            <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#renameModal">Rename</button>
+
+                            
+                            
+                            <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#replaceModal">Replace</button>
+                            <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#deleteModal">Delete</button>
                         </div>
+
+                        <!-- Rename Modal -->
+                        <div class="modal fade" id="renameModal" role="dialog">
+                                <div class="modal-dialog">
+                                
+                                  <!-- Modal content-->
+                                  <div class="modal-content">
+                                    <div class="modal-header">
+                                      <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                      <h4 class="modal-title">Rename File</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                      <p>Fill in the form with a new name to rename the file</p>
+                                      <form action="/renameFile" method="POST" enctype="multipart/form-data">
+                                          <label for="file">Filename:</label>
+                                          <input type="text" name="new_filename" value="{{ $data['files'][$i]->name }}">
+                                          <input type="hidden" id="fileid" name="fileid" value="{{$data['files'][$i]->id}}">
+                                          <input type="submit" name="submit" value="Submit">
+                                          {{ csrf_field() }}
+                                      </form>
+                                    </div>
+                                    <div class="modal-footer">
+                                      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                    </div>
+                                  </div>
+                                  
+                                </div>
+                              </div>
                     
                     
                 </div>
