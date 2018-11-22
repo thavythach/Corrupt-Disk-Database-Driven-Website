@@ -511,7 +511,7 @@
                 @if ( ($i % 2) == 0 ) 
                 
                 <div class="rellax d1" data-rellax-speed="5">
-                        <a href="#" data-toggle="popover" data-container="body" data-html="true" id="{{ "myFilesView-" . $i }}" data-placement="bottom" title="{{$data['files'][$i]->name}} by {{ Auth::user()->name }}">
+                        <a href="#" data-toggle="popover" data-container="body" data-html="true" id="{{ "myFilesView-" . $i }}" data-placement="bottom" title="{{$data['files'][$i]->name}} by {{ Auth::user()->name }}" data-trigger="focus">
                                 {{$data['files'][$i]->name}}
                                 <img src="@if( $data['files'][$i]->visibility == 1) {{ asset('img/document.png') }} @else {{ asset('img/priv_document.png') }} @endif" width="5%"/>
 
@@ -521,8 +521,6 @@
                             <a href="/files/{{$data['files'][$i]->id}}" class="glyphicon glyphicon-download">Download</a><br>
                             Private Content: @if ( $data['files'][$i]->visibility == 1 ) No. @else Yes. @endif <br>
                             <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#renameModal">Rename</button>
-
-                            
                             
                             <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#replaceModal">Replace</button>
                             <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#deleteModal">Delete</button>
@@ -1398,6 +1396,10 @@ $("[data-toggle=popover]").each(function(i, obj) {
     });
 
 });
+
+$('.popover-dismiss').popover({
+  trigger: 'focus'
+})
 </script>
 
 
