@@ -964,7 +964,7 @@ a:hover .plane.main .circle::before, .plane.main .circle::after {
                       <li class="radial-menu__menu-item">
                         <div class="radial-menu__menu-link-bg"></div>
                         <div class="radial-menu__menu-icon">
-                          <span class="oi glyphicon glyphicon-cloud-upload" aria-hidden="true"></span>
+                          <span class="oi glyphicon glyphicon-cloud-upload" style="color:green" aria-hidden="true"></span>
                         </div>
                         <div class="radial-menu__menu-content">
                           <div class="radial-menu__menu-content-wrapper">
@@ -984,7 +984,7 @@ a:hover .plane.main .circle::before, .plane.main .circle::after {
                       <li class="radial-menu__menu-item">
                         <div class="radial-menu__menu-link-bg"></div>
                         <div class="radial-menu__menu-icon">
-                          <span class="oi glyphicon glyphicon-user" aria-hidden="true"></span>
+                          <span class="oi glyphicon glyphicon-user" style="color:black" aria-hidden="true"></span>
                         </div>
                         <div class="radial-menu__menu-content">
                           <div class="radial-menu__menu-content-wrapper">
@@ -1002,12 +1002,12 @@ a:hover .plane.main .circle::before, .plane.main .circle::after {
                       <li class="radial-menu__menu-item">
                         <div class="radial-menu__menu-link-bg"></div>
                         <div class="radial-menu__menu-icon">
-                          <span class="oi glyphicon glyphicon-log-out" aria-hidden="true"></span>
+                          <span class="oi glyphicon glyphicon-remove" style="color:red" aria-hidden="true"></span>
                         </div>
                         <div class="radial-menu__menu-content">
                           <div class="radial-menu__menu-content-wrapper">
                             <h6 class="radial-menu__menu-content-title">
-                              Exit
+                              Logout
                             </h6>
                             <p class="radial-menu__menu-content-description">
                               Logout
@@ -1025,7 +1025,7 @@ a:hover .plane.main .circle::before, .plane.main .circle::after {
                       <li class="radial-menu__menu-item">
                         <div class="radial-menu__menu-link-bg"></div>
                         <div class="radial-menu__menu-icon">
-                          <span class="oi glyphicon glyphicon-heart" aria-hidden="true"></span>
+                          <span class="oi glyphicon glyphicon-heart" style="color:pink" aria-hidden="true"></span>
                         </div>
                         <div class="radial-menu__menu-content">
                           <div class="radial-menu__menu-content-wrapper">
@@ -1043,7 +1043,7 @@ a:hover .plane.main .circle::before, .plane.main .circle::after {
                       <li class="radial-menu__menu-item">
                         <div class="radial-menu__menu-link-bg"></div>
                         <div class="radial-menu__menu-icon">
-                          <span class="oi glyphicon glyphicon-envelope" aria-hidden="true"></span>
+                          <span class="oi glyphicon glyphicon-envelope" style="color:brown" aria-hidden="true"></span>
                         </div>
                         <div class="radial-menu__menu-content">
                           <div class="radial-menu__menu-content-wrapper">
@@ -1063,7 +1063,7 @@ a:hover .plane.main .circle::before, .plane.main .circle::after {
                       <li class="radial-menu__menu-item">
                         <div class="radial-menu__menu-link-bg"></div>
                         <div class="radial-menu__menu-icon">
-                          <span class="oi glyphicon glyphicon-file" aria-hidden="true"></span>
+                          <span class="oi glyphicon glyphicon-file" style="color:purple" aria-hidden="true"></span>
                         </div>
                         <div class="radial-menu__menu-content">
                           <div class="radial-menu__menu-content-wrapper">
@@ -1081,7 +1081,7 @@ a:hover .plane.main .circle::before, .plane.main .circle::after {
                       <li class="radial-menu__menu-item">
                         <div class="radial-menu__menu-link-bg"></div>
                         <div class="radial-menu__menu-icon">
-                          <span class="oi glyphicon glyphicon-question-sign" aria-hidden="true"></span>
+                          <span class="oi glyphicon glyphicon-question-sign" style="color:turquoise" aria-hidden="true"></span>
                         </div>
                         <div class="radial-menu__menu-content">
                           <div class="radial-menu__menu-content-wrapper">
@@ -1099,7 +1099,7 @@ a:hover .plane.main .circle::before, .plane.main .circle::after {
                       <li class="radial-menu__menu-item">
                         <div class="radial-menu__menu-link-bg"></div>
                         <div class="radial-menu__menu-icon">
-                          <span class="oi glyphicon glyphicon-duplicate" aria-hidden="true"></span>
+                          <span class="oi glyphicon glyphicon-duplicate" style="color:white" aria-hidden="true"></span>
                         </div>
                         <div class="radial-menu__menu-content">
                           <div class="radial-menu__menu-content-wrapper">
