@@ -650,6 +650,7 @@
         </div>
     </div>
 
+
     <div id="OwnedFiles" style="display: none;">
          {{-- show files as I scroll --}}
         @if(count($data['files']) > 0)
@@ -727,8 +728,8 @@
                             </div>
                         </div>
 
-                    <!-- Delete Modal -->
-                    <div class="modal fade" id="deleteModal" role="dialog">
+                        <!-- Delete Modal -->
+                        <div class="modal fade" id="deleteModal" role="dialog">
                             <div class="modal-dialog">
                             
                               <!-- Modal content-->
@@ -932,15 +933,15 @@
                       <li class="radial-menu__menu-item">
                         <div class="radial-menu__menu-link-bg"></div>
                         <div class="radial-menu__menu-icon">
-                          <span class="oi" data-glyph="link-intact" title="Hyperlink" aria-hidden="true"></span>
+                          <span class="oi glyphicon glyphicon-question-sign" aria-hidden="true"></span>
                         </div>
                         <div class="radial-menu__menu-content">
                           <div class="radial-menu__menu-content-wrapper">
                             <h6 class="radial-menu__menu-content-title">
-                              Hyperlink
+                              Help me!
                             </h6>
                             <p class="radial-menu__menu-content-description">
-                              Add a link to something
+                              Navigate UpCrate
                             </p>
                           </div>
                         </div>
@@ -1082,8 +1083,7 @@
                   
                   <div class="right-click-prompt">
                     <p class="right-click-prompt__label">
-                      Right click and drag
-                    </p>
+                    {{ Auth::user()->name}} @ UpCrate </p>
                   </div>
 
        	   @yield('content')
