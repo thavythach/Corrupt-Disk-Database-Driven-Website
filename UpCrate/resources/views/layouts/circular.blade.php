@@ -890,6 +890,31 @@
             </a>
       </div> --}}
 
+    
+    <div id="GroupToggle">
+            {{-- <div id="GroupToggle" style="display: none;"> --}}
+        @if(count($data['groups']) > 0)
+            @for ($i=0; $i < count($data['groups']); $i++)
+                    
+            <div class="@if ( ($i % 2) == 0 ) rellax d1 @else rellax d2 @endif" data-rellax-speed="5">
+                <a href="#" data-toggle="popover" data-container="body" data-html="true" id="{{ "myGroupView-" . $i }}" data-placement="bottom" title="{{$data['groups'][$i]->name}} by TODO" data-trigger="focus">
+                        {{$data['groups'][$i]->name}}
+                        <img src="{{ asset('img/group.png') }}" width="@if ( ($i % 2) == 0 ) 5% @else 19% @endif"/>
+                </a>
+                
+                <div id="{{ "popover-content-myGroupView-" . $i }}" class="hide">
+                    <a href="/groups/{{$data['groups'][$i]->group_id}}">Group Page</a><br>
+                </div>
+            </div>
+            @endfor
+ 
+        @else 
+            swag
+            {{-- <p> I don't own any groups. </p> --}}
+        @endif
+    </div>
+
+
 
     <div id="OwnedFiles" style="display: none;">
          {{-- show files as I scroll --}}

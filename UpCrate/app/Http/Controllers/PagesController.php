@@ -7,7 +7,9 @@ use App\File;
 use App\Owns;
 use App\IndividualAccess;
 use App\User;
-
+use App\GroupMembers;
+use App\GroupAccess;
+use App\GroupFile;
 
 class PagesController extends Controller
 {
@@ -71,6 +73,12 @@ class PagesController extends Controller
         $data['publicFiles'] = File
             ::where('visibility', '=', 1)
             ->get(); 
+        
+        // gets all groups
+        $data['groups'] = GroupMembers
+            ::where('group_members.user_id', '=', \Auth::id())
+            ->join('groupAccess', 'groupAccess.group_id', '=', 'group_members.group_id')
+            ->get();
         
         $data['count'] = $data['files']->count();
         $data['iaCount'] = $data['iaFiles']->count();
