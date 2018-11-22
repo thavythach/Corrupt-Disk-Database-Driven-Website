@@ -504,6 +504,13 @@ body{
         </div>
     </div>
 
+    {{-- <div class="container"> --}}
+          {{-- <a data-toggle="popover" data-container="body" data-placement="right" type="button" data-html="true" href="#" id="login"><span class="glyphicon glyphicon-list" style="margin:3px 0 0 0"></span></a> --}}
+        
+            
+              
+          
+          {{-- </div> --}}
 
 
     <div id="OwnedFiles" style="display: none;">
@@ -514,11 +521,21 @@ body{
                 
                 <div class="rellax d1" data-rellax-speed="5">
                             {{-- <a href="/files/{{$data['files'][$i]->id}}"> --}}
-                        <a href="#" data-toggle="popover" title="{{$data['files'][$i]->name}} by {{ Auth::user()->name }}" data-placement="bottom" data-content="Private Content: ">
+                        <a href="#" data-toggle="popover" data-container="body" data-html="true" id="myFilesView" data-placement="bottom" title="{{$data['files'][$i]->name}} by {{ Auth::user()->name }}">
                                 {{$data['files'][$i]->name}}
                                 <img src="@if( $data['files'][$i]->visibility == 1) {{ asset('img/document.png') }} @else {{ asset('img/priv_document.png') }} @endif" width="5%"/>
 
-                        </a>    
+                        </a>
+                        
+                        <div id="popover-content-myFilesView" class="hide">
+                                <ul class="list-group">
+                            <li class="list-group-item">Cras justo odio</li>
+                            <li class="list-group-item">Dapibus ac facilisis in</li>
+                            <li class="list-group-item">Morbi leo risus</li>
+                            <li class="list-group-item">Porta ac consectetur ac</li>
+                            <li class="list-group-item">Vestibulum at eros</li>
+                          </ul> 
+                        </div>
                     
                     
                 </div>
@@ -1303,10 +1320,18 @@ body{
 </script>
 
 <script>
-        $(document).ready(function(){
-            $('[data-toggle="popover"]').popover();   
-        });
-        </script>
+$("[data-toggle=popover]").each(function(i, obj) {
+
+    $(this).popover({
+    html: true,
+    content: function() {
+        var id = $(this).attr('id')
+        return $('#popover-content-' + id).html();
+    }
+    });
+
+});
+</script>
 
 
 
