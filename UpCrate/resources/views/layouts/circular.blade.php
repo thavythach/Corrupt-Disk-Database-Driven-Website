@@ -626,12 +626,28 @@
       });
     </script>
 
-<script type="text/javascript">
-    $(function(){
-        toastr.info('Are you from India?'); // Display a info toast, with no title
-    });
+<script>
+        @if(Session::has('message'))
+            var type="{{Session::get('alert-type','info')}}"
+    
+        
+            switch(type){
+                case 'info':
+                     toastr.info("{{ Session::get('message') }}");
+                     break;
+                case 'success':
+                    toastr.success("{{ Session::get('message') }}");
+                    break;
+                 case 'warning':
+                    toastr.warning("{{ Session::get('message') }}");
+                    break;
+                case 'error':
+                    toastr.error("{{ Session::get('message') }}");
+                    break;
+            }
+        @endif
     </script>
-
+    
     {{-- MODALS --}}
 
     {{-- uploadModal --}}
@@ -659,7 +675,7 @@
                                         {{-- <div class="form-row"> --}}
                                         <div class="form-group">
                                             <div class="form-row">
-                                                <label for="file">Select a file</label>
+                                                <label for="file">Select a 2MB file</label>
                                                 <input type="file" class="form-control-file" name="file" id="file">
                                             </div>
 
@@ -679,7 +695,11 @@
             
                                                             <select multiple class="form-control" name="item_id[]">
                                                                 @foreach($data['users'] as $item)
-                                                                <option value="{{$item->id}}">{{$item->name}}</option>
+                                                                    @if ($item->name == Auth::user()->name)
+                                                                        <option>None</option>
+                                                                    @else 
+                                                                        <option value="{{$item->id}}">{{$item->name}}</option>
+                                                                    @endif
                                                                 @endforeach
                                                             </select> 
                                                         </div>

@@ -67,7 +67,7 @@ class PagesController extends Controller
         
         
         // select all users but the authenticated user
-        $data['users'] = User::where('id', '!=', \Auth::id())->get();
+        $data['users'] = User::all();
         $data['publicFiles'] = File
             ::where('visibility', '=', 1)
             ->get(); 

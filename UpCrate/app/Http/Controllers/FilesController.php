@@ -5,12 +5,14 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\HomeController;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 use App\File;
 use App\Owns;
 use App\User; 
 use App\IndividualAccess;
+use Illuminate\Validation\Rule;
 
 
 class FilesController extends Controller
@@ -83,15 +85,37 @@ class FilesController extends Controller
             return view('auth.register');
         }
 
-        // TODO: check if size of file is bigger than 2MB to throw error, otherwise continue.
+        $input = $request->all();
+        $input['file'] = $request->file('file'); // cache the file
+
+        $rules = [];
+        $rules['file'] = 'required|max:2048';
+        $rules['visibility'] = ['required', Rule::in(['Public', 'Private'])];
+        
+        if (in_array("item_id", $input)){
+            foreach($input['item_id'] as $key => $val){
+                $rules[$key] = 'exists:users.name';
+            }
+        }
+        
+        $validator = Validator::make($input, $rules);
+
+        if ($validator->fails()) {
+  			$notification = array(
+                'message' => $validator->messages()->first(),
+                'alert-type' => 'error'
+              );
+            return back()->with($notification);
+        }
+
+        // validation has passed :)
 
         \DB::beginTransaction();
                 
         // creation of the new file
         $file = new File;
         
-        // cache the file
-        $tmp = $request->file('file');
+        $tmp = $input['file'];
         if (!$tmp){
             \DB::rollbackTransaction();
             \DB::commit();
@@ -125,22 +149,33 @@ class FilesController extends Controller
         $iaList = $request->item_id;
 
         // if list is countable go through and add file.
+        $iaListString = "";
         if ($iaList){
             for ($i=0; $i < count($iaList); $i++){
             
                 // add to IndividualAccess table // $file->id
                 $ia = new IndividualAccess;
-                if ($iaList[$i] != Auth::id()){
+                if ($iaList[$i] != Auth::id() || $iaList[$i] != "None"){
                     $ia->user_id = $iaList[$i];
                     $ia->file_id = $file->id;
                     $ia->save();
+                    $iaTmp = User::where('id', '=', $iaList[$i])->select('name')->first();
+                    $iaListString = $iaListString . $iaTmp['name'];
+                    if ($i != count($iaList)-1){
+                        $iaListString = $iaListString . ", ";
+                    }
                 }
             }
         }
 
         \DB::commit();
-        
-        return redirect()->route('files.index');
+
+
+        $notification = array(
+            'message' => "Successfully Uploaded " . $file->name . ". Shared with: " . $iaListString,
+            'alert-type' => 'success'
+        );
+        return back()->with($notification);
     }
 
 
