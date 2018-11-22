@@ -511,7 +511,8 @@ body{
             
             <div class="rellax d1" data-rellax-speed="5">
                 {{$data['files'][$i]->name}}
-                <img src="{{ asset('img/document.png') }}" width="5%"/>
+                
+                <img src="@if( $data['files'][$i]->visibility == 1) {{ asset('img/document.png') }} @else {{ asset('img/priv_document.png') }} @endif" width="5%"/>
             </div>
 
             @else 
@@ -519,7 +520,7 @@ body{
             <div class="rellax d2" data-rellax-speed="8">
                 <div>
                 {{$data['files'][$i]->name}}
-                <img src="{{ asset('img/document.png') }}" width="19%"/>
+                <img src="@if( $data['files'][$i]->visibility == 1) {{ asset('img/document.png') }} @else {{ asset('img/priv_document.png') }} @endif" width="19%"/>
                 </div>
             </div>
             @endif 
