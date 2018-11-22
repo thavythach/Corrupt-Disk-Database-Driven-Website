@@ -530,7 +530,7 @@ body{
             </a>
             @endfor
                 @else 
-                    <p> I don't own any files. </p>
+                    {{-- <p> I don't own any files. </p> --}}
                 @endif
     </div>
     <div id="SharedFiles" style="display: none;">
@@ -559,11 +559,37 @@ body{
             </a>
             @endfor
                 @else 
-                    <p> I don't own any files. </p>
+                    {{-- <p> I don't own any files. </p> --}}
                 @endif
     </div>
     <div id="PublicFiles" style="display: none;">
-        Files Public
+        {{-- show files as I scroll --}}
+        @if(count($data['publicFiles']) > 0)
+            @for ($i=0; $i < count($data['publicFiles']); $i++)
+            <a href="/files/{{$data['publicFiles'][$i]->id}}">
+                
+                @if ( ($i % 2) == 0 ) 
+                
+                <div class="rellax d1" data-rellax-speed="5">
+                    {{$data['publicFiles'][$i]->name}}
+                    
+                    <img src="@if( $data['publicFiles'][$i]->visibility == 1) {{ asset('img/document.png') }} @else {{ asset('img/priv_document.png') }} @endif" width="5%"/>
+                </div>
+
+                @else 
+                
+                <div class="rellax d2" data-rellax-speed="8">
+                    <div>
+                    {{$data['files'][$i]->name}}
+                    <img src="@if( $data['publicFiles'][$i]->visibility == 1) {{ asset('img/document.png') }} @else {{ asset('img/priv_document.png') }} @endif" width="19%"/>
+                    </div>
+                </div>
+                @endif 
+            </a>
+            @endfor
+                @else 
+                    {{-- <p> I don't own any files. </p> --}}
+                @endif
     </div>
 
    
@@ -675,7 +701,7 @@ body{
                         <div class="radial-menu__menu-content">
                           <div class="radial-menu__menu-content-wrapper">
                             <h6 class="radial-menu__menu-content-title">
-                              Show Files
+                              <div id="toggleFileView_label"> Show Files </div>
                             </h6>
                             <p class="radial-menu__menu-content-description">
                               List Files
@@ -1243,23 +1269,28 @@ body{
         var x = document.getElementById("OwnedFiles"); // Files I've uploaded personally.
         var y = document.getElementById("SharedFiles"); // Files I own because someone shared it with me.
         var z = document.getElementById("PublicFiles"); // files i dont own, but are publicly accessible.
+        var l = document.getElementById("toggleFileView_label");
 
         if (x.style.display === "none" && y.style.display === "none" && z.style.display === "none") {
             x.style.display = "block";
             y.style.display = "none";
             z.style.display = "none";
+            l.innerHTML = "Show Files Shared";
         } else if (x.style.display !== "none" && y.style.display === "none" && z.style.display === "none") {
             x.style.display = "none";
             y.style.display = "block";
             z.style.display = "none";
+            l.innerHTML = "Show Public Files";
         } else if (x.style.display === "none" && y.style.display !== "none" && z.style.display === "none") {
             x.style.display = "none";
             y.style.display = "none";
             z.style.display = "block";
+            l.innerHTML = "Show Nothing";
         } else {
             x.style.display = "none";
             y.style.display = "none";
             z.style.display = "none";
+            l.innerHTML = "Show My Files";
         }
         
         

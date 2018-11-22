@@ -65,6 +65,7 @@ class PagesController extends Controller
         
         // select all users but the authenticated user
         $data['users'] = User::where('id', '!=', \Auth::id())->get();
+        $data['publicFiles'] = File::where('visibility', '=', 1)->get(); // might want to do a owns so it'd be cool to know who owns the file 
         
         $data['count'] = $data['files']->count();
         $data['iaCount'] = $data['iaFiles']->count();
