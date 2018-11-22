@@ -508,12 +508,11 @@
          {{-- show files as I scroll --}}
         @if(count($data['files']) > 0)
             @for ($i=0; $i < count($data['files']); $i++)
-                @if ( ($i % 2) == 0 ) 
                 
-                <div class="rellax d1" data-rellax-speed="5">
+                <div class="@if ( ($i % 2) == 0 ) rellax d1 @else rellax d2 @endif" data-rellax-speed="5">
                         <a href="#" data-toggle="popover" data-container="body" data-html="true" id="{{ "myFilesView-" . $i }}" data-placement="bottom" title="{{$data['files'][$i]->name}} by {{ Auth::user()->name }}" data-trigger="focus">
                                 {{$data['files'][$i]->name}}
-                                <img src="@if( $data['files'][$i]->visibility == 1) {{ asset('img/document.png') }} @else {{ asset('img/priv_document.png') }} @endif" width="5%"/>
+                                <img src="@if( $data['files'][$i]->visibility == 1) {{ asset('img/document.png') }} @else {{ asset('img/priv_document.png') }} @endif" width="@if ( ($i % 2) == 0 ) 5% @else 19% @endif"/>
 
                         </a>
                         
@@ -605,16 +604,6 @@
                           </div>
                 </div>
 
-                @else 
-                
-                <div class="rellax d2" data-rellax-speed="8">
-                    <div>
-                    {{$data['files'][$i]->name}}
-                    <img src="@if( $data['files'][$i]->visibility == 1) {{ asset('img/document.png') }} @else {{ asset('img/priv_document.png') }} @endif" width="19%"/>
-                    </div>
-                </div>
-                @endif 
-            {{-- </a> --}}
             @endfor
                 @else 
                     {{-- <p> I don't own any files. </p> --}}
