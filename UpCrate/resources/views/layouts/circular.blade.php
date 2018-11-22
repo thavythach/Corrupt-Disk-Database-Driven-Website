@@ -1025,15 +1025,15 @@ a:hover .plane.main .circle::before, .plane.main .circle::after {
                       <li class="radial-menu__menu-item">
                         <div class="radial-menu__menu-link-bg"></div>
                         <div class="radial-menu__menu-icon">
-                          <span class="oi" data-glyph="align-left" title="Align left" aria-hidden="true"></span>
+                          <span class="oi glyphicon glyphicon-heart" aria-hidden="true"></span>
                         </div>
                         <div class="radial-menu__menu-content">
                           <div class="radial-menu__menu-content-wrapper">
                             <h6 class="radial-menu__menu-content-title">
-                              Text Alignment
+                              Surprise
                             </h6>
                             <p class="radial-menu__menu-content-description">
-                              Set text alignment
+                              Surprise
                             </p>
                           </div>
                         </div>
@@ -1099,12 +1099,12 @@ a:hover .plane.main .circle::before, .plane.main .circle::after {
                       <li class="radial-menu__menu-item">
                         <div class="radial-menu__menu-link-bg"></div>
                         <div class="radial-menu__menu-icon">
-                          <span class="oi" data-glyph="image" title="Image" aria-hidden="true"></span>
+                          <span class="oi glyphicon glyphicon-duplicate" aria-hidden="true"></span>
                         </div>
                         <div class="radial-menu__menu-content">
                           <div class="radial-menu__menu-content-wrapper">
                             <h6 class="radial-menu__menu-content-title">
-                              Image
+                              Group Management
                             </h6>
                             <p class="radial-menu__menu-content-description">
                               Add an image
