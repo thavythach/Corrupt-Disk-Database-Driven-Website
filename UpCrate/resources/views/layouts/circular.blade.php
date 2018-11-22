@@ -406,7 +406,42 @@ body{
         <script src="{{ asset('js/app.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/app.js') }}"></script>
 
-    
+    {{-- MODALS --}}
+
+    {{-- uploadModal --}}
+    <div class="modal fade" id="uploadModal" role="dialog">
+            <div class="modal-dialog">
+            
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Upload New File</h4>
+                </div>
+                <div class="modal-body">
+                {{-- <div class="container"> --}}
+                        <div id="content">
+                            <ul id="tabs" class="nav nav-tabs" data-tabs="tabs">
+                                <li class="active"><a href="#red" data-toggle="tab">Upload New File</a></li>
+                                <li><a href="#orange" data-toggle="tab">Upload Group File</a></li>
+                            </ul>
+                            <div id="my-tab-content" class="tab-content">
+                                <div class="tab-pane active" id="red">
+                                    <br>
+                                        Upload New File
+                                    <br>
+                                </div>
+                                <div class="tab-pane" id="orange">
+                                    <br>
+                                    Upload Group file
+                                    <br>
+                                </div>
+                            </div>
+                        </div>
+                    </div> 
+                </div>
+            </div>
+        </div>
 
     @if(count($data['files']) > 0)
         {{-- @foreach ($data['files'] as $file) --}}
@@ -415,16 +450,18 @@ body{
             
             @if ( ($i % 2) == 0 ) 
             
-            <div class="rellax d1">
+            <div class="rellax d1" data-rellax-speed="5">
                 {{$data['files'][$i]->name}}
                 <img src="{{ asset('img/document.png') }}" width="5%"/>
             </div>
 
             @else 
             
-            <div class="rellax d2">
+            <div class="rellax d2" data-rellax-speed="8">
+                <div>
                 {{$data['files'][$i]->name}}
                 <img src="{{ asset('img/document.png') }}" width="19%"/>
+                </div>
             </div>
             @endif 
         </a>
@@ -450,7 +487,9 @@ body{
                             </p>
                           </div>
                         </div>
-                        <a href="/upload" class="radial-menu__menu-link"></a>
+                        <a class="radial-menu__menu-link" data-toggle="modal" data-target="#uploadModal"></a>
+
+                        
                       </li>
                   
                       <li class="radial-menu__menu-item">
