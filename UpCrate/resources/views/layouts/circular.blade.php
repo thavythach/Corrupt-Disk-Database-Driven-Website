@@ -195,7 +195,7 @@
     }
     .radial-menu__menu-item.hovered .glyph-color-envelope {
         background-color: brown;
-        border-color: brown;
+        border-color: #578cbc;
         -webkit-transform: translate(-50%, -50%);
                 transform: translate(-50%, -50%);
         z-index: 4;
