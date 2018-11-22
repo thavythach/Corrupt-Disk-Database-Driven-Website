@@ -600,6 +600,7 @@
     }
 
     @yield('css');
+    
 </style>
 
 </head>
@@ -623,6 +624,12 @@
             console.log(position);
         }
       });
+    </script>
+
+<script type="text/javascript">
+    $(function(){
+        toastr.info('Are you from India?'); // Display a info toast, with no title
+    });
     </script>
 
     {{-- MODALS --}}
@@ -1745,6 +1752,7 @@ $('.popover-dismiss').popover({
   trigger: 'focus'
 })
 </script>
+
 
 
 

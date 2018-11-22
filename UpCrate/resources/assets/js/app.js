@@ -9,6 +9,7 @@ require('./bootstrap');
 require('rellax');
 require('particlesjs');
 require('jquery');
+require('toastr');
 
 window.Vue = require('vue');
 

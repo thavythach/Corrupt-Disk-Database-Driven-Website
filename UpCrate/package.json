@@ -20,6 +20,7 @@
     },
     "dependencies": {
         "particlesjs": "^2.2.3",
-        "rellax": "^1.7.1"
+        "rellax": "^1.7.1",
+        "toastr": "^2.1.4"
     }
 }
