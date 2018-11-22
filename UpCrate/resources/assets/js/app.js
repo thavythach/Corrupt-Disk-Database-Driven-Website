@@ -8,6 +8,7 @@
 require('./bootstrap');
 require('rellax');
 require('particlesjs');
+require('jquery');
 
 window.Vue = require('vue');
 

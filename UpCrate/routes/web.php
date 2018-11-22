@@ -18,19 +18,16 @@ use App\File;
 //  });
 
 Route::get('/welcome', 'PagesController@landing');
-Route::get('/navbar', 'PagesController@navbar');
+Route::get('/', 'PagesController@landing');
 Route::get('/about', 'PagesController@about');
 Route::get('/services', 'PagesController@services');
 Route::get('/proposal', 'PagesController@proposal');
 Route::get('/signin', 'PagesController@signin');
 
-// Route::get('/users/{id}', function($id){
-//     return 'This is user ' . $id;
-// });
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/', 'HomeController@index')->name('home');
+// Route::get('/', 'HomeController@index')->name('home');
 Route::get('/vault', 'FilesController@vault');
 Route::post('/changePassword','UsersController@changePassword')->name('changePassword');
 Route::post('renameFile', 'FilesController@rename');

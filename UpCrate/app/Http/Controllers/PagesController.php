@@ -38,10 +38,11 @@ class PagesController extends Controller
     }
 
     public function landing(){
-        return view('welcome');
-    }
+        
+        if (!\Auth::check()){
+            return view('welcome');
+        }
 
-    public function navbar(){
         return view('navbar');
     }
 }
