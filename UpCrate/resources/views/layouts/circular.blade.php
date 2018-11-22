@@ -18,6 +18,8 @@
   box-sizing: border-box;
 }
 
+
+
 html,
 body{
     margin: 0px;
@@ -502,33 +504,69 @@ body{
         </div>
     </div>
 
-    @if(count($data['files']) > 0)
-        {{-- @foreach ($data['files'] as $file) --}}
-        @for ($i=0; $i < count($data['files']); $i++)
-        <a href="/files/{{$data['files'][$i]->id}}">
-            
-            @if ( ($i % 2) == 0 ) 
-            
-            <div class="rellax d1" data-rellax-speed="5">
-                {{$data['files'][$i]->name}}
+    <div id="OwnedFiles" style="display: none;">
+         {{-- show files as I scroll --}}
+        @if(count($data['files']) > 0)
+            @for ($i=0; $i < count($data['files']); $i++)
+            <a href="/files/{{$data['files'][$i]->id}}">
                 
-                <img src="@if( $data['files'][$i]->visibility == 1) {{ asset('img/document.png') }} @else {{ asset('img/priv_document.png') }} @endif" width="5%"/>
-            </div>
-
-            @else 
-            
-            <div class="rellax d2" data-rellax-speed="8">
-                <div>
-                {{$data['files'][$i]->name}}
-                <img src="@if( $data['files'][$i]->visibility == 1) {{ asset('img/document.png') }} @else {{ asset('img/priv_document.png') }} @endif" width="19%"/>
+                @if ( ($i % 2) == 0 ) 
+                
+                <div class="rellax d1" data-rellax-speed="5">
+                    {{$data['files'][$i]->name}}
+                    
+                    <img src="@if( $data['files'][$i]->visibility == 1) {{ asset('img/document.png') }} @else {{ asset('img/priv_document.png') }} @endif" width="5%"/>
                 </div>
-            </div>
-            @endif 
-        </a>
-        @endfor
-    @else 
-        <p> I don't own any files. </p>
-    @endif
+
+                @else 
+                
+                <div class="rellax d2" data-rellax-speed="8">
+                    <div>
+                    {{$data['files'][$i]->name}}
+                    <img src="@if( $data['files'][$i]->visibility == 1) {{ asset('img/document.png') }} @else {{ asset('img/priv_document.png') }} @endif" width="19%"/>
+                    </div>
+                </div>
+                @endif 
+            </a>
+            @endfor
+                @else 
+                    <p> I don't own any files. </p>
+                @endif
+    </div>
+    <div id="SharedFiles" style="display: none;">
+        {{-- show files as I scroll --}}
+        @if(count($data['iaFiles']) > 0)
+            @for ($i=0; $i < count($data['iaFiles']); $i++)
+            <a href="/files/{{$data['iaFiles'][$i]->id}}">
+                
+                @if ( ($i % 2) == 0 ) 
+                
+                <div class="rellax d1" data-rellax-speed="5">
+                    {{$data['iaFiles'][$i]->name}}
+                    
+                    <img src="@if( $data['iaFiles'][$i]->visibility == 1) {{ asset('img/document.png') }} @else {{ asset('img/priv_document.png') }} @endif" width="5%"/>
+                </div>
+
+                @else 
+                
+                <div class="rellax d2" data-rellax-speed="8">
+                    <div>
+                    {{$data['files'][$i]->name}}
+                    <img src="@if( $data['iaFiles'][$i]->visibility == 1) {{ asset('img/document.png') }} @else {{ asset('img/priv_document.png') }} @endif" width="19%"/>
+                    </div>
+                </div>
+                @endif 
+            </a>
+            @endfor
+                @else 
+                    <p> I don't own any files. </p>
+                @endif
+    </div>
+    <div id="PublicFiles" style="display: none;">
+        Files Public
+    </div>
+
+   
 	<div class="container">
             <div class="radial-menu">
                     <ul class="radial-menu__menu-list">
@@ -632,19 +670,19 @@ body{
                       <li class="radial-menu__menu-item">
                         <div class="radial-menu__menu-link-bg"></div>
                         <div class="radial-menu__menu-icon">
-                          <span class="oi" data-glyph="double-quote-serif-right" title="Blockquote" aria-hidden="true"></span>
+                          <span class="oi glyphicon glyphicon-file" aria-hidden="true"></span>
                         </div>
                         <div class="radial-menu__menu-content">
                           <div class="radial-menu__menu-content-wrapper">
                             <h6 class="radial-menu__menu-content-title">
-                              Blockquote
+                              Show Files
                             </h6>
                             <p class="radial-menu__menu-content-description">
-                              Add a blockquote
+                              List Files
                             </p>
                           </div>
                         </div>
-                        <a href="/" class="radial-menu__menu-link"></a>
+                        <a onclick="toggleFileView()" class="radial-menu__menu-link"></a>
                       </li>
                   
                       <li class="radial-menu__menu-item">
@@ -810,395 +848,423 @@ body{
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/app.js') }}"></script>
-    <script>
-        //
-//  BASIC SETUP
-//–––––––––––––––––––––––––––––––––––––
 
-var container = document.querySelector('.radial-menu');
+<script>
+            //
+    //  BASIC SETUP
+    //–––––––––––––––––––––––––––––––––––––
 
-var menuDimensions = container.offsetWidth;
+    var container = document.querySelector('.radial-menu');
 
-var menuItems = container.querySelectorAll('.radial-menu__menu-item');
+    var menuDimensions = container.offsetWidth;
 
-var menuItemsCount = countMenuItems( menuItems );
+    var menuItems = container.querySelectorAll('.radial-menu__menu-item');
 
+    var menuItemsCount = countMenuItems( menuItems );
 
-//
-//  COUNT MENU ITEMS
-//–––––––––––––––––––––––––––––––––––––
 
-function countMenuItems( elems ) {
+    //
+    //  COUNT MENU ITEMS
+    //–––––––––––––––––––––––––––––––––––––
 
-// Count elems.
-var elemsCount = elems.length;
+    function countMenuItems( elems ) {
 
-// Initialise empty counter.
-var elemCounter = 0;
+    // Count elems.
+    var elemsCount = elems.length;
 
-for (var i = 0; i < elemsCount; i++) {
+    // Initialise empty counter.
+    var elemCounter = 0;
 
-var elem = elems[i];
+    for (var i = 0; i < elemsCount; i++) {
 
-// Get elements current "display" value.
-var elemDisplay = elem.currentStyle ? elem.currentStyle.display : getComputedStyle(elem, null).display;
+    var elem = elems[i];
 
-// If the elem is not hidden.
-if ( elemDisplay !== 'none' ) {
+    // Get elements current "display" value.
+    var elemDisplay = elem.currentStyle ? elem.currentStyle.display : getComputedStyle(elem, null).display;
 
-  // Increment the elem counter.
-  elemCounter++;
-}
-}
+    // If the elem is not hidden.
+    if ( elemDisplay !== 'none' ) {
 
-return elemCounter;
-}
+    // Increment the elem counter.
+    elemCounter++;
+    }
+    }
 
+    return elemCounter;
+    }
 
-//
-//  LINKS
-//–––––––––––––––––––––––––––––––––––––
 
-var links = document.querySelectorAll('.radial-menu__menu-link');
+    //
+    //  LINKS
+    //–––––––––––––––––––––––––––––––––––––
 
-setupLinks( links );
-setupLinkHovers( links );
+    var links = document.querySelectorAll('.radial-menu__menu-link');
 
+    setupLinks( links );
+    setupLinkHovers( links );
 
-//
-//  LINK BGs
-//–––––––––––––––––––––––––––––––––––––
 
-var linkBGs = document.querySelectorAll('.radial-menu__menu-link-bg');
+    //
+    //  LINK BGs
+    //–––––––––––––––––––––––––––––––––––––
 
-setupLinks( linkBGs );
+    var linkBGs = document.querySelectorAll('.radial-menu__menu-link-bg');
 
+    setupLinks( linkBGs );
 
-//
-//  SETUP LINKS
-//–––––––––––––––––––––––––––––––––––––
 
-function setupLinks( elems ) {
+    //
+    //  SETUP LINKS
+    //–––––––––––––––––––––––––––––––––––––
 
-// Count elems.
-var elemsCount = elems.length;
-// var elemsCount = countMenuItems( menuItems );
+    function setupLinks( elems ) {
 
-var menuItems = container.querySelectorAll('.radial-menu__menu-item');
+    // Count elems.
+    var elemsCount = elems.length;
+    // var elemsCount = countMenuItems( menuItems );
 
-// Count menu items.
-var menuItemsCount = countMenuItems( menuItems );
+    var menuItems = container.querySelectorAll('.radial-menu__menu-item');
 
+    // Count menu items.
+    var menuItemsCount = countMenuItems( menuItems );
 
-// Find degree interval.
-var degreeInterval = 360 / menuItemsCount;
 
-// Loop through elems.
-for (var i = 0; i < elemsCount; i++) {
+    // Find degree interval.
+    var degreeInterval = 360 / menuItemsCount;
 
-var elem = elems[i];
+    // Loop through elems.
+    for (var i = 0; i < elemsCount; i++) {
 
-var parentMenuItem = elem.parentElement;
+    var elem = elems[i];
 
-// Get parent menu item's current "display" value.
-var parentMenuItemDisplay = parentMenuItem.currentStyle ? parentMenuItem.currentStyle.display : getComputedStyle(parentMenuItem, null).display;
+    var parentMenuItem = elem.parentElement;
 
-if ( parentMenuItemDisplay !== 'none' ) {
-  var phase = i / menuItemsCount;    
-  // console.log('phase(' + i + '): ' + phase);
+    // Get parent menu item's current "display" value.
+    var parentMenuItemDisplay = parentMenuItem.currentStyle ? parentMenuItem.currentStyle.display : getComputedStyle(parentMenuItem, null).display;
 
-  var theta = phase * 2 * Math.PI;
-  // console.log('theta(' + i + '): ' + theta);
-  
-  var cssTransform = 'translateY(-50%) translateZ(0) rotateZ(' + degreeInterval*i  + 'deg) perspective(' + menuDimensions/1.5 + 'px)';
-
-  var transformString = getLinkTransforms( menuItemsCount );
-  
-  // cssTransform += 'rotateY(-83.8deg) scaleX(1.38)';
-  cssTransform += transformString;
-  
-  // console.log(cssTransform);
-  
-  elem.style.transform = cssTransform;
-}
-}
-}
-
-
-//
-//  ON LINK HOVER
-//–––––––––––––––––––––––––––––––––––––
+    if ( parentMenuItemDisplay !== 'none' ) {
+    var phase = i / menuItemsCount;    
+    // console.log('phase(' + i + '): ' + phase);
 
-function setupLinkHovers( elems ) {
+    var theta = phase * 2 * Math.PI;
+    // console.log('theta(' + i + '): ' + theta);
+    
+    var cssTransform = 'translateY(-50%) translateZ(0) rotateZ(' + degreeInterval*i  + 'deg) perspective(' + menuDimensions/1.5 + 'px)';
+
+    var transformString = getLinkTransforms( menuItemsCount );
+    
+    // cssTransform += 'rotateY(-83.8deg) scaleX(1.38)';
+    cssTransform += transformString;
+    
+    // console.log(cssTransform);
+    
+    elem.style.transform = cssTransform;
+    }
+    }
+    }
+
+
+    //
+    //  ON LINK HOVER
+    //–––––––––––––––––––––––––––––––––––––
 
-// Count elems.
-var elemsCount = elems.length;
+    function setupLinkHovers( elems ) {
+
+    // Count elems.
+    var elemsCount = elems.length;
 
-// Loop through elems.
-for (var i = 0; i < elemsCount; i++) {
+    // Loop through elems.
+    for (var i = 0; i < elemsCount; i++) {
 
-var elem = elems[i];
-var parentMenuItem  = elem.parentElement;
+    var elem = elems[i];
+    var parentMenuItem  = elem.parentElement;
 
-// Get parent menu item's current "display" value.
-var parentMenuItemDisplay = elem.currentStyle ? elem.currentStyle.display : getComputedStyle(elem, null).display;
+    // Get parent menu item's current "display" value.
+    var parentMenuItemDisplay = elem.currentStyle ? elem.currentStyle.display : getComputedStyle(elem, null).display;
 
-// If the menu item's display is not set to none.'
-if ( parentMenuItemDisplay !== 'none' ) {
-  elem.addEventListener('mouseenter', function( event ) {
-    var parentMenuItem = this.parentElement;
-    parentMenuItem.classList.add('hovered');
-    container.classList.add('item-is-hovered');
-  });
+    // If the menu item's display is not set to none.'
+    if ( parentMenuItemDisplay !== 'none' ) {
+    elem.addEventListener('mouseenter', function( event ) {
+        var parentMenuItem = this.parentElement;
+        parentMenuItem.classList.add('hovered');
+        container.classList.add('item-is-hovered');
+    });
 
-  elem.addEventListener('mouseleave', function( event ) {
-    var parentMenuItem = this.parentElement;
-    parentMenuItem.classList.remove('hovered');
-    container.classList.remove('item-is-hovered');
-  });
-}
-}
-}
+    elem.addEventListener('mouseleave', function( event ) {
+        var parentMenuItem = this.parentElement;
+        parentMenuItem.classList.remove('hovered');
+        container.classList.remove('item-is-hovered');
+    });
+    }
+    }
+    }
 
 
-//
-//  GET LINK TRANSFORMS
-//–––––––––––––––––––––––––––––––––––––
+    //
+    //  GET LINK TRANSFORMS
+    //–––––––––––––––––––––––––––––––––––––
 
-function getLinkTransforms( count ) {
+    function getLinkTransforms( count ) {
 
-var transformString;
+    var transformString;
 
-switch (count) {
-case 3: 
-  transformString = 'rotateY(-88.012deg) scaleX(1.45)';
-  break;
+    switch (count) {
+    case 3: 
+    transformString = 'rotateY(-88.012deg) scaleX(1.45)';
+    break;
 
-case 4:
-  transformString = 'rotateY(-86.45deg) scaleX(1.425)';
-  break;
+    case 4:
+    transformString = 'rotateY(-86.45deg) scaleX(1.425)';
+    break;
 
-case 5:
-  transformString = 'rotateY(-85.025deg) scaleX(1.39)';
-  break;
+    case 5:
+    transformString = 'rotateY(-85.025deg) scaleX(1.39)';
+    break;
 
-case 6:
-  transformString = 'rotateY(-83.65deg) scaleX(1.36)';
-  break;
+    case 6:
+    transformString = 'rotateY(-83.65deg) scaleX(1.36)';
+    break;
 
-case 7:
-  transformString = 'rotateY(-82.1deg) scaleX(1.325)';
-  break;
+    case 7:
+    transformString = 'rotateY(-82.1deg) scaleX(1.325)';
+    break;
 
-case 8:
-  transformString = 'rotateY(-80.8deg) scaleX(1.3)';
-  break;
+    case 8:
+    transformString = 'rotateY(-80.8deg) scaleX(1.3)';
+    break;
 
-case 9:
-  transformString = 'rotateY(-79deg) scaleX(1.265)';
-  break;
+    case 9:
+    transformString = 'rotateY(-79deg) scaleX(1.265)';
+    break;
 
-case 10:
-  transformString = 'rotateY(-77.3deg) scaleX(1.23)';
-  break;
+    case 10:
+    transformString = 'rotateY(-77.3deg) scaleX(1.23)';
+    break;
 
-case 11:
-  transformString = 'rotateY(-76deg) scaleX(1.21)';
-  break;
+    case 11:
+    transformString = 'rotateY(-76deg) scaleX(1.21)';
+    break;
 
-case 12:
-  transformString = 'rotateY(-74.75deg) scaleX(1.185)';
-  break;
+    case 12:
+    transformString = 'rotateY(-74.75deg) scaleX(1.185)';
+    break;
 
-case 13:
-  transformString = 'rotateY(-72.1deg) scaleX(1.14)';
-  break;
+    case 13:
+    transformString = 'rotateY(-72.1deg) scaleX(1.14)';
+    break;
 
-case 14:
-  transformString = 'rotateY(-69.8deg) scaleX(1.11)';
-  break;
+    case 14:
+    transformString = 'rotateY(-69.8deg) scaleX(1.11)';
+    break;
 
-case 15:
-  transformString = 'rotateY(-67.7deg) scaleX(1.086)';
-  break;
-}
+    case 15:
+    transformString = 'rotateY(-67.7deg) scaleX(1.086)';
+    break;
+    }
 
-return transformString;
-}
+    return transformString;
+    }
 
 
-//
-//  ICONS
-//–––––––––––––––––––––––––––––––––––––
+    //
+    //  ICONS
+    //–––––––––––––––––––––––––––––––––––––
 
-var icons = document.querySelectorAll('.radial-menu__menu-icon');
-var iconDistance = 95;
+    var icons = document.querySelectorAll('.radial-menu__menu-icon');
+    var iconDistance = 95;
 
-positionIcons( icons, iconDistance );
+    positionIcons( icons, iconDistance );
 
-function positionIcons( icons, iconDistance ) {
+    function positionIcons( icons, iconDistance ) {
 
-var menuItems = container.querySelectorAll('.radial-menu__menu-item');
+    var menuItems = container.querySelectorAll('.radial-menu__menu-item');
 
-// Count menu items.
-var menuItemsCount = countMenuItems( menuItems );
+    // Count menu items.
+    var menuItemsCount = countMenuItems( menuItems );
 
-// Count icons.
-var iconsCount = icons.length;
-var iconOffset = 1.575; // Used to rotate 90deg.
+    // Count icons.
+    var iconsCount = icons.length;
+    var iconOffset = 1.575; // Used to rotate 90deg.
 
-// Loop through icons.
-for (var i = 0; i < iconsCount; i++) {
-var icon = icons[i];
+    // Loop through icons.
+    for (var i = 0; i < iconsCount; i++) {
+    var icon = icons[i];
 
-var parentMenuItem = icon.parentElement;
+    var parentMenuItem = icon.parentElement;
 
-// Get parent menu item's current "display" value.
-var parentMenuItemDisplay = parentMenuItem.currentStyle ? parentMenuItem.currentStyle.display : getComputedStyle(parentMenuItem, null).display;
+    // Get parent menu item's current "display" value.
+    var parentMenuItemDisplay = parentMenuItem.currentStyle ? parentMenuItem.currentStyle.display : getComputedStyle(parentMenuItem, null).display;
 
-// If the menu item's display is not set to none.'
-if ( parentMenuItemDisplay !== 'none' ) {
+    // If the menu item's display is not set to none.'
+    if ( parentMenuItemDisplay !== 'none' ) {
 
-  var phase = i / menuItemsCount;
-  // console.log('phase(' + i + '): ' + phase);
+    var phase = i / menuItemsCount;
+    // console.log('phase(' + i + '): ' + phase);
 
-  var theta = phase * 2 * Math.PI;
-  theta = theta + iconOffset;
-  // console.log('theta(' + i + '): ' + theta);
+    var theta = phase * 2 * Math.PI;
+    theta = theta + iconOffset;
+    // console.log('theta(' + i + '): ' + theta);
 
-  icon.style.top = (-iconDistance * Math.cos(theta)).toFixed(1) + 'px';
-  icon.style.left = (iconDistance * Math.sin(theta)).toFixed(1) + 'px';
-}
-}
-}
+    icon.style.top = (-iconDistance * Math.cos(theta)).toFixed(1) + 'px';
+    icon.style.left = (iconDistance * Math.sin(theta)).toFixed(1) + 'px';
+    }
+    }
+    }
 
 
-//
-//  RIGHT CLICK
-//–––––––––––––––––––––––––––––––––––––
+    //
+    //  RIGHT CLICK
+    //–––––––––––––––––––––––––––––––––––––
 
-document.addEventListener('contextmenu', function(e) {
-e.preventDefault();
-var mousePosX = e.clientX;
-var mousePosY = e.clientY;
-// console.log( 'mousePosX: ' + mousePosX );
-// console.log( 'mousePosY: ' + mousePosY );
+    document.addEventListener('contextmenu', function(e) {
+    e.preventDefault();
+    var mousePosX = e.clientX;
+    var mousePosY = e.clientY;
+    // console.log( 'mousePosX: ' + mousePosX );
+    // console.log( 'mousePosY: ' + mousePosY );
 
-container.classList.remove('is-hidden');
-container.classList.add('is-active');
+    container.classList.remove('is-hidden');
+    container.classList.add('is-active');
 
-container.style.top = mousePosY + 'px';
-container.style.left = mousePosX + 'px';
+    container.style.top = mousePosY + 'px';
+    container.style.left = mousePosX + 'px';
 
-mouseMoveListener( mousePosX, mousePosY );
+    mouseMoveListener( mousePosX, mousePosY );
 
-return false;
-}, false);
+    return false;
+    }, false);
 
 
-//
-//  RIGHT CLICK MOUSE UP
-//–––––––––––––––––––––––––––––––––––––
+    //
+    //  RIGHT CLICK MOUSE UP
+    //–––––––––––––––––––––––––––––––––––––
 
-document.addEventListener('mouseup', function(e) {
+    document.addEventListener('mouseup', function(e) {
 
-var mouseButton = e.button;
+    var mouseButton = e.button;
 
-// If it's the right mouse button.
-if ( mouseButton == 2 ) {
+    // If it's the right mouse button.
+    if ( mouseButton == 2 ) {
 
-// Hide the menu.
-container.classList.add('is-hidden');
-container.classList.remove('is-active');
-}
-});
+    // Hide the menu.
+    container.classList.add('is-hidden');
+    container.classList.remove('is-active');
+    }
+    });
 
 
-//
-//  MOUSE MOVE LISTENER
-//–––––––––––––––––––––––––––––––––––––
+    //
+    //  MOUSE MOVE LISTENER
+    //–––––––––––––––––––––––––––––––––––––
 
-function mouseMoveListener(x, y) {
-document.addEventListener('mousemove', function(e) {
+    function mouseMoveListener(x, y) {
+    document.addEventListener('mousemove', function(e) {
 
-// If the radial menu is active.
-if ( container.classList.contains('is-active') ) {
+    // If the radial menu is active.
+    if ( container.classList.contains('is-active') ) {
 
-  var newX = e.clientX;
-  var newY = e.clientY;
+    var newX = e.clientX;
+    var newY = e.clientY;
 
-  var scale = Math.round(Math.sqrt(Math.pow(y - newY, 2) + Math.pow(x - newX, 2)));
+    var scale = Math.round(Math.sqrt(Math.pow(y - newY, 2) + Math.pow(x - newX, 2)));
 
-  // console.log('scale: ' + scale);
+    // console.log('scale: ' + scale);
 
-  scale = scale * 0.01;
-  // console.log('scale / 100: ' + scale);
+    scale = scale * 0.01;
+    // console.log('scale / 100: ' + scale);
 
-  // container.style.transform = 'translate(-50%, -50%) scale(' + scale  + ')';
-  // console.log('e.clientX: ' + e.clientX);
-  // console.log('e.clientY: ' + e.clientY);
-}
-});
-}
+    // container.style.transform = 'translate(-50%, -50%) scale(' + scale  + ')';
+    // console.log('e.clientX: ' + e.clientX);
+    // console.log('e.clientY: ' + e.clientY);
+    }
+    });
+    }
 
 
-//
-//  MENU ITEMS DROPDOWN
-//–––––––––––––––––––––––––––––––––––––
+    //
+    //  MENU ITEMS DROPDOWN
+    //–––––––––––––––––––––––––––––––––––––
 
-onMenuItemsDropdownChange();
+    onMenuItemsDropdownChange();
 
-function onMenuItemsDropdownChange() {
+    function onMenuItemsDropdownChange() {
 
-// Instantiate the menu items to show select.
-var menuItemsSelect = document.getElementById('menu-items-to-show');
+    // Instantiate the menu items to show select.
+    var menuItemsSelect = document.getElementById('menu-items-to-show');
 
-// Listen for changes on the select.
-menuItemsSelect.addEventListener('change', function(e){
+    // Listen for changes on the select.
+    menuItemsSelect.addEventListener('change', function(e){
 
-// Get the selected value.
-var optionValue = this.value;
+    // Get the selected value.
+    var optionValue = this.value;
 
-// Update menu items accordingly.
-updateMenuItemDisplayValues( optionValue );
-});
-}
+    // Update menu items accordingly.
+    updateMenuItemDisplayValues( optionValue );
+    });
+    }
 
 
-//
-//  UPDATE MENU ITEMS
-//–––––––––––––––––––––––––––––––––––––
+    //
+    //  UPDATE MENU ITEMS
+    //–––––––––––––––––––––––––––––––––––––
 
-function updateMenuItemDisplayValues( itemsToShow ) {
+    function updateMenuItemDisplayValues( itemsToShow ) {
 
-var menuItems = container.querySelectorAll('.radial-menu__menu-item');
+    var menuItems = container.querySelectorAll('.radial-menu__menu-item');
 
-for (var i = 0; i < menuItems.length; i++) {
-if ( i < itemsToShow ) {
-  menuItems[i].style.display = 'block';
-} else {
-  menuItems[i].style.display = 'none';
-}
-}
+    for (var i = 0; i < menuItems.length; i++) {
+    if ( i < itemsToShow ) {
+    menuItems[i].style.display = 'block';
+    } else {
+    menuItems[i].style.display = 'none';
+    }
+    }
 
-// Set up links.
-var links = document.querySelectorAll('.radial-menu__menu-link');
-setupLinks( links );
-setupLinkHovers( links );
+    // Set up links.
+    var links = document.querySelectorAll('.radial-menu__menu-link');
+    setupLinks( links );
+    setupLinkHovers( links );
 
-// Set up link BGs.
-var linkBGs = document.querySelectorAll('.radial-menu__menu-link-bg');
-setupLinks( linkBGs );
+    // Set up link BGs.
+    var linkBGs = document.querySelectorAll('.radial-menu__menu-link-bg');
+    setupLinks( linkBGs );
 
-// Set up icons.
-var icons = document.querySelectorAll('.radial-menu__menu-icon');
-var iconDistance = 95;
+    // Set up icons.
+    var icons = document.querySelectorAll('.radial-menu__menu-icon');
+    var iconDistance = 95;
 
-positionIcons( icons, iconDistance );
-}
+    positionIcons( icons, iconDistance );
+    }
 
-  </script>
+</script>
 
+<script>
+    function toggleFileView() {
+        var x = document.getElementById("OwnedFiles"); // Files I've uploaded personally.
+        var y = document.getElementById("SharedFiles"); // Files I own because someone shared it with me.
+        var z = document.getElementById("PublicFiles"); // files i dont own, but are publicly accessible.
+
+        if (x.style.display === "none" && y.style.display === "none" && z.style.display === "none") {
+            x.style.display = "block";
+            y.style.display = "none";
+            z.style.display = "none";
+        } else if (x.style.display !== "none" && y.style.display === "none" && z.style.display === "none") {
+            x.style.display = "none";
+            y.style.display = "block";
+            z.style.display = "none";
+        } else if (x.style.display === "none" && y.style.display !== "none" && z.style.display === "none") {
+            x.style.display = "none";
+            y.style.display = "none";
+            z.style.display = "block";
+        } else {
+            x.style.display = "none";
+            y.style.display = "none";
+            z.style.display = "none";
+        }
+        
+        
+    }
+</script>
 
 </body>
 </html>
