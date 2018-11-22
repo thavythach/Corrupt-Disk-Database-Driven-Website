@@ -74,11 +74,16 @@ class PagesController extends Controller
             ::where('visibility', '=', 1)
             ->get(); 
         
-        // gets all groups
+        // gets all groups i belong to
         $data['groups'] = GroupMembers
+            // ::groupBy("groupFile.file_id")
             ::where('group_members.user_id', '=', \Auth::id())
             ->join('groupAccess', 'groupAccess.group_id', '=', 'group_members.group_id')
+            ->leftJoin('groupFile', 'group_members.group_id', '=', 'groupFile.group_id')
+            ->select('groupFile.file_id', 'groupAccess.name as groupName', 'group_members.user_id as groupMemberID', 'groupAccess.user_id as groupOwnerID', 'groupFile.group_id')
             ->get();
+        
+        return $data['groups'];
         
         $data['count'] = $data['files']->count();
         $data['iaCount'] = $data['iaFiles']->count();
