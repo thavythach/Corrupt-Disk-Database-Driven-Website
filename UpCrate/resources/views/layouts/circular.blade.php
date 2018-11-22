@@ -506,46 +506,149 @@
 
     {{-- friendShareModal --}}
     <div class="modal fade" id="friendShareModal" role="dialog">
-            <div class="modal-dialog">
-            
-            <!-- Modal content-->
-            <div class="modal-content">
-                <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Tell your friends to register!</h4>
-                </div>
-                <div class="modal-body">
-                {{-- <div class="container"> --}}
-                        <div id="content">
-                            <ul id="tabs" class="nav nav-tabs" data-tabs="tabs">
-                                <li class="active"><a href="#red" data-toggle="tab">Generate Registration Email!</a></li>
-                                {{-- <li><a href="#orange" data-toggle="tab">Upload Group File</a></li> --}}
-                            </ul>
-                            <div id="my-tab-content" class="tab-content">
-                                <div class="tab-pane active" id="red">
-                                    <br>
-                                        <center>
-                                        <p>Fill in the form with an email.</p>
-                                        <form action="/friendShare/process" method="POST" enctype="multipart/form-data">
-                                            <label for="file">Friend's Email:</label>
-                                            <input type="text" name="email" value="">
-                                            <input type="submit" name="submit" value="Submit">
-                                            {{ csrf_field() }}
-                                        </form>
-                                        </center>
-                                    <br>
-                                </div>
-                                {{-- <div class="tab-pane" id="orange">
-                                    <br>
-                                    Too much swag
-                                    <br>
-                                </div> --}}
+        <div class="modal-dialog">
+        
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">Tell your friends to register!</h4>
+            </div>
+            <div class="modal-body">
+            {{-- <div class="container"> --}}
+                    <div id="content">
+                        <ul id="tabs" class="nav nav-tabs" data-tabs="tabs">
+                            <li class="active"><a href="#red" data-toggle="tab">Generate Registration Email!</a></li>
+                            {{-- <li><a href="#orange" data-toggle="tab">Upload Group File</a></li> --}}
+                        </ul>
+                        <div id="my-tab-content" class="tab-content">
+                            <div class="tab-pane active" id="red">
+                                <br>
+                                    <center>
+                                    <p>Fill in the form with an email.</p>
+                                    <form action="/friendShare/process" method="POST" enctype="multipart/form-data">
+                                        <label for="file">Friend's Email:</label>
+                                        <input type="text" name="email" value="">
+                                        <input type="submit" name="submit" value="Submit">
+                                        {{ csrf_field() }}
+                                    </form>
+                                    </center>
+                                <br>
                             </div>
+                            {{-- <div class="tab-pane" id="orange">
+                                <br>
+                                Too much swag
+                                <br>
+                            </div> --}}
                         </div>
-                    </div> 
-                </div>
+                    </div>
+                </div> 
             </div>
         </div>
+    </div>
+
+    {{-- profileModal --}}
+    <div class="modal fade" id="profileModal" role="dialog">
+        <div class="modal-dialog">
+        
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">Edit Profile</h4>
+            </div>
+            <div class="modal-body">
+            {{-- <div class="container"> --}}
+                    <div id="content">
+                        <ul id="tabs" class="nav nav-tabs" data-tabs="tabs">
+                            <li class="active"><a href="#red" data-toggle="tab">Delete Account or Change your Password</a></li>
+                            {{-- <li><a href="#orange" data-toggle="tab" style="color:red;">Delete My Account Permanently</a></li> --}}
+                        </ul>
+                        <div id="my-tab-content" class="tab-content">
+                            <div class="tab-pane active" id="red">
+                                <br>
+                                <div class="panel panel-default">
+                                        <div class="panel-heading">Change password</div>
+                        
+                                        <div class="panel-body">
+                                            @if (session('error'))
+                                                <div class="alert alert-danger">
+                                                    {{ session('error') }}
+                                                </div>
+                                            @endif
+                                                @if (session('success'))
+                                                    <div class="alert alert-success">
+                                                        {{ session('success') }}
+                                                    </div>
+                                                @endif
+                                            <form class="form-horizontal" method="POST" action="{{ route('changePassword') }}">
+                                                {{ csrf_field() }}
+                        
+                                                <div class="form-group{{ $errors->has('current-password') ? ' has-error' : '' }}">
+                                                    <label for="new-password" class="col-md-4 control-label">Current Password</label>
+                        
+                                                    <div class="col-md-6">
+                                                        <input id="current-password" type="password" class="form-control" name="current-password" required>
+                        
+                                                        @if ($errors->has('current-password'))
+                                                            <span class="help-block">
+                                                                <strong>{{ $errors->first('current-password') }}</strong>
+                                                            </span>
+                                                        @endif
+                                                    </div>
+                                                </div>
+                        
+                                                <div class="form-group{{ $errors->has('new-password') ? ' has-error' : '' }}">
+                                                    <label for="new-password" class="col-md-4 control-label">New Password</label>
+                        
+                                                    <div class="col-md-6">
+                                                        <input id="new-password" type="password" class="form-control" name="new-password" required>
+                        
+                                                        @if ($errors->has('new-password'))
+                                                            <span class="help-block">
+                                                                <strong>{{ $errors->first('new-password') }}</strong>
+                                                            </span>
+                                                        @endif
+                                                    </div>
+                                                </div>
+                        
+                                                <div class="form-group">
+                                                    <label for="new-password-confirm" class="col-md-4 control-label">Confirm New Password</label>
+                        
+                                                    <div class="col-md-6">
+                                                        <input id="new-password-confirm" type="password" class="form-control" name="new-password_confirmation" required>
+                                                    </div>
+                                                </div>
+                        
+                                                <div class="form-group">
+                                                    <div class="col-md-6 col-md-offset-4">
+                                                        <button type="submit" class="btn btn-primary">
+                                                            Change Password
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                <br>
+
+                                <a href="#" data-toggle="popover" data-container="body" data-html="true" id="deleteAccount" data-placement="bottom" title="Delete {{ Auth::user()->name }}!" data-trigger="focus">
+                                    <center><h1>Delete<h1></center>
+                                </a>
+                                
+                                <div id="popover-content-deleteAccount" class="hide">
+                                        <p>Delete Account Permanently</p>
+                                        <a href="/deleteAccount"><button type="button" class="btn btn-danger btn-lg">Delete</button></a>
+                                </div>
+                                
+                            </div>
+                           
+                        </div>
+                    </div>
+                </div> 
+            </div>
+        </div>
+    </div>
 
     <div id="OwnedFiles" style="display: none;">
          {{-- show files as I scroll --}}
@@ -744,7 +847,7 @@
                             </p>
                           </div>
                         </div>
-                        <a href="/users/{{ Auth::id() }}"" class="radial-menu__menu-link"></a>
+                        <a href="#" class="radial-menu__menu-link" data-toggle="modal" data-target="#profileModal"></a>
                       </li>
                   
                       <li class="radial-menu__menu-item">
