@@ -181,6 +181,10 @@ a:hover .plane.main .circle::before, .plane.main .circle::after {
   }
 }
 
+.p:hover .dope{
+    display: none;
+}
+
     </style>
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
@@ -191,6 +195,11 @@ a:hover .plane.main .circle::before, .plane.main .circle::after {
         <div class="rellax d1">
             <img src="{{ asset('img/2.png') }}" width="81%"/>
       </div>
+
+      {{-- <div class="rellax d4" data-rellax-speed="100">
+            <center><p style="font-size: 350px; color: #CE2029;" class="dope">UPCRATE</p></center>
+            
+      </div> --}}
 
       <div class="rellax d5" data-rellax-speed="1">
             {{-- <img src="{{ asset('img/nick.jpg') }}" width="15%"/> --}}
