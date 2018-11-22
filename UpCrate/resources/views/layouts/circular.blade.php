@@ -504,18 +504,23 @@ body{
         </div>
     </div>
 
+
+
     <div id="OwnedFiles" style="display: none;">
          {{-- show files as I scroll --}}
         @if(count($data['files']) > 0)
             @for ($i=0; $i < count($data['files']); $i++)
-            <a href="/files/{{$data['files'][$i]->id}}">
-                
                 @if ( ($i % 2) == 0 ) 
                 
                 <div class="rellax d1" data-rellax-speed="5">
-                    {{$data['files'][$i]->name}}
+                            {{-- <a href="/files/{{$data['files'][$i]->id}}"> --}}
+                        <a href="#" data-toggle="popover" title="{{$data['files'][$i]->name}} by {{ Auth::user()->name }}" data-placement="bottom" data-content="Private Content: ">
+                                {{$data['files'][$i]->name}}
+                                <img src="@if( $data['files'][$i]->visibility == 1) {{ asset('img/document.png') }} @else {{ asset('img/priv_document.png') }} @endif" width="5%"/>
+
+                        </a>    
                     
-                    <img src="@if( $data['files'][$i]->visibility == 1) {{ asset('img/document.png') }} @else {{ asset('img/priv_document.png') }} @endif" width="5%"/>
+                    
                 </div>
 
                 @else 
@@ -527,7 +532,7 @@ body{
                     </div>
                 </div>
                 @endif 
-            </a>
+            {{-- </a> --}}
             @endfor
                 @else 
                     {{-- <p> I don't own any files. </p> --}}
@@ -1296,6 +1301,14 @@ body{
         
     }
 </script>
+
+<script>
+        $(document).ready(function(){
+            $('[data-toggle="popover"]').popover();   
+        });
+        </script>
+
+
 
 </body>
 </html>
