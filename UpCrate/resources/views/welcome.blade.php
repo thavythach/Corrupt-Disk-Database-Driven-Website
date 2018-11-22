@@ -39,6 +39,28 @@
             margin-top: 500px;
             margin-left: 800px;
         }
+
+         .right-click-prompt {
+    bottom: 0;
+    color: #c1ced9;
+    font-size: .7em;
+    font-weight: bold;
+    left: 50%;
+    letter-spacing: .05em;
+    padding: 40px;
+    position: absolute;
+    text-transform: uppercase;
+    -webkit-transform: translateX(-50%);
+            transform: translateX(-50%);
+    }
+
+    @media (max-height: 430px) {
+    .right-click-prompt {
+        left: 0;
+        -webkit-transform: translateX(0);
+                transform: translateX(0);
+    }
+}
 {{-- 
         html, body {
   /* background: #222;
@@ -179,10 +201,6 @@ a:hover .plane.main .circle::before, .plane.main .circle::after {
     -webkit-transform: rotateX(360deg) rotateY(360deg) rotateZ(360deg);
             transform: rotateX(360deg) rotateY(360deg) rotateZ(360deg);
   }
-}
-
-.p:hover .dope{
-    display: none;
 }
 
     </style>
@@ -348,7 +366,10 @@ a:hover .plane.main .circle::before, .plane.main .circle::after {
                         
                        
                                         
-
+    <div class="right-click-prompt">
+            <p class="right-click-prompt__label">
+             @ UpCrate Team </p>
+            </div>
                                 
 
         
