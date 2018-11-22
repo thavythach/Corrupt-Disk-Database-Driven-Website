@@ -19,12 +19,13 @@
 }
 
 html,
-body {
-  background-image: url('img/BG.jpg');
-  font-family: sans-serif;
-  height: 100%;
-  width: 100%;
-}
+body{
+    margin: 0px;
+    padding: 0px;
+    background-image: url('img/BG.jpg');
+    background-size: 100% 100%;
+    background-attachment: fixed;
+}    
 
 .radial-menu {
   background: #c1ced9;
@@ -1070,5 +1071,15 @@ positionIcons( icons, iconDistance );
 }
 
   </script>
+
+<script>
+        var rellax = new Rellax('.rellax', {
+        // center: true
+        callback: function(position) {
+            // callback every position change
+            console.log(position);
+        }
+      });
+    </script>
 </body>
 </html>
