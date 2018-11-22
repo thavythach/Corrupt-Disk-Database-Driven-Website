@@ -367,6 +367,37 @@ body{
   }
 }
 
+        .d1{
+            margin-top: 135px;
+            margin-left: 300px;
+        }
+        .d8{
+            margin-top: 135px;
+            margin-left: 1200px;
+        }
+        .d2{
+            margin-top: 135px;
+            margin-left: 1500px;
+        }
+        .d3{
+            margin-top: -650px;
+        }
+        .d4{
+            margin-top: -1050px;
+        }
+        .d5{
+            margin-top: -600px;
+            margin-left: 100px;
+        }
+        .d6{
+            margin-top: 250px;
+            margin-left: 840px;
+        }
+        .d7{
+            margin-top: 500px;
+            margin-left: 800px;
+        }
+
     @yield('css');
     </style>
 
@@ -374,6 +405,33 @@ body{
 <body>
         <script src="{{ asset('js/app.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/app.js') }}"></script>
+
+    
+
+    @if(count($data['files']) > 0)
+        {{-- @foreach ($data['files'] as $file) --}}
+        @for ($i=0; $i < count($data['files']); $i++)
+        <a href="/files/{{$data['files'][$i]->id}}">
+            
+            @if ( ($i % 2) == 0 ) 
+            
+            <div class="rellax d1">
+                {{$data['files'][$i]->name}}
+                <img src="{{ asset('img/document.png') }}" width="5%"/>
+            </div>
+
+            @else 
+            
+            <div class="rellax d2">
+                {{$data['files'][$i]->name}}
+                <img src="{{ asset('img/document.png') }}" width="19%"/>
+            </div>
+            @endif 
+        </a>
+        @endfor
+    @else 
+        <p> I don't own any files. </p>
+    @endif
 	<div class="container">
             <div class="radial-menu">
                     <ul class="radial-menu__menu-list">

@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\File;
+use App\Owns;
+use App\IndividualAccess;
+
 
 class PagesController extends Controller
 {
@@ -43,6 +47,25 @@ class PagesController extends Controller
             return view('welcome');
         }
 
-        return view('navbar');
+         $data['files'] = Owns
+            ::where('user_id', '=', \Auth::id())
+            ->join('file', 'owns.file_id', '=', 'file.id')
+            ->select('file.id', 'file.file_path', 'file.visibility', 'file.name')
+            ->getQuery()
+            ->get();
+
+        // select * from File natural join IndividualAccess where userID = pm34;
+        $data['iaFiles'] = IndividualAccess
+            ::where('user_id', '=', \Auth::id())
+            ->join('file', 'individualAccess.file_id', '=', 'file.id')
+            ->select('file.id', 'file.file_path', 'file.visibility', 'file.name')
+            ->getQuery()
+            ->get();
+        
+        $data['count'] = $data['files']->count();
+        $data['iaCount'] = $data['iaFiles']->count();
+
+
+        return view('navbar')->with('data', $data);
     }
 }
