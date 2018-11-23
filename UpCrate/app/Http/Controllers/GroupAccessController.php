@@ -61,7 +61,7 @@ class GroupAccessController extends Controller
         $input = $request->all();
         
         $rules = [];
-        $rules['group_name'] = 'required|string';
+        $rules['group_name'] = 'required|string|max:16';
 
         if (in_array("item_id", $input)){
             foreach($input['item_id'] as $key => $val){
@@ -91,6 +91,7 @@ class GroupAccessController extends Controller
 
     
         // if list is countable go through and add file.
+        $gmListString = "";
         if ($gmList){
             for ($i=0; $i < count($gmList); $i++){
             
@@ -99,18 +100,32 @@ class GroupAccessController extends Controller
                     $gm->user_id = $gmList[$i];
                     $gm->group_id = $tmp->group_id; 
                     $gm->save();
+                    
+                    // create shared string
+                    $gmTmp = User::where('id', '=', $gmList[$i])->select('name')->first();
+                    $gmListString = $gmListString . $gmTmp['name'];
+                    if ($i != count($gmList)-1){
+                        $gmListString = $gmListString . ", ";
                     }
+                }
             }
         } else {
             $gm = new GroupMembers;
             $gm->user_id = \Auth::id();
             $gm->group_id = $tmp->group_id; 
             $gm->save();
+            $gmListString = \Auth::user()->name;
         }
 
         \DB::commit();
 
-        return redirect()->route('groups.index'); 
+
+
+         $notification = array(
+            'message' => "Successfully created new group called " . $tmp->name . ". Members: " . $gmListString,
+            'alert-type' => 'success'
+        );
+        return back()->with($notification);
         
     }
 

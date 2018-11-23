@@ -159,6 +159,8 @@ class FilesController extends Controller
                     $ia->user_id = $iaList[$i];
                     $ia->file_id = $file->id;
                     $ia->save();
+                    
+                    //create shared string
                     $iaTmp = User::where('id', '=', $iaList[$i])->select('name')->first();
                     $iaListString = $iaListString . $iaTmp['name'];
                     if ($i != count($iaList)-1){
