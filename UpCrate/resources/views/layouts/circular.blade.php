@@ -932,6 +932,56 @@
                 </div>
             </div>
         </div>
+    
+    {{-- groupUploadModal --}}
+    <div class="modal fade" id="groupUploadModal" role="dialog">
+            <div class="modal-dialog">
+            
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Upload Group File</h4>
+                </div>
+                <div class="modal-body">
+                {{-- <div class="container"> --}}
+                        <div id="content">
+                            <ul id="tabs" class="nav nav-tabs" data-tabs="tabs">
+                                <li class="active"><a href="#red" data-toggle="tab">Upload Group File</a></li>
+                                {{-- <li><a href="#orange" data-toggle="tab">Upload Group File</a></li> --}}
+                            </ul>
+                            <div id="my-tab-content" class="tab-content">
+                                <div class="tab-pane active" id="red">
+                                    <br>
+                                    <p>Fill out the form to upload a file to a specific group.</p>
+                                    <form action="/groupFile" method="POST" enctype="multipart/form-data">
+                                        <label for="file">Select a 2MB file</label>
+                                        <input type="file" class="form-control-file" name="new_file" id="new_file">
+                                        <div class="form-group">
+                                                <label for="userSelect">Select groups that can access: </label>
+                                                {{-- {!! Form::Label('item', 'Item:') !!} --}}
+                                                <select multiple class="form-control" name="item_id[]">
+                                                    @foreach($data['groups'] as $group)
+                                                    <option value="{{$group['groupID']}}">{{$group['groupName']}}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        <input type="submit" name="submit" value="Submit">
+                                        {{ csrf_field() }}
+                                    </form>
+                                    <br>
+                                </div>
+                                {{-- <div class="tab-pane" id="orange">
+                                    <br>
+                                    Upload Group file
+                                    <br>
+                                </div> --}}
+                            </div>
+                        </div>
+                    </div> 
+                </div>
+            </div>
+        </div>
 
     {{-- <div class="rellax d1" data-rellax-speed="1">
             {{-- <img src="{{ asset('img/nick.jpg') }}" width="15%"/> 
@@ -1205,19 +1255,19 @@
                       <li class="radial-menu__menu-item">
                         <div class="radial-menu__menu-link-bg"></div>
                         <div class="radial-menu__menu-icon">
-                          <span class="oi glyphicon glyphicon-heart" style="color:pink" aria-hidden="true"></span>
+                          <span class="oi glyphicon glyphicon-paperclip" style="color:pink" aria-hidden="true"></span>
                         </div>
                         <div class="radial-menu__menu-content glyph-color-heart">
                           <div class="radial-menu__menu-content-wrapper">
                             <h6 class="radial-menu__menu-content-title">
-                              Surprise
+                              Upload New Group File
                             </h6>
                             <p class="radial-menu__menu-content-description">
                               Surprise
                             </p>
                           </div>
                         </div>
-                        <a href="/" class="radial-menu__menu-link"></a>
+                        <a data-toggle="modal" data-target="#groupUploadModal" class="radial-menu__menu-link"></a>
                       </li>
                   
                       <li class="radial-menu__menu-item">

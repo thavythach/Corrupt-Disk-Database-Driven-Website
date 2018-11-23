@@ -10,6 +10,8 @@ use App\IndividualAccess;
 use App\GroupFile;
 use App\GroupAccess;
 use App\GroupMembers;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 
 class GroupFileController extends Controller
 {
@@ -45,13 +47,43 @@ class GroupFileController extends Controller
             return view.('auth.register');
         }
 
-        \DB::beginTransaction();
+        // validation begins
 
-        // TODO: check size larger than 2MB
+        $input = $request->all();
+        $input['new_file'] = $request->file('new_file'); // cache the file
+
+        $rules = [];
+        $rules['new_file'] = 'required|max:2048';
+        
+        if (in_array("item_id", $input)){
+            foreach($input['item_id'] as $key => $val){
+                $rules[$key] = 'required|exists:groupAccess.name';
+            }
+        } else {
+            $notification = array(
+                'message' => "Group Files can't be uploaded without a group!",
+                'alert-type' => 'error'
+              );
+            return back()->with($notification);
+        }
+        
+        $validator = Validator::make($input, $rules);
+
+        if ($validator->fails()) {
+  			$notification = array(
+                'message' => $validator->messages()->first(),
+                'alert-type' => 'error'
+              );
+            return back()->with($notification);
+        }
+
+        // validation ends 
+
+        \DB::beginTransaction();
         
         $file = new File;
         
-        $tmp = $request->file('new_file');
+        $tmp = $input['new_file'];
         if (!$tmp){
             \DB::rollbackTransaction();
             \DB::commit();

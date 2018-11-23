@@ -6,13 +6,14 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 use App\File;
 use App\Owns;
 use App\User; 
 use App\IndividualAccess;
-use Illuminate\Validation\Rule;
+
 
 
 class FilesController extends Controller
@@ -85,6 +86,8 @@ class FilesController extends Controller
             return view('auth.register');
         }
 
+        // validation begins
+
         $input = $request->all();
         $input['file'] = $request->file('file'); // cache the file
 
@@ -108,7 +111,7 @@ class FilesController extends Controller
             return back()->with($notification);
         }
 
-        // validation has passed :)
+        // validation ends
 
         \DB::beginTransaction();
                 
