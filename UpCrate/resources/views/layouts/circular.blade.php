@@ -186,8 +186,8 @@
                 transform: translate(-50%, -50%);
         z-index: 4;
     }
-    .radial-menu__menu-item.hovered .glyph-color-duplicate {
-        background-color: gray;
+    .radial-menu__menu-item.hovered .glyph-color-link {
+        background-color: orange;
         border-color: #578cbc;
         -webkit-transform: translate(-50%, -50%);
                 transform: translate(-50%, -50%);
@@ -665,7 +665,7 @@
                     <div id="content">
                         <ul id="tabs" class="nav nav-tabs" data-tabs="tabs">
                             <li class="active"><a href="#red" data-toggle="tab">Upload New File</a></li>
-                            <li><a href="#orange" data-toggle="tab">Upload Group File</a></li>
+                            {{-- <li><a href="#orange" data-toggle="tab">Upload Group File</a></li> --}}
                         </ul>
                         <div id="my-tab-content" class="tab-content">
                             <div class="tab-pane active" id="red">
@@ -875,6 +875,63 @@
             </div>
         </div>
     </div>
+
+    {{-- groupManagementModal --}}
+    <div class="modal fade" id="groupManagementModal" role="dialog">
+            <div class="modal-dialog">
+            
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Create New Group</h4>
+                </div>
+                <div class="modal-body">
+                {{-- <div class="container"> --}}
+                        <div id="content">
+                            <ul id="tabs" class="nav nav-tabs" data-tabs="tabs">
+                                <li class="active"><a href="#red" data-toggle="tab">Create New Group</a></li>
+                                {{-- <li><a href="#orange" data-toggle="tab">Upload Group File</a></li> --}}
+                            </ul>
+                            <div id="my-tab-content" class="tab-content">
+                                <div class="tab-pane active" id="red">
+                                    <br>
+                                        <form action="/group/process" enctype="multipart/form-data" method="POST">
+                                            <div class="form-group">
+                                                <label>Group Name</label>
+                                                <input type="text" name="group_name" value="">
+                                                <br><br>
+                                            </div>
+                            
+                                            <div class="form-group">
+                                                <label for="userSelect">Select users that can access: </label>
+                                                {{-- {!! Form::Label('item', 'Item:') !!} --}}
+                                                <select multiple class="form-control" name="item_id[]">
+                                                    @foreach($data['users'] as $item)
+                                                    @if ($item->name == Auth::user()->name)
+                                                        <option>None</option>
+                                                    @else 
+                                                     <option value="{{$item->id}}">{{$item->name}}</option>
+                                                    @endif
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                            <button class="btn btn-primary btn-lg">Create Group</button>
+                                            {{ csrf_field() }}
+                                        </form>
+                                    <br>
+                                </div>
+                                {{-- <div class="tab-pane" id="orange">
+                                    <br>
+                                    Upload Group file
+                                    <br>
+                                </div> --}}
+                            </div>
+                        </div>
+                    </div> 
+                </div>
+            </div>
+        </div>
 
     {{-- <div class="rellax d1" data-rellax-speed="1">
             {{-- <img src="{{ asset('img/nick.jpg') }}" width="15%"/> 
@@ -1222,19 +1279,19 @@
                       <li class="radial-menu__menu-item">
                         <div class="radial-menu__menu-link-bg"></div>
                         <div class="radial-menu__menu-icon">
-                          <span class="oi glyphicon glyphicon-duplicate" style="color:gray" aria-hidden="true"></span>
+                          <span class="oi glyphicon glyphicon-screenshot" style="color:orange" aria-hidden="true"></span>
                         </div>
-                        <div class="radial-menu__menu-content glyph-color-duplicate">
+                        <div class="radial-menu__menu-content glyph-color-link">
                           <div class="radial-menu__menu-content-wrapper">
                             <h6 class="radial-menu__menu-content-title">
-                              Group Management
+                              Create New Group
                             </h6>
                             <p class="radial-menu__menu-content-description">
                               Add an image
                             </p>
                           </div>
                         </div>
-                        <a href="/" class="radial-menu__menu-link"></a>
+                        <a data-toggle="modal" data-target="#groupManagementModal" class="radial-menu__menu-link" ></a>
                       </li>
                   
                       <li class="radial-menu__menu-item" style="display: none;">

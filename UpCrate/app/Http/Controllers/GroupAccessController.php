@@ -7,6 +7,8 @@ use App\GroupAccess;
 use App\GroupMembers;
 use App\User;
 use App\GroupFile;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 
 class GroupAccessController extends Controller
 {
@@ -55,6 +57,29 @@ class GroupAccessController extends Controller
             return view('auth.register');
         }
 
+        // validation start 
+        $input = $request->all();
+        
+        $rules = [];
+        $rules['group_name'] = 'required|string';
+
+        if (in_array("item_id", $input)){
+            foreach($input['item_id'] as $key => $val){
+                $rules[$key] = 'exists:users.name';
+            }
+        }
+
+        $validator = Validator::make($input, $rules);
+
+        if ($validator->fails()) {
+            $notification = array(
+              'message' => $validator->messages()->first(),
+              'alert-type' => 'error'
+            );
+          return back()->with($notification);
+        }
+        // validation end 
+
         \DB::beginTransaction();
 
         $tmp = new GroupAccess;
@@ -63,21 +88,24 @@ class GroupAccessController extends Controller
         $tmp->save();
 
         $gmList = $request->item_id;
-        // array_push($gmList, (int) \Auth::id());
 
+    
         // if list is countable go through and add file.
         if ($gmList){
             for ($i=0; $i < count($gmList); $i++){
             
                 $gm = new GroupMembers;
-                // if ($gmList[$i] == \Auth::id()){
-                //     $j += 1;
-                // }
-                $gm->user_id = $gmList[$i];
-                $gm->group_id = $tmp->group_id; 
-                $gm->save();
-                // }
+                if ($gmList[$i] != "None"){
+                    $gm->user_id = $gmList[$i];
+                    $gm->group_id = $tmp->group_id; 
+                    $gm->save();
+                    }
             }
+        } else {
+            $gm = new GroupMembers;
+            $gm->user_id = \Auth::id();
+            $gm->group_id = $tmp->group_id; 
+            $gm->save();
         }
 
         \DB::commit();
