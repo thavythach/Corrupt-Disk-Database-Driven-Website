@@ -891,8 +891,10 @@
       </div> --}}
 
     
-    <div id="GroupToggle">
-            {{-- <div id="GroupToggle" style="display: none;"> --}}
+
+    
+    {{-- <div id="GroupToggle"> --}}
+            <div id="GroupToggle" style="display: none;">
         @if(count($data['groups']) > 0)
             @for ($i=0; $i < count($data['groups']); $i++)
                     
@@ -905,7 +907,7 @@
                 <div id="{{ "popover-content-myGroupView-" . $i }}" class="hide">
                     Group Files <br>
                     @foreach ($data['groups'][$i]['files_names'] as $grpFile)
-                        <a href="files/{{ $grpFile->id }}">{{ $grpFile->name }}</a><br>
+                        <a href="/groupFile/{{ $grpFile->id }}" class="glyphicon glyphicon-download"> {{ $grpFile->name }} </a><br>
                     @endforeach
 
                 </div>
@@ -913,7 +915,7 @@
             @endfor
  
         @else 
-            swag
+            {{-- swag --}}
             {{-- <p> I don't own any groups. </p> --}}
         @endif
     </div>
@@ -1756,31 +1758,39 @@
         var x = document.getElementById("OwnedFiles"); // Files I've uploaded personally.
         var y = document.getElementById("SharedFiles"); // Files I own because someone shared it with me.
         var z = document.getElementById("PublicFiles"); // files i dont own, but are publicly accessible.
+        var w = document.getElementById("GroupToggle"); // files i dont own, but are publicly accessible.
         var l = document.getElementById("toggleFileView_label");
 
-        if (x.style.display === "none" && y.style.display === "none" && z.style.display === "none") {
+        if (x.style.display === "none" && y.style.display === "none" && z.style.display === "none" && w.style.display === "none") {
             x.style.display = "block";
             y.style.display = "none";
             z.style.display = "none";
+            w.style.display = "none";
             l.innerHTML = "Show Files Shared";
-        } else if (x.style.display !== "none" && y.style.display === "none" && z.style.display === "none") {
+        } else if (x.style.display !== "none" && y.style.display === "none" && z.style.display === "none" && w.style.display === "none") {
             x.style.display = "none";
             y.style.display = "block";
             z.style.display = "none";
             l.innerHTML = "Show Public Files";
-        } else if (x.style.display === "none" && y.style.display !== "none" && z.style.display === "none") {
+        } else if (x.style.display === "none" && y.style.display !== "none" && z.style.display === "none" && w.style.display === "none") {
             x.style.display = "none";
             y.style.display = "none";
             z.style.display = "block";
+            w.style.display = "none";
+            l.innerHTML = "Show Groups";
+        } else if (x.style.display === "none" && y.style.display === "none" && z.style.display !== "none" && w.style.display === "none") {
+            x.style.display = "none";
+            y.style.display = "none";
+            z.style.display = "none";
+            w.style.display = "block";
             l.innerHTML = "Show Nothing";
         } else {
             x.style.display = "none";
             y.style.display = "none";
             z.style.display = "none";
+            w.style.display = "none";
             l.innerHTML = "Show My Files";
         }
-        
-        
     }
 </script>
 
