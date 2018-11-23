@@ -897,13 +897,17 @@
             @for ($i=0; $i < count($data['groups']); $i++)
                     
             <div class="@if ( ($i % 2) == 0 ) rellax d1 @else rellax d2 @endif" data-rellax-speed="5">
-                <a href="#" data-toggle="popover" data-container="body" data-html="true" id="{{ "myGroupView-" . $i }}" data-placement="bottom" title="{{$data['groups'][$i]->name}} by TODO" data-trigger="focus">
-                        {{$data['groups'][$i]->name}}
+                <a href="#" data-toggle="popover" data-container="body" data-html="true" id="{{ "myGroupView-" . $i }}" data-placement="bottom" title="{{$data['groups'][$i]['groupName']}} Group" data-trigger="focus">
+                        {{$data['groups'][$i]['groupName']}}
                         <img src="{{ asset('img/group.png') }}" width="@if ( ($i % 2) == 0 ) 5% @else 19% @endif"/>
                 </a>
                 
                 <div id="{{ "popover-content-myGroupView-" . $i }}" class="hide">
-                    <a href="/groups/{{$data['groups'][$i]->group_id}}">Group Page</a><br>
+                    Group Files <br>
+                    @foreach ($data['groups'][$i]['files_names'] as $grpFile)
+                        <a href="files/{{ $grpFile->id }}">{{ $grpFile->name }}</a><br>
+                    @endforeach
+
                 </div>
             </div>
             @endfor

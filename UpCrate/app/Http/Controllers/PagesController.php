@@ -85,8 +85,20 @@ class PagesController extends Controller
             ->where('groupFile.group_id', '!=', 'null')
             // ->groupBy('group_members.user_id')
             ->groupBy('groupFile.group_id')
-            ->get();
+            // ->join('users', )
+            ->get()->toArray();
 
+        $j = 0;
+        for ($i=0; $i < count($data['groups']); $i++){
+            $data['groups'][$i]['files_names'] = array();
+            $data['groups'][$i]['files'] = explode(",", $data['groups'][$i]['files']);
+            // $ra = array();
+            foreach ($data['groups'][$i]['files'] as $grpFile) {
+                $ff = File::find((int)$grpFile)->select('name as file_name')->first()->file_name;
+                array_push($data['groups'][$i]['files_names'], File::find($grpFile));
+            }
+            $j++;
+        }        
         // return $data['groups'];
         
         $data['count'] = $data['files']->count();
