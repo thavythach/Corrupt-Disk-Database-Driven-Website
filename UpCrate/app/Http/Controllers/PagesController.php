@@ -80,10 +80,14 @@ class PagesController extends Controller
             ::where('group_members.user_id', '=', \Auth::id())
             ->join('groupAccess', 'groupAccess.group_id', '=', 'group_members.group_id')
             ->leftJoin('groupFile', 'group_members.group_id', '=', 'groupFile.group_id')
-            ->select('groupFile.file_id', 'groupAccess.name as groupName', 'group_members.user_id as groupMemberID', 'groupAccess.user_id as groupOwnerID', 'groupFile.group_id')
+            ->select('groupAccess.name as groupName', 'group_members.user_id as groupMemberID', 'groupAccess.user_id as groupOwnerID', 'groupFile.group_id as groupID', \DB::raw('GROUP_CONCAT(groupFile.file_id) AS files'))
+            ->orderBy('groupFile.group_id')
+            ->where('groupFile.group_id', '!=', 'null')
+            // ->groupBy('group_members.user_id')
+            ->groupBy('groupFile.group_id')
             ->get();
-        
-        return $data['groups'];
+
+        // return $data['groups'];
         
         $data['count'] = $data['files']->count();
         $data['iaCount'] = $data['iaFiles']->count();
