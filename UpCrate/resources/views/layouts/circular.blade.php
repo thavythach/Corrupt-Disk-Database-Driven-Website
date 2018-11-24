@@ -900,9 +900,12 @@
                                             <div class="form-group">
                                                 <label>Group Name</label>
                                                 <input type="text" name="group_name" value="">
-                                                <br><br>
+                                                
                                             </div>
                             
+                                            <label for="file">Select a 2MB file</label>
+                                            <input type="file" class="form-control-file" name="GroupFile" id="Groupfile">
+                                            <br>
                                             <div class="form-group">
                                                 <label for="userSelect">Select users that can access: </label>
                                                 {{-- {!! Form::Label('item', 'Item:') !!} --}}

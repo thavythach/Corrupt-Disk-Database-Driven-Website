@@ -7,6 +7,7 @@ use App\GroupAccess;
 use App\GroupMembers;
 use App\User;
 use App\GroupFile;
+use App\File;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 
@@ -59,9 +60,11 @@ class GroupAccessController extends Controller
 
         // validation start 
         $input = $request->all();
-        
+        $input['GroupFile'] = $request->file('GroupFile');
+
         $rules = [];
         $rules['group_name'] = 'required|string|max:16';
+        $rules['GroupFile'] = 'required|max:2048'; // TODO: add a new file creation
 
         if (in_array("item_id", $input)){
             foreach($input['item_id'] as $key => $val){
@@ -104,11 +107,19 @@ class GroupAccessController extends Controller
                     // create shared string
                     $gmTmp = User::where('id', '=', $gmList[$i])->select('name')->first();
                     $gmListString = $gmListString . $gmTmp['name'];
-                    if ($i != count($gmList)-1){
-                        $gmListString = $gmListString . ", ";
-                    }
-                }
+                    $gmListString = $gmListString . ", ";
+                } 
+                    
             }
+            
+            $gm = new GroupMembers;
+            $gm->user_id = \Auth::id();
+            $gm->group_id = $tmp->group_id; 
+            $gm->save();
+
+            // create shared string
+            $gmListString = $gmListString . \Auth::user()->name;
+
         } else {
             $gm = new GroupMembers;
             $gm->user_id = \Auth::id();
@@ -116,6 +127,20 @@ class GroupAccessController extends Controller
             $gm->save();
             $gmListString = \Auth::user()->name;
         }
+
+        // generate a new filename. getClientOriginalExtension() for the file extension
+        $new_file = new File;
+        $new_file->name = $input['GroupFile']->getClientOriginalName();
+        $new_file->file_path = $input['GroupFile']->storeAs('files', $new_file->name . time());
+        $new_file->visibility = 0; // groupFiles are always private
+
+        $new_file->save(); // persist
+
+        // haha generate new groupfile 
+        $grpFile = new GroupFile;
+        $grpFile->group_id = $tmp->group_id;
+        $grpFile->file_id = $new_file->id; 
+        $grpFile->save(); // persist 
 
         \DB::commit();
 
