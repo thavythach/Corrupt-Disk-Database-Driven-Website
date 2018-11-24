@@ -126,24 +126,21 @@ class GroupFileController extends Controller
         }
 
         $dl = File
-            // ::where('file.id','=',$id)
-            ::join('groupFile', 'file.id', '=', 'groupFile.file_id')
+            ::where('file.id','=', $id)
+            ->join('groupFile', 'file.id', '=', 'groupFile.file_id')
             ->join('group_members', 'group_members.group_id', '=', 'groupFile.group_id')
-            ->orderBy('group_members.user_id')
             ->where('group_members.user_id', '=', \Auth::id())
             ->get()->first();
         
         if (!$dl){
-            return redirect()->route('groups.index'); 
+            $notification = array(
+                'message' => "You do not have the correct privileges to download this file.",
+                'alert-type' => 'info'
+            );
+            return back()->with($notification); // TODO causes redirects
         }
-        
-        $tmp = File::find($dl->id)->first();
-
-        if (!$tmp){
-            return redirect()->route('groups.index'); 
-        }
-
-        return \Storage::download($tmp->file_path, $tmp->name);
+   
+        return \Storage::download($dl->file_path, $dl->name);
     }
 
     /**
