@@ -22,7 +22,25 @@ class MailController extends Controller {
 //       echo "Basic Email Sent. Check your inbox.";
 //    }
    public function html_email($email){
-   	  'email' => 'required|regex:/(.*)@myemail\.com/i'
+   	  // validation start
+   	  $input = $email->all();
+   	  $input['email'] = $email->file('email')
+
+   	  $rules = [];
+   	  $rules['email'] = 'required|regex:/(.*)@myemail\.com/i'
+
+   	  $validator = Validator::make($input, $rules);
+
+        if ($validator->fails()) {
+            $notification = array(
+              'message' => $validator->messages()->first(),
+              'alert-type' => 'error'
+            );
+          return back()->with($notification);
+        }
+
+       // validation end
+
       $data = array('name'=>"New User");
       Mail::send('mail', $data, function($message) use ($email){
         
