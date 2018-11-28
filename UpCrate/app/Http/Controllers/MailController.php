@@ -22,6 +22,7 @@ class MailController extends Controller {
 //       echo "Basic Email Sent. Check your inbox.";
 //    }
    public function html_email($email){
+   	  'email' => 'required|regex:/(.*)@myemail\.com/i'
       $data = array('name'=>"New User");
       Mail::send('mail', $data, function($message) use ($email){
         
