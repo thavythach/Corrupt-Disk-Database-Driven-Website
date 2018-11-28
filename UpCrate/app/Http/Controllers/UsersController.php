@@ -8,6 +8,9 @@ use App\Http\Controllers\FilesController;
 use App\User;
 use App\File;
 use App\Owns;
+use App\GroupFile;
+use App\GroupAccess;
+use App\GroupMembers;
 use App\IndividualAccess;
 
 class UsersController extends Controller
@@ -124,7 +127,7 @@ class UsersController extends Controller
         //
     }
 
-    public function delete(){
+    public function delete() {
         
         if (!\Auth::check()){
             return redirect()->route('files.index');

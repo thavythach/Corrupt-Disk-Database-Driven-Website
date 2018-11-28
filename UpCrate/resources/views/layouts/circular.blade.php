@@ -1314,19 +1314,19 @@
                       <li class="radial-menu__menu-item">
                         <div class="radial-menu__menu-link-bg"></div>
                         <div class="radial-menu__menu-icon">
-                          <span class="oi glyphicon glyphicon-question-sign" style="color:blue" aria-hidden="true"></span>
+                          <span class="oi glyphicon glyphicon-info-sign" style="color:blue" aria-hidden="true"></span>
                         </div>
                         <div class="radial-menu__menu-content glyph-color-question-sign">
                           <div class="radial-menu__menu-content-wrapper">
                             <h6 class="radial-menu__menu-content-title">
-                              Help me!
+                              Visit our GitHub!
                             </h6>
                             <p class="radial-menu__menu-content-description">
                               Navigate UpCrate
                             </p>
                           </div>
                         </div>
-                        <a href="/" class="radial-menu__menu-link"></a>
+                        <a href="https://github.com/thavythach/TeamCorruptDisk" class="radial-menu__menu-link"></a>
                       </li>
                   
                       <li class="radial-menu__menu-item">
