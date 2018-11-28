@@ -45,7 +45,13 @@ class UsersController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        if (!\Auth::check()){
+            return view.('auth.register');
+        }
+
+        //validation start
+        $rules = [];
+        $rules['name'] = 'required|string|max:16';
     }
 
     /**
@@ -69,7 +75,7 @@ class UsersController extends Controller
 
         if (!(\Hash::check($request->get('current-password'), \Auth::user()->password))) {
             // The passwords matches
-            return redirect()->back()->with("error","Your current password does not matches with the password you provided. Please try again.");
+            return redirect()->back()->with("error","Your current password does not match with the password you provided. Please try again.");
         }
 
         if(strcmp($request->get('current-password'), $request->get('new-password')) == 0){
