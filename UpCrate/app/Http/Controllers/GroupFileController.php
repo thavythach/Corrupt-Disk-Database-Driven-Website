@@ -54,18 +54,13 @@ class GroupFileController extends Controller
 
         $rules = [];
         $rules['new_file'] = 'required|max:2048';
+
         
         if (in_array("item_id", $input)){
             foreach($input['item_id'] as $key => $val){
                 $rules[$key] = 'required|exists:groupAccess.name';
             }
-        } else {
-            $notification = array(
-                'message' => "Group Files can't be uploaded without a group!",
-                'alert-type' => 'error'
-              );
-            return back()->with($notification);
-        }
+        } 
         
         $validator = Validator::make($input, $rules);
 
@@ -110,7 +105,12 @@ class GroupFileController extends Controller
         }
 
         \DB::commit();
-        return redirect()->route('groups.index'); 
+
+        $notification = array(
+            'message' => "Group File was Succesfully Uploaded.",
+            'alert-type' => 'success'
+        );
+        return back()->with($notification);
     }
 
     /**
