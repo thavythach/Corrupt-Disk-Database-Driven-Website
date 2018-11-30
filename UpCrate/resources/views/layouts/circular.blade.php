@@ -967,6 +967,7 @@
                                                     @foreach($data['groups'] as $group)
                                                     <option value="{{$group['groupID']}}">{{$group['groupName']}}</option>
                                                     @endforeach
+                                                    <option value="None" selected>None</option>
                                                 </select>
                                             </div>
                                         <input type="submit" name="submit" value="Submit">
