@@ -61,12 +61,15 @@ class GroupFileController extends Controller
                 'alert-type' => 'error'
             );
             return back()->with($notification);
-        }
-        foreach($input['item_id'] as $key => $val){
-            if ($val != "None"){
-                $rules[$key] = 'required|exists:groupAccess.name';                            
-            }
-        }    
+        } 
+
+        // foreach($input['item_id'] as $key => $val){
+        //     if ($val != "None"){
+        //         $rules[$key] = 'required|exists:groupAccess.name';                            
+        //     }
+        // }    
+        // return $input;
+
         // return $rules;    
         
         $validator = Validator::make($input, $rules);
