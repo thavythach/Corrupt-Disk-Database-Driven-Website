@@ -1,6 +1,11 @@
 # UpCrate
 Databases Final Project (Like DropBox, but Better)
 
+Created by:
+Thavy Thach
+Nick Bigger
+Jake Redmond
+
 
 ![alt text](https://raw.githubusercontent.com/thavythach/UpCrate/master/UpCrateScreenShots/1.png)
 ![alt text](https://raw.githubusercontent.com/thavythach/UpCrate/master/UpCrateScreenShots/2.png)
