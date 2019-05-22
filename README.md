@@ -1,5 +1,5 @@
 # UpCrate
-Databases Final Project (Like DropBox, but Better)
+Databases Final Project (Like DropBox, but Better) using Laravel-Php Web Framework
 
 Created by:
 Thavy Thach
